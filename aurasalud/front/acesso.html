@@ -881,6 +881,18 @@ select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:i
 
   <!-- estado aberto — placeholder onde o desbloquear.php injeta o conteúdo -->
   <div data-bn-vista="abierto" hidden>
+    <!-- invitación a la Comunidad: solo aparece si el servidor la envía (r.comunidad) -->
+    <div class="card comunidad" id="bn-comunidad" hidden>
+      <div class="garantia">
+        <div class="sello"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M3 19c.8-3.2 3.2-5 6-5s5.2 1.8 6 5"/><path d="M15.5 14.2c2.6-.4 4.7 1.2 5.5 4.3"/></svg></div>
+        <div style="min-width:0">
+          <h3>Comunidad Blindaje en WhatsApp</h3>
+          <p>Cada lunes, el desafío de la semana, una técnica de memoria y el recordatorio de tu test mensual. Solo publica nuestro equipo: tu número no lo ven los demás miembros.</p>
+        </div>
+      </div>
+      <a class="btn oro chico" id="bn-comunidad-link" href="#" target="_blank" rel="noopener" style="margin-top:14px;text-decoration:none">
+        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-5A8.5 8.5 0 1 1 21 11.5z"/></svg>Unirme a la comunidad</a>
+    </div>
     <div id="bn-contenido"></div>
   </div>
 
@@ -2736,7 +2748,15 @@ function blFin(){
   }
 
   var abierto = false;
-  function abrir(html){
+  /* enlace de la comunidad: viene del servidor junto con el contenido pagado */
+  function mostrarComunidad(url){
+    var c = document.getElementById('bn-comunidad'), a = document.getElementById('bn-comunidad-link');
+    if (!c || !a || typeof url !== 'string' || !/^https:\/\/chat\.whatsapp\.com\/[A-Za-z0-9]+$/.test(url)) return;
+    a.href = url; c.hidden = false;
+    if (!a.dataset.ok){ a.dataset.ok = '1'; a.addEventListener('click', function(){ registrar('comunidad'); }); }
+  }
+  function abrir(html, comunidad){
+    mostrarComunidad(comunidad);
     caja.innerHTML = html;
     vCerrado.hidden = true;
     vAbierto.hidden = false;
@@ -2756,7 +2776,7 @@ function blFin(){
       if (r && r.ok){
         try{ localStorage.setItem(LS_CORREO, correo); }catch(e){}
         decir('¡Listo!','bien');
-        abrir(r.html);
+        abrir(r.html, r.comunidad);
         return;
       }
       if (r && r.motivo==='sin_acceso'){
@@ -2852,7 +2872,7 @@ function blFin(){
     pedir(c).then(function(r){
       if (r && r.ok){
         try{ localStorage.setItem(LS_CORREO, c); }catch(e){}
-        abrir(r.html);
+        abrir(r.html, r.comunidad);
       }
     });
   };

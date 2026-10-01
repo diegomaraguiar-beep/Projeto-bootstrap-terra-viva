@@ -22,7 +22,7 @@ $d = json_decode($crudo ?: '', true);
 if (!is_array($d)) { http_response_code(400); exit; }
 
 const EVENTOS = ['abrir','consentimiento','inicio','tarea','contenido','test','hito','desbloqueo',
-                 'recordatorio','respaldo','restaurar','reinicio','correo','juego'];
+                 'recordatorio','respaldo','restaurar','reinicio','correo','juego','comunidad'];
 const EXTRAS  = ['tarea','id','test','hito','version','producto','inicio','hora','dia_test'];
 
 $ev = (string)($d['ev'] ?? '');

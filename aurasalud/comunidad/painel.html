@@ -1,0 +1,496 @@
+<title>Painel Comunidade Blindaje</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: coluna única de trabalho — o post da semana em destaque (prévia estilo WhatsApp), depois o calendário de 12 semanas e o kit de criação. */
+:root{
+  --ink:#1a3a4a; --ink-2:#24505f; --gold:#c9952f; --gold-soft:#fbf3e0; --gold-line:#ecd7a6;
+  --bg:#eef3f6; --surface:#ffffff; --text:#2f4a58; --muted:#6b8796; --line:#dbe6ec;
+  --ok:#2f9e6f; --ok-soft:#e5f4ec; --warn:#b26b12; --warn-soft:#fdf1df;
+  --chat:#e7ddd2; --bubble:#ffffff; --bubble-text:#1f2c33; --chat-meta:#7a8a92;
+  --f-display:'Playfair Display',Georgia,'Times New Roman',serif;
+  --f-body:'Source Sans 3','Source Sans Pro',-apple-system,'Segoe UI',Roboto,sans-serif;
+  --f-chat:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --ink:#d9e8ef; --ink-2:#a9c6d3; --gold:#e8b44d; --gold-soft:#2c2617; --gold-line:#5a4a26;
+  --bg:#0f1b21; --surface:#16252d; --text:#c5d6de; --muted:#86a0ad; --line:#26363f;
+  --ok:#5cc49a; --ok-soft:#163128; --warn:#e9a54a; --warn-soft:#30230f;
+  --chat:#0b141a; --bubble:#1f2c33; --bubble-text:#e9edef; --chat-meta:#8696a0; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --ink:#d9e8ef; --ink-2:#a9c6d3; --gold:#e8b44d; --gold-soft:#2c2617; --gold-line:#5a4a26;
+  --bg:#0f1b21; --surface:#16252d; --text:#c5d6de; --muted:#86a0ad; --line:#26363f;
+  --ok:#5cc49a; --ok-soft:#163128; --warn:#e9a54a; --warn-soft:#30230f;
+  --chat:#0b141a; --bubble:#1f2c33; --bubble-text:#e9edef; --chat-meta:#8696a0; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:flex;flex-direction:column;gap:28px}
+h1,h2,h3{font-family:var(--f-display);color:var(--ink);margin:0;line-height:1.2;text-wrap:balance}
+p{margin:0}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2.5px solid var(--gold);outline-offset:2px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--gold)}
+header{display:flex;flex-direction:column;gap:8px}
+header h1{font-size:clamp(28px,6vw,38px)}
+header p{color:var(--muted);max-width:60ch}
+
+/* ---- ajustes ---- */
+.ajustes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.campo{display:flex;flex-direction:column;gap:5px;min-width:0}
+.campo label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.campo input{width:100%;border:1.5px solid var(--line);background:var(--bg);border-radius:10px;padding:10px 12px;font-size:15px;color:var(--text)}
+.campo input:focus{border-color:var(--gold);outline:none}
+.campo small{font-size:12.5px;color:var(--muted)}
+
+/* ---- semana atual ---- */
+.atual{display:flex;flex-direction:column;gap:14px}
+.atual-cab{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.atual-cab h2{font-size:clamp(22px,4.6vw,28px);flex:1 1 260px;min-width:0}
+.chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 12px;font-size:13px;font-weight:700;white-space:nowrap}
+.chip.pend{background:var(--warn-soft);color:var(--warn)}
+.chip.ok{background:var(--ok-soft);color:var(--ok)}
+.meta-sem{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+.chat{background:var(--chat);border-radius:16px;padding:18px 14px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.chat .grupo{font-family:var(--f-chat);font-size:12px;color:var(--chat-meta);align-self:center;background:var(--bubble);border-radius:8px;padding:3px 10px;margin-bottom:6px}
+.bolha{background:var(--bubble);color:var(--bubble-text);font-family:var(--f-chat);font-size:15px;line-height:1.45;border-radius:4px 12px 12px 12px;padding:9px 12px 6px;max-width:min(100%,520px);white-space:pre-wrap;word-break:break-word;box-shadow:0 1px .5px rgba(0,0,0,.13)}
+.bolha .hora{display:block;text-align:right;font-size:11px;color:var(--chat-meta);margin-top:4px}
+.bolha code{font-family:ui-monospace,Menlo,monospace;font-size:13.5px}
+
+.acoes{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:11px;padding:12px 18px;font-weight:700;font-size:15px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;text-decoration:none;flex:1 1 180px;transition:transform .12s}
+.btn:active{transform:scale(.98)}
+.btn.prim{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.btn.ouro{background:var(--gold);border-color:var(--gold);color:#2e2206}
+.btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.aviso{font-size:14px;color:var(--muted);min-height:1.4em}
+
+/* ---- calendário ---- */
+section h2.sec{font-size:22px;margin-bottom:12px}
+.semanas{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.semanas li{border-bottom:1px solid var(--line)}
+.semanas button{width:100%;display:grid;grid-template-columns:3.2em 1fr auto;gap:12px;align-items:center;padding:12px 4px;background:none;border:none;text-align:left;cursor:pointer}
+.semanas .n{font-family:var(--f-display);font-weight:800;font-size:20px;color:var(--gold);font-variant-numeric:tabular-nums}
+.semanas .t{min-width:0}
+.semanas .t b{display:block;color:var(--ink);font-size:15.5px;line-height:1.3}
+.semanas .t span{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.semanas li.agora{background:var(--gold-soft)}
+.semanas li.sel button .t b{text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px}
+.marca{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center}
+.marca.ok{background:var(--ok);border-color:var(--ok)}
+.marca svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---- kit ---- */
+.kit{display:flex;flex-direction:column;gap:12px}
+details.bloco{background:var(--surface);border:1px solid var(--line);border-radius:14px}
+details.bloco>summary{list-style:none;cursor:pointer;padding:15px 16px;display:flex;align-items:center;gap:12px;font-weight:700;color:var(--ink)}
+details.bloco>summary::-webkit-details-marker{display:none}
+details.bloco>summary span{flex:1;min-width:0}
+details.bloco>summary small{display:block;font-weight:400;color:var(--muted);font-size:13.5px}
+details.bloco>summary svg{width:16px;height:16px;stroke:var(--muted);fill:none;stroke-width:2.4;transition:transform .2s;flex-shrink:0}
+details.bloco[open]>summary svg{transform:rotate(180deg)}
+.bloco-c{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px}
+ol.passos{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:9px}
+ol.passos b{color:var(--ink)}
+.texto{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-family:var(--f-chat);font-size:14.5px;white-space:pre-wrap;word-break:break-word;color:var(--text)}
+.nota{font-size:14px;color:var(--muted)}
+.nota b{color:var(--text)}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">AuraSalud · Blindaje Neural</span>
+    <h1>Comunidade Blindaje</h1>
+    <p>O post de cada semana pronto para colar no grupo de avisos da comunidade. Toda segunda-feira: abra este painel, copie, cole e marque como postado. Leva dois minutos.</p>
+  </header>
+
+  <div class="ajustes">
+    <div class="campo">
+      <label for="cfg-inicio">Início da comunidade</label>
+      <input type="date" id="cfg-inicio">
+      <small>A segunda-feira da semana 1.</small>
+    </div>
+    <div class="campo">
+      <label for="cfg-app">Link do app (opcional)</label>
+      <input type="url" id="cfg-app" placeholder="https://aurasalud.online/front/acesso.html" spellcheck="false">
+      <small>Entra no fim dos posts que levam ao app.</small>
+    </div>
+  </div>
+
+  <section class="atual" aria-labelledby="atual-tit">
+    <div class="atual-cab">
+      <h2 id="atual-tit"></h2>
+      <span class="chip pend" id="atual-chip">Pendente</span>
+    </div>
+    <p class="meta-sem" id="atual-meta"></p>
+    <div class="chat">
+      <span class="grupo">Comunidad Blindaje · Avisos</span>
+      <div class="bolha" id="atual-bolha"></div>
+    </div>
+    <div class="acoes">
+      <button class="btn prim" type="button" id="b-copiar"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copiar texto</button>
+      <a class="btn ouro" id="b-wa" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-5A8.5 8.5 0 1 1 21 11.5z"/></svg>Abrir no WhatsApp</a>
+      <button class="btn" type="button" id="b-marcar"><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg><span>Marcar como postado</span></button>
+    </div>
+    <p class="aviso" id="aviso" role="status"></p>
+  </section>
+
+  <section aria-labelledby="cal-tit">
+    <h2 class="sec" id="cal-tit">As 12 semanas</h2>
+    <ul class="semanas" id="semanas"></ul>
+    <p class="nota" style="margin-top:10px">Depois da semana 12 o ciclo recomeça na semana 1. Os posts não dependem do dia em que cada cliente entrou, então servem para quem chega a qualquer momento.</p>
+  </section>
+
+  <section class="kit" aria-labelledby="kit-tit">
+    <h2 class="sec" id="kit-tit">Kit de criação</h2>
+
+    <details class="bloco" open>
+      <summary><span>Criar a comunidade (uma vez só)<small>10 minutos, pelo celular com o WhatsApp Business</small></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="bloco-c">
+        <ol class="passos">
+          <li>Use um <b>número só do suporte</b>, não o pessoal. Se um dia trocar de pessoa no atendimento, a comunidade continua.</li>
+          <li>No WhatsApp: aba <b>Comunidades → Nova comunidade</b>. Nome: <b>Comunidad Blindaje · AuraSalud</b>. Cole a descrição abaixo.</li>
+          <li>Em <b>Configurações da comunidade</b>: ative <b>Aprovar novos membros</b>. Assim, se o link vazar, só entra quem você aprovar.</li>
+          <li>O grupo <b>Avisos</b> já vem só para administradores postarem. Não crie outros grupos dentro da comunidade: é isso que mantém os números dos clientes ocultos entre eles e evita reclamações em público.</li>
+          <li>Em <b>Convidar membros → Link de convite</b>, copie o link (<code>https://chat.whatsapp.com/…</code>).</li>
+          <li>No seu servidor, no <code>desbloquear.php</code>, inclua esse link na resposta de quem comprou o Blindaje: <code>"comunidad": "https://chat.whatsapp.com/SEU-CODIGO"</code>. O app passa a mostrar o botão <b>Unirme a la comunidad</b> só para compradores.</li>
+          <li>Poste a <b>mensagem de boas-vindas</b> e fixe-a no grupo de avisos.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="bloco">
+      <summary><span>Descrição da comunidade<small>Campo "Descrição" ao criar</small></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="bloco-c"><div class="texto" id="t-desc"></div><button class="btn" type="button" data-copiar="t-desc">Copiar descrição</button></div>
+    </details>
+
+    <details class="bloco">
+      <summary><span>Mensagem de boas-vindas (fixar)<small>O primeiro post, fixado no topo</small></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="bloco-c"><div class="texto" id="t-bienv"></div><button class="btn" type="button" data-copiar="t-bienv">Copiar boas-vindas</button></div>
+    </details>
+
+    <details class="bloco">
+      <summary><span>Lembrete toda segunda-feira<small>Para não esquecer de postar</small></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="bloco-c">
+        <p class="nota">Cria um evento semanal no Google Agenda, às 9h de segunda-feira, com o link deste painel. Depois de abrir, toque em <b>Salvar</b>.</p>
+        <a class="btn" id="b-agenda" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>Criar lembrete no Google Agenda</a>
+      </div>
+    </details>
+
+    <details class="bloco">
+      <summary><span>Regras de ouro do conteúdo<small>Para a comunidade proteger a venda, não colocá-la em risco</small></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="bloco-c">
+        <ol class="passos">
+          <li><b>Nada de promessa de cura</b> ("previne Alzheimer", "regenera neurônios"). É o que mais gera denúncia, bloqueio de anúncio e pedido de reembolso.</li>
+          <li><b>Todo post leva de volta ao app</b> (um jogo, o teste, uma lição). Cliente que usa o produto não pede chargeback.</li>
+          <li><b>Dúvida individual vai para o Suporte do app</b>, nunca para a comunidade. Os posts já terminam lembrando disso.</li>
+          <li><b>No máximo 1 ou 2 posts por semana.</b> Mais que isso, as pessoas silenciam a comunidade.</li>
+        </ol>
+      </div>
+    </details>
+  </section>
+</div>
+
+<script>
+/* ==================================================================
+   CONTEÚDO — espanhol, formatação do WhatsApp (*negrito*, _itálico_)
+   {app} é trocado pelo link do app (ou a linha é removida se vazio)
+================================================================== */
+const DESCRIPCION=`Comunidad exclusiva para quienes tienen el Protocolo Blindaje Neural.
+
+Cada lunes: el desafío de la semana, una técnica de memoria y el recordatorio de tu test mensual.
+
+Solo publica el equipo de AuraSalud. Tus datos y tu número no son visibles para los demás miembros.
+
+¿Dudas personales? Escríbenos desde la pestaña *Soporte* de tu app. Respondemos en menos de 24 horas.
+
+Contenido informativo y de hábitos. No sustituye la consulta médica.`;
+
+const BIENVENIDA=`👋 *¡Bienvenida, bienvenido a la Comunidad Blindaje!*
+
+Aquí no hay ruido: solo publicamos nosotros, *una vez por semana, los lunes*.
+
+Cada semana vas a encontrar:
+✅ Un *desafío* con los juegos de tu app
+✅ Una *técnica* de memoria para usar en tu día
+✅ El *recordatorio* de tu test mensual cuando toque
+
+📌 *Para empezar hoy:* abre tu app → pestaña *Blindaje* → haz tu *test baseline* (3 minutos). Ese número es tu punto de partida.
+{app}
+
+🔒 Tu número no lo ven los demás miembros.
+💬 ¿Una duda personal? Escríbenos en la pestaña *Soporte* de tu app.
+
+_Contenido informativo y de hábitos. No sustituye la consulta médica._`;
+
+const PIE=`
+💬 ¿Dudas? Escríbenos en la pestaña *Soporte* de tu app.`;
+
+const SEMANAS=[
+ {t:'Seu número de partida',tema:'Baseline',txt:
+`🧭 *Semana 1 · Tu número de partida*
+
+Lo que no se mide, no se puede mejorar. Por eso esta semana empieza con algo muy simple: conocer tu número.
+
+*Desafío de la semana:*
+Haz tu *test baseline* en la pestaña *Blindaje* de tu app. Son 3 minutos y te da un puntaje de 0 a 100.
+
+*Cómo hacerlo bien:*
+• Por la mañana, después del desayuno
+• En un lugar tranquilo, sin el teléfono sonando
+• Sin anotar nada en papel
+
+Ese número no es una nota ni un diagnóstico. Es *tu* referencia. Dentro de un mes lo repites en las mismas condiciones y comparas.
+{app}${PIE}`},
+
+ {t:'Desafio: Secuencia de luces',tema:'Jogo',txt:
+`💡 *Semana 2 · Desafío: subir un nivel en Secuencia de luces*
+
+Este juego entrena la memoria visual: la que usas para recordar dónde dejaste las llaves o por qué calle entraste.
+
+*La técnica que más ayuda:*
+Mientras miras la secuencia, *dila en voz baja*: "arriba, centro, izquierda…". Así trabajan juntas la memoria visual y la verbal, y el recuerdo se sostiene mejor.
+
+*Desafío:* juega 3 días esta semana y sube al menos un nivel.
+📍 App → *Mente* → *Juegos* → *Secuencia de luces*
+
+Si un día bajas de nivel, es normal: el juego se ajusta para que entrenes en tu punto justo.
+{app}${PIE}`},
+
+ {t:'Sono e memória',tema:'Hábito',txt:
+`🌙 *Semana 3 · Dormir también es memorizar*
+
+Mientras duermes, tu cerebro ordena lo que viviste en el día y decide qué guardar. Dormir poco o a deshoras deja ese trabajo a medias.
+
+*Desafío de la semana: la rutina de 30 minutos*
+1. Elige una hora fija para acostarte, también el fin de semana
+2. 30 minutos antes: pantallas fuera y luz baja
+3. Cena ligera, 3 horas antes de dormir
+
+No hace falta hacerlo perfecto. Con 5 de 7 noches ya notarás la diferencia en cómo te levantas.${PIE}`},
+
+ {t:'Teste do mês 1',tema:'Teste',txt:
+`📊 *Semana 4 · Primer mes: hora de medir*
+
+Se cumple un mes desde tu test baseline. Esta semana toca repetirlo.
+
+*Para que la comparación sea justa:*
+• A la misma hora que la primera vez
+• En el mismo tipo de lugar tranquilo
+• Sin ayuda y sin pausas
+
+📍 App → *Blindaje* → *Empezar test*
+
+*Cómo leer tu resultado:*
+Un número suelto dice poco. Lo que importa es la tendencia de varios meses. Subir, mantenerse o bajar 2 o 3 puntos es variación normal del día.
+
+Las palabras del test cambian cada vez, así que tu puntaje mide tu memoria, no si ya te sabes la lista.
+{app}${PIE}`},
+
+ {t:'Quando conversar com o médico',tema:'Sinais',txt:
+`🩺 *Semana 5 · Cuándo vale la pena conversar con tu médico*
+
+Olvidar dónde dejaste el celular es normal a cualquier edad. Hay otras señales que merecen una consulta, sin alarmarse:
+
+• Perderse en lugares que conoces bien
+• Repetir la misma pregunta varias veces en la misma conversación
+• Dificultad nueva para manejar dinero o seguir una receta conocida
+• Que tu familia note cambios que tú no notas
+
+Si reconoces alguna, no significa que algo esté mal. Significa que vale la pena una consulta. Lleva tu *historial de tests* de la app: es información útil para el médico.
+
+En tu módulo Blindaje tienes el capítulo completo sobre estas señales.${PIE}`},
+
+ {t:'Desafio: Pares de palabras',tema:'Jogo',txt:
+`🔗 *Semana 6 · La técnica de la escena absurda*
+
+Los campeones de memoria no tienen un cerebro distinto: usan técnicas. Esta es la más poderosa y la puedes usar hoy.
+
+*Cómo funciona:*
+Para recordar dos cosas juntas, imagínalas en una escena *absurda*. "Abeja" y "tambor" → una abeja gigante tocando un tambor. Cuanto más rara la escena, mejor se graba.
+
+*Desafío:* practícala en el juego *Pares de palabras* y sube un nivel esta semana.
+📍 App → *Mente* → *Juegos* → *Pares de palabras*
+
+*Úsala en la vida real:* el nombre de una persona nueva + un rasgo suyo. "Rosa" con una rosa enorme en el hombro.
+{app}${PIE}`},
+
+ {t:'Caminhar com narração',tema:'Hábito',txt:
+`🚶 *Semana 7 · Tres caminatas que entrenan la memoria*
+
+Caminar aumenta el flujo de sangre al cerebro. Es uno de los hábitos con más respaldo científico para la salud cognitiva, y es gratis.
+
+*Desafío de la semana:* 3 caminatas de 20 minutos, a paso firme.
+
+*Para sumar entrenamiento:* durante 5 minutos de la caminata, describe en voz baja lo que ves, con detalle: "un auto azul con una calcomanía roja", "una señora con vestido amarillo". Al volver a casa, intenta recordar 5 cosas que describiste.
+
+Si tienes algún problema de salud que limite el ejercicio, consulta antes con tu médico.${PIE}`},
+
+ {t:'Teste do mês 2',tema:'Teste',txt:
+`📊 *Semana 8 · Segundo mes: tu segunda comparación*
+
+Toca repetir tu test en la pestaña *Blindaje*. Con este ya tendrás 3 mediciones, y con 3 ya se empieza a ver una tendencia.
+
+📍 App → *Blindaje* → *Empezar test*
+
+*Qué mirar en tu historial:*
+• Si se mantiene o sube: lo que estás haciendo funciona, sigue igual
+• Si baja un poco en una sola medición: suele ser un mal día, un mal sueño o estrés
+• Si baja *más de 10 puntos en varias mediciones seguidas*: vale la pena conversarlo con tu médico y llevar tu historial
+
+Mismas condiciones que siempre: misma hora, lugar tranquilo, sin ayuda.
+{app}${PIE}`},
+
+ {t:'Conversar é treinar',tema:'Hábito',txt:
+`☎️ *Semana 9 · Conversar también es entrenar*
+
+Una conversación de verdad obliga a tu cerebro a recordar, escuchar, interpretar y responder rápido, todo a la vez. Por eso la vida social activa está asociada a una mejor memoria con los años.
+
+*Desafío de la semana:*
+Llama (no mensaje: *llamada*) a 2 personas con las que hace tiempo no hablas. Cuéntales algo concreto de tu semana y pregúntales algo concreto de la suya.
+
+*Extra:* al día siguiente, intenta recordar 3 detalles de lo que te contaron.${PIE}`},
+
+ {t:'Desafio: ¿Igual que antes?',tema:'Jogo',txt:
+`🧠 *Semana 10 · El juego más difícil (y el que más entrena)*
+
+*¿Igual que antes?* entrena la memoria de trabajo: la "mesa" donde tu cerebro sostiene información mientras la usa. Es la que falla cuando entras a la cocina y no recuerdas a qué ibas.
+
+*El truco:* no intentes recordar todas las letras. Solo las últimas, repitiéndolas mentalmente como un pequeño eco: "B… K… B".
+
+*Desafío:* juega 4 días esta semana. Si ya estás en el nivel 2 o 3, el objetivo es mantenerte.
+📍 App → *Mente* → *Juegos* → *¿Igual que antes?*
+
+Frustrarse un poco es parte del entrenamiento: significa que estás en el nivel justo.
+{app}${PIE}`},
+
+ {t:'O prato que cuida da memória',tema:'Alimentação',txt:
+`🥗 *Semana 11 · Tres cosas en tu plato esta semana*
+
+Sin dietas complicadas. Solo tres hábitos del protocolo para retomar esta semana:
+
+1. *Pescado azul 2 veces* (sardina, salmón o caballa)
+2. *Un fermentado al día* (kéfir, yogur natural o chucrut refrigerado)
+3. *Una porción de verdura verde* en el almuerzo o la cena
+
+*Recordatorio útil:* el chucrut enlatado suele estar pasteurizado y ya no tiene bacterias vivas. Búscalo en la sección refrigerada.
+
+Si tomas anticoagulantes u otra medicación diaria, consulta con tu médico antes de cambios grandes en tu alimentación.${PIE}`},
+
+ {t:'Teste do mês 3 e próximo trimestre',tema:'Teste',txt:
+`🏁 *Semana 12 · Tres meses: mira tu camino*
+
+Último test del trimestre. Hazlo en la pestaña *Blindaje*, en las mismas condiciones de siempre.
+
+📍 App → *Blindaje* → *Empezar test*
+
+*Después del test, 2 minutos de reflexión:*
+• ¿Qué hábito te resultó más fácil de mantener?
+• ¿En qué juego subiste más de nivel?
+• ¿Qué hábito quieres reforzar en los próximos 3 meses?
+
+Elige *uno solo* para el próximo trimestre. Un hábito sostenido vale más que diez abandonados.
+
+La próxima semana empieza un nuevo ciclo de desafíos. Gracias por ser parte de la comunidad. 💛
+{app}${PIE}`}
+];
+
+/* ==================================================================
+   LÓGICA
+================================================================== */
+const LS='painel-comunidade-v1';
+let E={inicio:'',app:'',postado:{},sel:null};
+try{Object.assign(E,JSON.parse(localStorage.getItem(LS))||{})}catch(e){}
+function salvar(){try{localStorage.setItem(LS,JSON.stringify(E))}catch(e){}}
+
+function iso(d){const t=new Date(d.getTime()-d.getTimezoneOffset()*6e4);return t.toISOString().slice(0,10)}
+function segundaDe(d){const x=new Date(d);x.setHours(12,0,0,0);x.setDate(x.getDate()-((x.getDay()+6)%7));return x}
+function addDias(isoStr,n){const d=new Date(isoStr+'T12:00');d.setDate(d.getDate()+n);return d}
+const MESES=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+function curta(d){return d.getDate()+' '+MESES[d.getMonth()]}
+
+if(!E.inicio)E.inicio=iso(segundaDe(new Date()));
+
+/* índice absoluto da semana (0 = semana 1 do ciclo 1) */
+function semanaAtual(){
+  const dias=Math.floor((segundaDe(new Date())-new Date(E.inicio+'T12:00'))/864e5);
+  return Math.max(0,Math.floor(dias/7));
+}
+function textoDe(i){
+  const app=(E.app||'').trim();
+  let t=SEMANAS[i%12].txt;
+  t=app?t.replace('{app}','👉 '+app):t.replace(/\n\{app\}/,'');
+  return t;
+}
+function chavePost(abs){return 'c'+Math.floor(abs/12)+'-s'+(abs%12)}
+
+/* prévia: aplica a formatação do WhatsApp com HTML escapado */
+function formatar(t){
+  const e=t.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  return e.replace(/\*([^*\n]+)\*/g,'<b>$1</b>').replace(/(^|[\s(])_([^_\n]+)_/g,'$1<i>$2</i>');
+}
+
+const $=id=>document.getElementById(id);
+function pintar(){
+  const agora=semanaAtual(),abs=E.sel==null?agora:E.sel;
+  const i=abs%12,ciclo=Math.floor(abs/12)+1,ini=addDias(E.inicio,abs*7);
+  const s=SEMANAS[i],k=chavePost(abs),ok=!!E.postado[k];
+  $('atual-tit').textContent=(abs===agora?'Esta semana · ':'')+'Semana '+(i+1)+': '+s.t;
+  $('atual-meta').textContent='Segunda, '+curta(ini)+(ciclo>1?' · ciclo '+ciclo:'')+' · '+s.tema+(ok?' · postado em '+E.postado[k]:'');
+  const chip=$('atual-chip');chip.textContent=ok?'Postado':(abs<agora?'Atrasado':abs>agora?'Agendado':'Pendente');
+  chip.className='chip '+(ok?'ok':'pend');
+  const txt=textoDe(i);
+  $('atual-bolha').innerHTML=formatar(txt)+'<span class="hora">09:00</span>';
+  $('b-wa').href='https://wa.me/?text='+encodeURIComponent(txt);
+  $('b-marcar').querySelector('span').textContent=ok?'Desmarcar':'Marcar como postado';
+
+  const base=Math.floor(agora/12)*12;   // mostra o ciclo atual
+  $('semanas').innerHTML=SEMANAS.map((x,j)=>{
+    const a=base+j,d=addDias(E.inicio,a*7),okj=!!E.postado[chavePost(a)];
+    return '<li class="'+(a===agora?'agora ':'')+(a===abs?'sel':'')+'"><button type="button" data-abs="'+a+'">'
+      +'<span class="n">'+String(j+1).padStart(2,'0')+'</span>'
+      +'<span class="t"><b>'+x.t+'</b><span>'+curta(d)+' · '+x.tema+(a===agora?' · esta semana':'')+'</span></span>'
+      +'<span class="marca'+(okj?' ok':'')+'" aria-label="'+(okj?'Postado':'Não postado')+'">'+(okj?'<svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg>':'')+'</span>'
+      +'</button></li>';
+  }).join('');
+}
+function aviso(t){$('aviso').textContent=t;clearTimeout(aviso.t);aviso.t=setTimeout(()=>{$('aviso').textContent=''},3500)}
+function copiar(t,ok){
+  const fallback=()=>{const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();
+    try{document.execCommand('copy');aviso(ok)}catch(e){aviso('Não deu para copiar automaticamente. Selecione o texto e copie.')}a.remove()};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(()=>aviso(ok)).catch(fallback);else fallback();
+}
+
+$('cfg-inicio').value=E.inicio;
+$('cfg-app').value=E.app;
+$('cfg-inicio').addEventListener('change',e=>{if(e.target.value){E.inicio=iso(segundaDe(new Date(e.target.value+'T12:00')));e.target.value=E.inicio;E.sel=null;salvar();pintar()}});
+$('cfg-app').addEventListener('input',e=>{E.app=e.target.value;salvar();pintar();pintarKit()});
+$('b-copiar').addEventListener('click',()=>{const abs=E.sel==null?semanaAtual():E.sel;copiar(textoDe(abs%12),'Copiado. Cole no grupo Avisos da comunidade.')});
+$('b-marcar').addEventListener('click',()=>{
+  const abs=E.sel==null?semanaAtual():E.sel,k=chavePost(abs);
+  if(E.postado[k])delete E.postado[k];else E.postado[k]=curta(new Date());
+  salvar();pintar();aviso(E.postado[k]?'Marcado como postado.':'Desmarcado.');
+});
+$('semanas').addEventListener('click',e=>{const b=e.target.closest('button[data-abs]');if(!b)return;
+  const a=+b.dataset.abs;E.sel=a===semanaAtual()?null:a;pintar();$('atual-tit').scrollIntoView({behavior:'smooth',block:'start'})});
+document.querySelectorAll('[data-copiar]').forEach(b=>b.addEventListener('click',()=>copiar($(b.dataset.copiar).textContent,'Copiado.')));
+
+function pintarKit(){
+  const app=(E.app||'').trim();
+  $('t-desc').textContent=DESCRIPCION;
+  $('t-bienv').textContent=app?BIENVENIDA.replace('{app}','👉 '+app):BIENVENIDA.replace(/\n\{app\}/,'');
+  const ini=new Date(E.inicio+'T09:00'),fim=new Date(E.inicio+'T09:15');
+  const f=d=>d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'T'+String(d.getHours()).padStart(2,'0')+String(d.getMinutes()).padStart(2,'0')+'00';
+  $('b-agenda').href='https://calendar.google.com/calendar/render?action=TEMPLATE'
+    +'&text='+encodeURIComponent('Postar na Comunidade Blindaje')
+    +'&dates='+f(ini)+'/'+f(fim)
+    +'&recur='+encodeURIComponent('RRULE:FREQ=WEEKLY;BYDAY=MO')
+    +'&details='+encodeURIComponent('Abrir o painel, copiar o post da semana, colar no grupo Avisos e marcar como postado.');
+}
+pintar();pintarKit();
+</script>
