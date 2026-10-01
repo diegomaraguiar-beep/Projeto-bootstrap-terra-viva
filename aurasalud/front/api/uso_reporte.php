@@ -47,6 +47,7 @@ $NOMBRES = [
   'tarea' => 'Concluiu tarefa', 'contenido' => 'Abriu conteúdo', 'test' => 'Fez teste', 'hito' => 'Marco atingido',
   'desbloqueo' => 'Desbloqueou módulo pago', 'recordatorio' => 'Criou lembrete diário', 'respaldo' => 'Salvou backup',
   'restaurar' => 'Restaurou backup', 'reinicio' => 'Reiniciou o protocolo', 'correo' => 'Cadastrou e-mail',
+  'juego' => 'Jogou jogo de memória',
 ];
 
 $dias = array_unique(array_map(fn($r) => substr($r['srv'] ?? '', 0, 10), $ev));

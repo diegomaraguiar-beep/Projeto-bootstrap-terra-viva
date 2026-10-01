@@ -507,6 +507,47 @@ ol.pasos li{margin-bottom:9px;font-size:15.5px}
 .ajuste.rojo .ic svg{stroke:var(--rojo)}
 select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b8a9a' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center/16px}
 
+/* ---- juegos de memoria ---- */
+.jg-item{display:block;width:100%;text-align:left}
+.jg-nivel{display:flex;align-items:center;gap:10px;margin-top:9px;font-size:13px;color:var(--suave);font-weight:700}
+.jg-nivel .pts{display:inline-flex;gap:3px}
+.jg-nivel .pts i{width:9px;height:9px;border-radius:50%;background:#dfe9ef}
+.jg-nivel .pts i.on{background:var(--oro)}
+.jg-info{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--suave);font-weight:700;margin-bottom:6px}
+.jg-msg{text-align:center;font-weight:700;color:var(--tinta);min-height:24px;margin:6px 0 4px}
+.jg-grid{display:grid;gap:10px;margin:12px auto;max-width:340px}
+.jg-cel{aspect-ratio:1;border-radius:14px;background:#dde8ee;border:none;transition:background .12s,transform .12s;touch-action:manipulation}
+.jg-cel.on{background:var(--oro);transform:scale(1.05);box-shadow:0 0 0 4px rgba(232,180,77,.3)}
+.jg-cel.ok{background:var(--verde)}
+.jg-cel.mal{background:var(--rojo)}
+.jg-cartas{gap:8px}
+.jg-carta{aspect-ratio:3/4;border-radius:12px;background:linear-gradient(160deg,var(--tinta),var(--tinta2));border:2px solid transparent;font-size:30px;display:flex;align-items:center;justify-content:center;transition:transform .15s,background .15s;touch-action:manipulation}
+.jg-carta{position:relative}
+.jg-carta::after{content:'';position:absolute;width:34%;aspect-ratio:1;border:2px solid rgba(232,180,77,.55);border-radius:50%;pointer-events:none}
+.jg-carta.vista::after,.jg-carta.par::after{display:none}
+.jg-carta span{visibility:hidden}
+.jg-carta.vista,.jg-carta.par{background:#fff;border-color:var(--borde);transform:scale(1.03)}
+.jg-carta.par{background:var(--verde-l);border-color:#bde6d1;transform:none}
+.jg-carta.vista span,.jg-carta.par span{visibility:visible}
+.jg-par{min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-family:'Playfair Display',serif;font-size:30px;font-weight:800;color:var(--tinta);text-align:center;margin:12px 0}
+.jg-par .mas{font-size:20px;color:var(--oro-d)}
+.jg-opc{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.jg-opc button{padding:16px 8px;border-radius:12px;border:1.5px solid var(--borde);background:#fff;font-weight:700;font-size:17px;color:var(--tinta);transition:all .15s}
+.jg-opc button.ok{background:var(--verde);border-color:var(--verde);color:#fff}
+.jg-opc button.mal{background:var(--rojo);border-color:var(--rojo);color:#fff}
+.jg-letra{font-family:'Playfair Display',serif;font-size:96px;font-weight:800;text-align:center;height:150px;line-height:150px;color:var(--tinta);margin:6px 0 14px;background:#fff;border-radius:18px;box-shadow:var(--sombra)}
+.jg-letra.entra{animation:fade .18s ease}
+.jg-igual{padding:20px;font-size:19px}
+.jg-igual.flash-ok{background:var(--verde);color:#fff}
+.jg-igual.flash-mal{background:var(--rojo);color:#fff}
+.jg-prog{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--borde)}
+.jg-prog:last-of-type{border-bottom:none}
+.jg-prog b{display:block;color:var(--tinta);font-size:15px}
+.jg-prog span{font-size:12.5px;color:var(--suave)}
+.jg-barras{display:flex;align-items:flex-end;gap:3px;height:34px;width:120px;flex-shrink:0;justify-content:flex-end}
+.jg-barras i{width:6px;background:var(--oro);border-radius:2px 2px 0 0}
+.jg-barras em{font-size:12px;color:var(--suave)}
+
 /* ---- test baseline (Blindaje) ---- */
 .rt-zona{height:190px;border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:18px;color:#fff;background:var(--tinta2);user-select:none;-webkit-user-select:none;cursor:pointer;padding:16px;transition:background .08s}
 .rt-zona.ya{background:var(--verde)}
@@ -528,9 +569,9 @@ select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:i
       <h1>Protocolo de<br>Memoria Blindada</h1>
       <p>21 días de hábitos guiados para cuidar tu intestino, entrenar tu memoria y medir tu claridad mental, paso a paso.</p>
       <ul class="onb-incluye">
-        <li><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg><span>Qué hacer cada día, en menos de 20 minutos</span></li>
+        <li><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg><span>Qué hacer cada día, en unos 20 minutos</span></li>
         <li><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg><span>7 preparaciones con cronómetro y lista de compras</span></li>
-        <li><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg><span>Ejercicios de memoria y un test para medir tu avance</span></li>
+        <li><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg><span>Juegos de memoria que suben de nivel contigo y un test para medir tu avance</span></li>
         <li><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg><span>Una lección corta al día y soporte humano en la app</span></li>
       </ul>
       <div style="margin-top:26px"><button class="btn oro" type="button" onclick="onbPaso(2)">Comenzar</button></div>
@@ -692,14 +733,20 @@ select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:i
 <section class="vista" id="v-mente">
   <div class="cap">Parte 4 y 7</div>
   <h1 class="h-vista">Entrenamiento y test</h1>
-  <p class="sub-vista">15 minutos al día. No son juegos: son secuencias que rotan entre las 4 zonas del cerebro que controlan la memoria.</p>
+  <p class="sub-vista">Juegos que suben de nivel contigo, ejercicios guiados para las 4 zonas de la memoria y el test que mide tu avance.</p>
 
   <div class="btns" style="margin-bottom:18px">
-    <button class="btn chico" onclick="verMente('ej')" id="tb-ej">Ejercicios</button>
-    <button class="btn linea chico" onclick="verMente('test')" id="tb-test">Test de Alerta</button>
+    <button class="btn chico" type="button" onclick="verMente('juegos')" id="tb-juegos">Juegos</button>
+    <button class="btn linea chico" type="button" onclick="verMente('ej')" id="tb-ej">Ejercicios</button>
+    <button class="btn linea chico" type="button" onclick="verMente('test')" id="tb-test">Test</button>
   </div>
 
-  <div id="p-ej">
+  <div id="p-juegos">
+    <div id="lista-juegos"></div>
+    <div class="nota"><strong>Cómo funcionan:</strong> cada juego tiene niveles. Si aciertas, la próxima partida es un poco más difícil; si fallas mucho, baja un nivel. Así entrenas siempre en tu punto justo. Juega con el teléfono en silencio para no tener interrupciones.</div>
+  </div>
+
+  <div id="p-ej" style="display:none">
     <div id="lista-ejercicios"></div>
     <div class="nota"><strong>La regla de oro:</strong> nunca hagas los ejercicios con el teléfono al lado. El simple hecho de saber que está ahí reduce tu capacidad cognitiva de forma medible. Déjalo en otra habitación durante los 15 minutos (o pon el cronómetro y voltéalo boca abajo).</div>
   </div>
@@ -747,6 +794,11 @@ select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:i
       <span><i style="background:#c9553d"></i>Hinchazón</span>
     </div>
     <p style="font-size:13.5px;color:var(--suave);margin:14px 0 0">Claridad y energía deben <b>subir</b>. Hinchazón debe <b>bajar</b>. Si la hinchazón cae, tu intestino está respondiendo: menos inflamación significa más nutrientes llegando al cerebro.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>Tus juegos de memoria</h3></div>
+    <div id="prog-juegos"></div>
   </div>
 
   <div class="card">
@@ -1102,7 +1154,21 @@ const COMPRAS=[
  'Avena en copos','Semillas de chía','Pepino','Aceite de oliva extra virgen'
 ];
 
-const PALABRAS=['Silla','Montaña','Reloj','Perro','Azul','Cocina','Tren','Lluvia','Zapato','Carta'];
+/* Una lista distinta en cada test: si se repite la misma, a los 21 días la persona
+   la recuerda porque ya la aprendió, no porque su memoria mejoró. Las cuatro listas
+   tienen la misma estructura (objetos cotidianos, un animal, un color, un lugar de
+   la casa, un transporte, un fenómeno del clima, una prenda, algo de papel). */
+const LISTAS_TEST=[
+ ['Silla','Montaña','Reloj','Perro','Azul','Cocina','Tren','Lluvia','Zapato','Carta'],     // día 1
+ ['Mesa','Playa','Cuchara','Gato','Negro','Balcón','Barco','Nieve','Camisa','Libro'],      // día 7
+ ['Puerta','Bosque','Llave','Conejo','Rojo','Garaje','Avión','Viento','Sombrero','Postal'],// día 14
+ ['Cama','Lago','Vaso','Pájaro','Blanco','Pasillo','Coche','Trueno','Guante','Revista']    // día 21
+];
+const INICIOS_RESTA=[100,101,102,103];   // misma dificultad, distinta secuencia
+function listaParaDia(dia){
+  if(dia<7)return 0; if(dia<14)return 1; if(dia<21)return 2; if(dia===21)return 3;
+  return (S.tests.filter(t=>t.dia>21).length+1)%4;   // mantenimiento: van rotando
+}
 
 /* ==================================================================
    CONFIGURACIÓN — ajusta estos valores a tu operación
@@ -1166,7 +1232,7 @@ function faqs(){
 ================================================================== */
 const KEY='mb_app_v1';
 let S=cargar();
-function base(){return{inicio:null,checks:{},reg:{},tests:[],compras:{},correo:'',consent:null,hitos:{},hora:'08:00',ultimaVisita:null}}
+function base(){return{inicio:null,checks:{},reg:{},tests:[],compras:{},correo:'',consent:null,hitos:{},hora:'08:00',ultimaVisita:null,juegos:{},v2desde:null}}
 function cargar(){try{const r=JSON.parse(localStorage.getItem(KEY));return r&&typeof r==='object'?Object.assign(base(),r):base()}catch(e){return base()}}
 function guardar(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 
@@ -1233,7 +1299,12 @@ function tareasDe(iso,sem){
   L.push({id:'alim',t:'Plan de alimentación',s:'Los 12 alimentos dentro, los 6 fuera',go:()=>ir('plan')});
   L.push({id:'nh',t:'Toma del Protocolo Neuro-Honey',s:'Tu protocolo base, como ya lo haces',go:null});
   const dn=numDe(iso);
-  if(dn>=1&&dn<=21)L.push({id:'lec',t:'Lección del día',s:'1 minuto · '+LECCIONES[dn-1].t,go:()=>{ir('hoy');setTimeout(()=>{const c=document.getElementById('card-leccion');if(c)c.scrollIntoView({behavior:'smooth',block:'center'})},120)}});
+  const nuevo=!S.v2desde||iso>=S.v2desde;   // días anteriores a esta versión no cuentan las tareas nuevas
+  if(nuevo&&dn>=1){
+    const ji=(dn-1)%JUEGOS.length,jj=JUEGOS[ji];
+    L.push({id:'juego',t:'Juego de memoria: '+jj.t,s:'3 minutos · '+jj.zona,go:()=>{ir('mente');verMente('juegos');setTimeout(()=>abrirJuego(ji),260)}});
+  }
+  if(nuevo&&dn>=1&&dn<=21)L.push({id:'lec',t:'Lección del día',s:'1 minuto · '+LECCIONES[dn-1].t,go:()=>{ir('hoy');setTimeout(()=>{const c=document.getElementById('card-leccion');if(c)c.scrollIntoView({behavior:'smooth',block:'center'})},120)}});
   if(sem>=2){
     const e=EJER.filter(x=>x.dias.indexOf(dw)>-1);
     e.forEach((x,i)=>L.push({id:'ej'+EJER.indexOf(x),t:'Ejercicio: '+x.t,s:x.min+' minutos · '+x.zona,go:()=>{ir('mente');verMente('ej');setTimeout(()=>abrirEjercicio(EJER.indexOf(x)),260)}}));
@@ -1266,11 +1337,12 @@ function verPlan(p){
   });
 }
 function verMente(p){
-  ['ej','test'].forEach(x=>{
+  ['juegos','ej','test'].forEach(x=>{
     document.getElementById('p-'+x).style.display = x===p?'block':'none';
     const b=document.getElementById('tb-'+x); b.className = x===p?'btn chico':'btn linea chico';
   });
   if(p==='test')pintarTests();
+  if(p==='juegos')pintarJuegos();
 }
 
 /* ==================================================================
@@ -1293,6 +1365,8 @@ function cerrarModal(desdePop){
   DIA_MODAL=null;
   if(enTest){enTest=false;clearInterval(TT);}
   if(BL_TEST)blCancelar();
+  if(JG)jgCancelar();
+  if(CELEBRAR_AL_CERRAR){CELEBRAR_AL_CERRAR=false;setTimeout(celebrar,300)}
   if(CR.run)pintarCrono();
   if(MODAL_HIST){MODAL_HIST=false;if(desdePop!==true){IGNORAR_POP=true;try{history.back()}catch(e){IGNORAR_POP=false}}}
 }
@@ -1349,7 +1423,7 @@ function render(){
   document.getElementById('aro-n').textContent=d;
   document.getElementById('aro').style.strokeDashoffset = 283-(283*(d/21));
   const titSem=['Semana 1','Semana 2','Semana 3'][sem-1];
-  const txtSem=['Solo alimentación y preparaciones. Deja que tu cuerpo se adapte.',
+  const txtSem=['Alimentación, preparaciones y un juego corto de memoria. Deja que tu cuerpo se adapte.',
                 'Se suman los suplementos y los ejercicios cognitivos.',
                 'Protocolo completo. Aquí es donde se nota.'][sem-1];
   document.getElementById('hero-tit').textContent = real>21?'Protocolo completado':titSem;
@@ -1383,6 +1457,7 @@ function render(){
   pintarEjercicios();
   pintarCompras();
   pintarTests();
+  pintarJuegos();
 }
 
 /* ---------- TAREAS ---------- */
@@ -1702,7 +1777,8 @@ function bip(){
 ================================================================== */
 let TS={},TT=null,enTest=false;
 function iniciarTest(){
-  TS={p1:0,p2:0,p3:0,p4:0,dichas1:[],dichas4:[],animales:[]};
+  const li=listaParaDia(Math.max(1,numDia()));
+  TS={p1:0,p2:0,p3:0,p4:0,dichas1:[],dichas4:[],animales:[],lista:li,pal:LISTAS_TEST[li],inicio:INICIOS_RESTA[li]};
   enTest=true;
   paso0();
 }
@@ -1721,7 +1797,7 @@ function paso1(){
     barra(1)
     +'<p>Lee esta lista <b>una sola vez</b>, con calma. Tienes 40 segundos. Después tendrás que escribir las que recuerdes.</p>'
     +'<div class="big-num" id="t1">40</div>'
-    +'<div class="palabras">'+PALABRAS.map(p=>'<div>'+p+'</div>').join('')+'</div>'
+    +'<div class="palabras">'+TS.pal.map(p=>'<div>'+p+'</div>').join('')+'</div>'
     +'<button class="btn" onclick="paso1b()">Ya las memoricé</button>');
   clearInterval(TT);
   TT=setInterval(()=>{
@@ -1736,32 +1812,32 @@ function paso1b(){
   modal('Prueba 1 · Escribe lo que recuerdes',
     barra(1)
     +'<p>Escribe todas las palabras que recuerdes, separadas por coma. No mires atrás.</p>'
-    +'<textarea class="campo" id="in1" rows="3" placeholder="silla, tren, ..." autofocus></textarea>'
+    +'<textarea class="campo" id="in1" rows="3" placeholder="'+norm(TS.pal[0])+', '+norm(TS.pal[6])+', ..." autofocus></textarea>'
     +'<button class="btn oro" style="margin-top:14px" onclick="corrige1()">Corregir y seguir</button>');
   setTimeout(()=>{const e=document.getElementById('in1');if(e)e.focus()},250);
 }
 function corrige1(){
   const v=(document.getElementById('in1').value||'').split(/[,\n;]+/).map(norm).filter(Boolean);
-  const ac=PALABRAS.filter(p=>v.indexOf(norm(p))>-1);
+  const ac=TS.pal.filter(p=>v.indexOf(norm(p))>-1);
   TS.p1=ac.length;TS.dichas1=ac;
   modal('Prueba 1 · Resultado',
     barra(1)
     +'<div class="big-num">'+ac.length+'<span style="font-size:22px;color:var(--suave)">/10</span></div>'
-    +'<div class="chips">'+PALABRAS.map(p=>'<span class="'+(ac.indexOf(p)>-1?'ok':'no')+'">'+p+'</span>').join('')+'</div>'
+    +'<div class="chips">'+TS.pal.map(p=>'<span class="'+(ac.indexOf(p)>-1?'ok':'no')+'">'+p+'</span>').join('')+'</div>'
     +'<div class="nota" style="margin-top:18px">7-10 excelente · 5-6 normal · menos de 5, hay margen de mejora. Lo que importa de verdad es cómo cambia este número entre el día 1 y el día 21.</div>'
     +'<button class="btn" onclick="paso2()">Ir a la prueba 2</button>');
 }
 /* Prueba 2: resta de 7 */
 let R2={val:100,ok:0,t:60};
 function paso2(){
-  R2={val:100,ok:0,t:60};
+  R2={val:TS.inicio||100,ok:0,t:60,ini:TS.inicio||100};
   modal('Prueba 2 · Memoria de trabajo',
     barra(2)
-    +'<p>Resta de <b>7 en 7</b> empezando en 100, lo más rápido que puedas. Escribe cada resultado y pulsa enter. Tienes 60 segundos.</p>'
+    +'<p>Resta de <b>7 en 7</b> empezando en <b>'+R2.ini+'</b>, lo más rápido que puedas. Escribe cada resultado y pulsa enter. Tienes 60 segundos.</p>'
     +'<div class="big-num" id="t2">60</div>'
     +'<div style="text-align:center;font-size:15px;color:var(--suave);margin:14px 0 4px">Vas en</div>'
-    +'<div style="text-align:center;font-family:\'Playfair Display\',serif;font-size:34px;font-weight:800;color:var(--oro-d)" id="v2">100</div>'
-    +'<input class="campo" id="in2" type="number" inputmode="numeric" style="margin-top:14px;text-align:center;font-size:22px;font-weight:700" placeholder="93">'
+    +'<div style="text-align:center;font-family:\'Playfair Display\',serif;font-size:34px;font-weight:800;color:var(--oro-d)" id="v2">'+R2.ini+'</div>'
+    +'<input class="campo" id="in2" type="number" inputmode="numeric" style="margin-top:14px;text-align:center;font-size:22px;font-weight:700" placeholder="'+(R2.ini-7)+'">'
     +'<div class="serie" id="s2"></div>'
     +'<button class="btn linea chico" style="margin-top:10px" onclick="fin2()">Terminar antes</button>');
   const inp=document.getElementById('in2');
@@ -1785,7 +1861,7 @@ function chk2(){
     document.getElementById('v2').textContent=v;
     const s=document.getElementById('s2');s.innerHTML+='<span>'+v+'</span>';
     inp.value='';inp.style.borderColor='';
-    if(v<=2){clearInterval(TT);fin2()}
+    if(v<7){clearInterval(TT);fin2()}
   } else {
     inp.style.borderColor='var(--rojo)';
     setTimeout(()=>{if(inp)inp.style.borderColor=''},450);
@@ -1799,7 +1875,7 @@ function fin2(){
     barra(2)
     +'<div class="big-num">'+R2.ok+'<span style="font-size:20px;color:var(--suave)"> restas</span></div>'
     +'<p class="mini">Llegaste hasta el '+R2.val+' en 60 segundos.</p>'
-    +'<div class="nota" style="margin-top:18px">Llegar al 30 sin error es excelente. Llegar al 58 es normal. Atascarse antes del 72 indica margen de mejora.</div>'
+    +'<div class="nota" style="margin-top:18px">10 restas o más sin error es excelente. De 6 a 9 es normal. Menos de 6 indica margen de mejora.</div>'
     +'<button class="btn" onclick="paso3()">Ir a la prueba 3</button>');
 }
 /* Prueba 3: fluidez verbal */
@@ -1843,16 +1919,16 @@ function paso4(){
   modal('Prueba 4 · Memoria diferida',
     barra(4)
     +'<p>Sin mirar atrás: ¿cuántas de las 10 palabras del principio recuerdas <b>ahora</b>, después de las otras dos pruebas?</p>'
-    +'<textarea class="campo" id="in4" rows="3" placeholder="silla, tren, ..."></textarea>'
+    +'<textarea class="campo" id="in4" rows="3" placeholder="'+norm(TS.pal[0])+', '+norm(TS.pal[6])+', ..."></textarea>'
     +'<button class="btn oro" style="margin-top:14px" onclick="fin4()">Ver mi resultado final</button>');
   setTimeout(()=>{const e=document.getElementById('in4');if(e)e.focus()},250);
 }
 function fin4(){
   const v=(document.getElementById('in4').value||'').split(/[,\n;]+/).map(norm).filter(Boolean);
-  const ac=PALABRAS.filter(p=>v.indexOf(norm(p))>-1);
+  const ac=TS.pal.filter(p=>v.indexOf(norm(p))>-1);
   TS.p4=ac.length;TS.dichas4=ac;
   // el día real (después del 21 cuenta como test de mantenimiento, sin pisar el del día 21)
-  const reg={dia:Math.max(1,numDia()),fecha:hoyISO(),p1:TS.p1,p2:TS.p2,p3:TS.p3,p4:TS.p4};
+  const reg={dia:Math.max(1,numDia()),fecha:hoyISO(),p1:TS.p1,p2:TS.p2,p3:TS.p3,p4:TS.p4,lista:TS.lista};
   S.tests=S.tests.filter(t=>t.dia!==reg.dia);
   S.tests.push(reg);S.tests.sort((a,b)=>a.dia-b.dia);
   guardar();enTest=false;
@@ -1912,6 +1988,7 @@ function pintarProgreso(){
   document.getElementById('tag-adh').textContent=adherencia()+'%';
   document.getElementById('grafico').innerHTML=grafico();
   compTests();
+  pintarJuegosProgreso();
 }
 function grafico(){
   const W=320,H=170,pl=24,pr=8,pt=10,pb=24;
@@ -1989,6 +2066,8 @@ function copiarResumen(){
   t+='TESTS DE ALERTA COGNITIVO\n';
   if(!S.tests.length)t+='Sin tests registrados.\n';
   else S.tests.forEach(x=>{t+='Día '+x.dia+' ('+x.fecha+'): inmediata '+x.p1+'/10 · trabajo '+x.p2+' · fluidez '+x.p3+' · diferida '+x.p4+'/10\n'});
+  t+='\nJUEGOS DE MEMORIA\n';
+  JUEGOS.forEach(j=>{const e=jgEstado(j.id);t+=j.t+': nivel '+e.nivel+' de '+j.max+' ('+e.ses.length+' partidas)\n'});
   t+='\nREGISTRO DIARIO (claridad / energía / hinchazón, escala 1-5)\n';
   for(let i=1;i<=n;i++){
     const iso=fechaDe(i),r=S.reg[iso];
@@ -2044,6 +2123,282 @@ function abrirGuia(){
   +'<div class="nota"><b>Qué esperar y cuándo.</b> La mayoría de las personas reporta los primeros cambios entre el día 10 y el 14: menos hinchazón, más energía por la mañana y la sensación de que la cabeza está más limpia. La mejora medible en memoria suele aparecer al día 21. No te frustres si no lo notas antes: la restauración intestinal es gradual y tu cerebro necesita tiempo para aprovechar el nuevo ambiente.</div>'
   +'<div class="aviso"><b>Importante.</b> Este material es informativo y no sustituye la consulta médica. Si tomas anticoagulantes, sedantes, antidepresivos, medicación para la tensión, la diabetes o el colesterol, habla con tu médico antes de añadir cualquier suplemento o cambio alimentario.</div>'
   +'<p style="font-size:13px;color:var(--suave)">Dudas o reembolsos: soporte@aurasalud.online</p>');
+}
+
+/* ==================================================================
+   JUEGOS DE MEMORIA — interactivos y adaptativos
+   Cada juego tiene niveles. Si aciertas, la próxima partida es más
+   difícil; si fallas mucho, baja un nivel. Así se entrena siempre en
+   el punto justo, que es lo que mantiene el reto y las ganas de volver.
+================================================================== */
+const JUEGOS=[
+ {id:'luces',t:'Secuencia de luces',zona:'Memoria visoespacial',max:7,
+  d:'Los cuadros se encienden en un orden. Repite ese orden tocándolos. Cada acierto suma un cuadro más.',
+  ayuda:'Di la secuencia en voz baja mientras la miras ("arriba, centro, izquierda…"): dos tipos de memoria trabajan juntas.'},
+ {id:'parejas',t:'Parejas',zona:'Memoria a corto plazo',max:5,
+  d:'Da vuelta a dos cartas por turno y encuentra todas las parejas con el menor número de intentos.',
+  ayuda:'Antes de tocar, intenta recordar dónde viste cada dibujo. Adivinar al azar gasta intentos.'},
+ {id:'palabras',t:'Pares de palabras',zona:'Hipocampo · asociación',max:6,
+  d:'Verás parejas de palabras, una por una. Después te mostramos la primera y eliges su compañera.',
+  ayuda:'Imagina las dos cosas juntas en una escena absurda ("una abeja tocando un tambor"). Es la técnica que usan los campeones de memoria.'},
+ {id:'nback',t:'¿Igual que antes?',zona:'Memoria de trabajo',max:3,
+  d:'Aparecen letras una tras otra. Toca «¡Igual!» cuando la letra coincida con la que apareció antes.',
+  ayuda:'No intentes recordar todo: solo las últimas letras. Repítelas mentalmente como un pequeño eco.'}
+];
+const SIMBOLOS=['🍎','🍋','🍇','🍓','🥕','🌽','🐟','🌻','🔑','⏰','🎈','🚲'];
+const PAREJAS_POR_NIVEL=[3,4,6,8,10];
+/* palabras distintas de las de los tests, para no "entrenar" el test */
+const POOL_PALABRAS=['Hoja','Taza','Tigre','Bota','Faro','Abeja','Cuerda','Plato','Sartén','Nido','Torre','Vela','Pluma','Rana',
+ 'Moneda','Anillo','Alfombra','Escoba','Martillo','Peine','Toalla','Globo','Fresa','Limón','Queso','Mapa','Ancla','Cebra','Pulpo',
+ 'Cohete','Tranvía','Canoa','Cueva','Volcán','Desierto','Mochila','Paraguas','Cartera','Espejo','Reina'];
+const LETRAS_NB='BCDFGHKLMNPRST';
+
+function barajar(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function jgEstado(id){S.juegos=S.juegos||{};return S.juegos[id]=S.juegos[id]||{nivel:1,mejor:0,ses:[]}}
+function juegoDelDia(){return (Math.max(1,numDia())-1)%JUEGOS.length}
+
+let JG=null,CELEBRAR_AL_CERRAR=false;
+function jgCancelar(){if(!JG)return;JG.timers.forEach(clearTimeout);JG=null}
+function jgT(fn,ms){const yo=JG;const id=setTimeout(()=>{if(JG&&JG===yo)fn()},ms);JG.timers.push(id);return id}
+function jgMsg(t){const e=document.getElementById('jg-msg');if(e)e.textContent=t}
+function jgInfo(a,b){const x=document.getElementById('jg-a'),y=document.getElementById('jg-b');if(x&&a!=null)x.textContent=a;if(y&&b!=null)y.textContent=b}
+
+/* ---------- lista en la pestaña Mente ---------- */
+function pintarJuegos(){
+  const c=document.getElementById('lista-juegos');if(!c)return;
+  const hoy=juegoDelDia(),hecho=!!(S.checks[hoyISO()]||{}).juego;
+  c.innerHTML=JUEGOS.map((j,i)=>{
+    const e=jgEstado(j.id),esHoy=i===hoy;
+    let pts='';for(let k=1;k<=j.max;k++)pts+='<i class="'+(k<=e.nivel?'on':'')+'"></i>';
+    return '<button type="button" class="card plana jg-item" style="'+(esHoy?'border:2px solid var(--oro)':'')+'" onclick="abrirJuego('+i+')">'
+      +'<div style="padding:16px 17px">'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">'
+      +(esHoy?'<span class="tag oro">'+(hecho?'Hoy · hecho':'Juego de hoy')+'</span>':'')
+      +'<span class="tag">'+j.zona+'</span>'
+      +'<span style="margin-left:auto"><svg viewBox="0 0 24 24" style="width:17px;height:17px;stroke:#b6c9d4;fill:none;stroke-width:2.4;stroke-linecap:round"><path d="M9 5l7 7-7 7"/></svg></span></div>'
+      +'<h3 style="font-size:18px;line-height:1.25">'+j.t+'</h3>'
+      +'<div class="jg-nivel"><span>Nivel '+e.nivel+' de '+j.max+'</span><span class="pts">'+pts+'</span>'
+      +'<span style="margin-left:auto">'+e.ses.length+' '+(e.ses.length===1?'partida':'partidas')+'</span></div>'
+      +'</div></button>';
+  }).join('');
+}
+
+/* ---------- introducción de cada juego ---------- */
+function abrirJuego(i){
+  jgCancelar();
+  const j=JUEGOS[i],e=jgEstado(j.id);
+  let extra='';
+  if(j.id==='nback')extra='<div class="nota"><b>En el nivel '+e.nivel+':</b> toca «¡Igual!» cuando la letra sea la misma que '
+    +['la inmediatamente anterior','la de <b>dos</b> letras antes','la de <b>tres</b> letras antes'][e.nivel-1]
+    +'. Ejemplo: '+['B, <b>B</b>','B, K, <b>B</b>','B, K, M, <b>B</b>'][e.nivel-1]+'.</div>';
+  modal(j.t,'<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px"><span class="tag oro">Nivel '+e.nivel+' de '+j.max+'</span><span class="tag">'+j.zona+'</span><span class="tag">2-3 minutos</span></div>'
+    +'<p>'+j.d+'</p>'+extra
+    +'<div class="porque"><b>Truco:</b> '+j.ayuda+'</div>'
+    +'<button class="btn oro" type="button" onclick="empezarJuego('+i+')"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9z"/></svg>Jugar</button>');
+  registrar('contenido',{id:'juego-'+j.id});
+}
+function empezarJuego(i){
+  jgCancelar();
+  ({luces:jLuces,parejas:jParejas,palabras:jPalabras,nback:jNback})[JUEGOS[i].id]();
+}
+
+/* ---------- fin de partida: guarda, ajusta nivel y muestra resultado ---------- */
+function jgTerminar(id,res){
+  jgCancelar();
+  const i=JUEGOS.findIndex(x=>x.id===id),j=JUEGOS[i],e=jgEstado(id),antes=e.nivel;
+  if(res.sube)e.nivel=Math.min(j.max,e.nivel+1);else if(res.baja)e.nivel=Math.max(1,e.nivel-1);
+  e.mejor=Math.max(e.mejor||0,res.p);
+  e.ses.push({f:hoyISO(),n:antes,p:res.p});if(e.ses.length>90)e.ses=e.ses.slice(-90);
+  const iso=hoyISO();S.checks[iso]=S.checks[iso]||{};
+  const ya=!!S.checks[iso].juego;S.checks[iso].juego=true;guardar();
+  registrar('juego',{id:id});
+  pintarTareas(iso,semana());
+  document.getElementById('st-racha').textContent=racha();
+  document.getElementById('st-adh').textContent=adherencia()+'%';
+  if(!ya&&todoHecho(iso))CELEBRAR_AL_CERRAR=true;
+  pintarJuegos();
+  const nv=e.nivel>antes?'<div class="bienvenida"><b>¡Subes al nivel '+e.nivel+'!</b> La próxima partida será un poco más difícil.</div>'
+    :e.nivel<antes?'<div class="nota">Bajamos al nivel '+e.nivel+' para que entrenes en tu punto justo: ni muy fácil ni frustrante. Es normal y es parte del método.</div>'
+    :'<div class="nota">Sigues en el nivel '+e.nivel+'. '+(e.nivel>=j.max?'Es el nivel máximo: excelente memoria.':'Con un poco más de precisión, subes.')+'</div>';
+  modal(j.t,'<div class="hito"><div class="medalla"><b>'+e.nivel+'</b></div><p class="mini" style="margin:-6px 0 12px">Nivel actual</p><p>'+res.txt+'</p></div>'+nv
+    +'<div class="btns"><button class="btn linea chico" type="button" onclick="cerrarModal()">Terminar</button>'
+    +'<button class="btn chico" type="button" onclick="empezarJuego('+i+')">Jugar otra vez</button></div>');
+}
+
+/* ---------- 1. Secuencia de luces ---------- */
+function jLuces(){
+  const e=jgEstado('luces'),ini=2+e.nivel,lado=e.nivel>=5?4:3;
+  JG={id:'luces',timers:[],L:ini,ini:ini,err:0,max:0,seq:[],pos:0,lado:lado,bloq:true,ronda:1};
+  let celdas='';for(let k=0;k<lado*lado;k++)celdas+='<button type="button" class="jg-cel" data-i="'+k+'" aria-label="Cuadro '+(k+1)+'"></button>';
+  modal('Secuencia de luces','<div class="jg-info"><span id="jg-a">Ronda 1</span><span id="jg-b">'+ini+' cuadros</span></div>'
+    +'<p class="jg-msg" id="jg-msg">Prepárate…</p>'
+    +'<div class="jg-grid" id="jg-grid" style="grid-template-columns:repeat('+lado+',1fr)">'+celdas+'</div>'
+    +'<p class="mini">2 errores terminan la partida.</p>');
+  document.getElementById('jg-grid').addEventListener('pointerdown',ev=>{
+    const b=ev.target.closest('.jg-cel');if(b){ev.preventDefault();lucesToque(+b.dataset.i)}});
+  jgT(lucesMostrar,900);
+}
+function lucesEncender(i,cl,ms){const b=document.querySelector('#jg-grid [data-i="'+i+'"]');if(!b)return;b.classList.add(cl);setTimeout(()=>b.classList.remove(cl),ms)}
+function lucesMostrar(){
+  const n=JG.lado*JG.lado;JG.seq=[];
+  while(JG.seq.length<JG.L){const r=Math.floor(Math.random()*n);if(r!==JG.seq[JG.seq.length-1])JG.seq.push(r)}
+  JG.pos=0;JG.bloq=true;jgMsg('Mira con atención…');jgInfo('Ronda '+JG.ronda,JG.L+' cuadros');
+  JG.seq.forEach((c,k)=>jgT(()=>lucesEncender(c,'on',520),250+k*780));
+  jgT(()=>{JG.bloq=false;jgMsg('Tu turno: tócalos en el mismo orden')},250+JG.seq.length*780);
+}
+function lucesToque(i){
+  if(!JG||JG.id!=='luces'||JG.bloq)return;
+  if(i===JG.seq[JG.pos]){
+    lucesEncender(i,'ok',220);JG.pos++;
+    if(JG.pos===JG.seq.length){
+      JG.bloq=true;JG.max=Math.max(JG.max,JG.L);JG.L++;JG.ronda++;jgMsg('¡Correcto!');
+      if(JG.L>12){jgT(lucesFin,700);return}
+      jgT(lucesMostrar,1000);
+    }
+  }else{
+    lucesEncender(i,'mal',450);JG.bloq=true;JG.err++;JG.ronda++;
+    if(JG.err>=2){jgMsg('Fin de la partida');jgT(lucesFin,900);return}
+    jgMsg('Casi. Otra vez con '+JG.L+' cuadros.');jgT(lucesMostrar,1300);
+  }
+}
+function lucesFin(){
+  const p=JG.max,ini=JG.ini;
+  jgTerminar('luces',{p:p,sube:p>=ini+2,baja:p<ini,
+    txt:p?'Recordaste secuencias de hasta <b>'+p+' cuadros</b>.':'Esta vez no completaste ninguna secuencia. Mira la siguiente con más calma.'});
+}
+
+/* ---------- 2. Parejas ---------- */
+function jParejas(){
+  const e=jgEstado('parejas'),n=PAREJAS_POR_NIVEL[e.nivel-1];
+  const sim=barajar(SIMBOLOS.slice()).slice(0,n),cartas=barajar(sim.concat(sim));
+  JG={id:'parejas',timers:[],cartas:cartas,abiertas:[],hechas:0,intentos:0,n:n,bloq:false,t0:Date.now()};
+  modal('Parejas','<div class="jg-info"><span id="jg-a">Parejas 0 de '+n+'</span><span id="jg-b">0 intentos</span></div>'
+    +'<div class="jg-grid jg-cartas" id="jg-grid" style="grid-template-columns:repeat('+(n<=3?3:4)+',1fr)">'
+    +cartas.map((c,k)=>'<button type="button" class="jg-carta" data-i="'+k+'" aria-label="Carta '+(k+1)+'"><span>'+c+'</span></button>').join('')+'</div>');
+  document.getElementById('jg-grid').addEventListener('click',ev=>{
+    const b=ev.target.closest('.jg-carta');if(b)parejasToque(+b.dataset.i)});
+}
+function parejasToque(i){
+  if(!JG||JG.id!=='parejas'||JG.bloq)return;
+  const b=document.querySelector('#jg-grid [data-i="'+i+'"]');
+  if(!b||b.classList.contains('vista')||b.classList.contains('par'))return;
+  b.classList.add('vista');JG.abiertas.push(i);
+  if(JG.abiertas.length<2)return;
+  JG.intentos++;const a=JG.abiertas[0],c=JG.abiertas[1];JG.abiertas=[];
+  const ba=document.querySelector('#jg-grid [data-i="'+a+'"]');
+  if(JG.cartas[a]===JG.cartas[c]){
+    [ba,b].forEach(x=>{x.classList.remove('vista');x.classList.add('par')});
+    JG.hechas++;if(navigator.vibrate)try{navigator.vibrate(10)}catch(e){}
+    if(JG.hechas===JG.n)jgT(parejasFin,700);
+  }else{
+    JG.bloq=true;
+    jgT(()=>{ba.classList.remove('vista');b.classList.remove('vista');JG.bloq=false},900);
+  }
+  jgInfo('Parejas '+JG.hechas+' de '+JG.n,JG.intentos+(JG.intentos===1?' intento':' intentos'));
+}
+function parejasFin(){
+  const prec=Math.round(JG.n/JG.intentos*100),seg=Math.round((Date.now()-JG.t0)/1000);
+  jgTerminar('parejas',{p:prec,sube:prec>=60,baja:prec<35,
+    txt:'Encontraste las '+JG.n+' parejas en <b>'+JG.intentos+' intentos</b> ('+seg+' segundos). Precisión: <b>'+prec+'%</b>.'});
+}
+
+/* ---------- 3. Pares de palabras ---------- */
+function jPalabras(){
+  const e=jgEstado('palabras'),n=3+e.nivel,w=barajar(POOL_PALABRAS.slice()).slice(0,n*2),pares=[];
+  for(let k=0;k<n;k++)pares.push([w[2*k],w[2*k+1]]);
+  JG={id:'palabras',timers:[],pares:pares,n:n,k:0,ok:0,q:0,orden:barajar(pares.map((x,k)=>k)),bloq:false};
+  modal('Pares de palabras','<div class="jg-info"><span id="jg-a">Memoriza</span><span id="jg-b">Par 1 de '+n+'</span></div>'
+    +'<div class="jg-par" id="jg-par"></div>'
+    +'<p class="mini">Imagina las dos cosas juntas en una escena. Así se graban.</p>');
+  jgT(palMostrar,600);
+}
+function palMostrar(){
+  const el=document.getElementById('jg-par');if(!el)return;
+  if(JG.k>=JG.n){el.innerHTML='';jgMsg('');jgT(palPregunta,700);return}
+  const p=JG.pares[JG.k];
+  el.innerHTML='<div>'+p[0]+'</div><div class="mas">+</div><div>'+p[1]+'</div>';
+  jgInfo('Memoriza','Par '+(JG.k+1)+' de '+JG.n);
+  JG.k++;
+  jgT(()=>{const e2=document.getElementById('jg-par');if(e2)e2.innerHTML=''},3000);
+  jgT(palMostrar,3400);
+}
+function palPregunta(){
+  if(JG.q>=JG.n){palFin();return}
+  const idx=JG.orden[JG.q],par=JG.pares[idx];
+  const otras=barajar(JG.pares.filter((x,k)=>k!==idx).map(x=>x[1])).slice(0,3);
+  const opc=barajar(otras.concat([par[1]]));
+  JG.bloq=false;JG.correcta=par[1];
+  modal('Pares de palabras','<div class="jg-info"><span>Pregunta '+(JG.q+1)+' de '+JG.n+'</span><span>'+JG.ok+' aciertos</span></div>'
+    +'<p style="text-align:center;margin:18px 0 4px;color:var(--suave)">¿Cuál era la compañera de…?</p>'
+    +'<div class="jg-par" style="min-height:0;margin:0 0 6px"><div>'+par[0]+'</div></div>'
+    +'<div class="jg-opc" id="jg-opc">'+opc.map(o=>'<button type="button" data-o="'+esc(o)+'">'+esc(o)+'</button>').join('')+'</div>');
+  document.getElementById('jg-opc').addEventListener('click',ev=>{const b=ev.target.closest('button');if(b)palResp(b)});
+}
+function palResp(b){
+  if(!JG||JG.id!=='palabras'||JG.bloq)return;JG.bloq=true;
+  const bien=b.dataset.o===JG.correcta;
+  if(bien){JG.ok++;b.classList.add('ok')}
+  else{b.classList.add('mal');document.querySelectorAll('#jg-opc button').forEach(x=>{if(x.dataset.o===JG.correcta)x.classList.add('ok')})}
+  JG.q++;jgT(palPregunta,bien?650:1300);
+}
+function palFin(){
+  const pct=Math.round(JG.ok/JG.n*100);
+  jgTerminar('palabras',{p:pct,sube:pct>=80,baja:pct<50,
+    txt:'Recordaste <b>'+JG.ok+' de '+JG.n+'</b> parejas ('+pct+'%).'});
+}
+
+/* ---------- 4. ¿Igual que antes? (n-back) ---------- */
+function jNback(){
+  const e=jgEstado('nback'),N=e.nivel,tot=20+N,seq=[];
+  for(let k=0;k<tot;k++){
+    if(k>=N&&Math.random()<0.3)seq.push(seq[k-N]);
+    else{let l;do{l=LETRAS_NB[Math.floor(Math.random()*LETRAS_NB.length)]}while(k>=N&&l===seq[k-N]);seq.push(l)}
+  }
+  let obj=0;for(let k=N;k<tot;k++)if(seq[k]===seq[k-N])obj++;
+  JG={id:'nback',timers:[],N:N,seq:seq,i:-1,resp:false,hits:0,fa:0,obj:obj,noobj:tot-obj};
+  modal('¿Igual que antes?','<div class="jg-info"><span id="jg-a">'+['Igual a la anterior','Igual a la de 2 antes','Igual a la de 3 antes'][N-1]+'</span><span id="jg-b">Prepárate</span></div>'
+    +'<div class="jg-letra" id="jg-letra">·</div>'
+    +'<button class="btn oro jg-igual" id="jg-igual" type="button">¡Igual!</button>'
+    +'<p class="mini">Si no coincide, no toques nada.</p>');
+  document.getElementById('jg-igual').addEventListener('pointerdown',ev=>{ev.preventDefault();nbResp()});
+  jgT(nbPaso,1200);
+}
+function nbPaso(){
+  JG.i++;
+  if(JG.i>=JG.seq.length){nbFin();return}
+  JG.resp=false;
+  const l=document.getElementById('jg-letra');if(!l)return;
+  l.textContent=JG.seq[JG.i];l.classList.remove('sale');void l.offsetWidth;l.classList.add('entra');
+  jgInfo(null,(JG.i+1)+' de '+JG.seq.length);
+  jgT(()=>{const x=document.getElementById('jg-letra');if(x){x.textContent='';x.classList.remove('entra')}},1500);
+  jgT(nbPaso,2200);
+}
+function nbResp(){
+  if(!JG||JG.id!=='nback'||JG.i<0||JG.resp)return;
+  JG.resp=true;
+  const b=document.getElementById('jg-igual');
+  const acierto=JG.i>=JG.N&&JG.seq[JG.i]===JG.seq[JG.i-JG.N];
+  if(acierto)JG.hits++;else JG.fa++;
+  b.classList.add(acierto?'flash-ok':'flash-mal');setTimeout(()=>b.classList.remove('flash-ok','flash-mal'),350);
+}
+function nbFin(){
+  const hr=JG.obj?JG.hits/JG.obj:0,far=JG.noobj?JG.fa/JG.noobj:0;
+  const p=Math.max(0,Math.round((hr-far)*100));
+  jgTerminar('nback',{p:p,sube:p>=70,baja:p<35,
+    txt:'Detectaste <b>'+JG.hits+' de '+JG.obj+'</b> coincidencias'+(JG.fa?' y tocaste <b>'+JG.fa+'</b> '+(JG.fa===1?'vez':'veces')+' sin que la hubiera':' sin ninguna falsa alarma')+'. Puntuación: <b>'+p+'</b>.'});
+}
+
+/* ---------- resumen de juegos en Progreso ---------- */
+function pintarJuegosProgreso(){
+  const c=document.getElementById('prog-juegos');if(!c)return;
+  const total=JUEGOS.reduce((s,j)=>s+jgEstado(j.id).ses.length,0);
+  if(!total){c.innerHTML='<p style="font-size:14.5px;color:var(--suave);margin:0">Todavía no has jugado. Cada día tienes un juego de 3 minutos en la lista de <b>Hoy</b>.</p>';return}
+  c.innerHTML=JUEGOS.map(j=>{
+    const e=jgEstado(j.id),ult=e.ses.slice(-14);
+    const barras=ult.map(x=>'<i style="height:'+Math.max(12,Math.round(x.n/j.max*100))+'%" title="Nivel '+x.n+'"></i>').join('');
+    return '<div class="jg-prog"><div style="flex:1;min-width:0"><b>'+j.t+'</b><span>Nivel '+e.nivel+' de '+j.max+' · '+e.ses.length+' '+(e.ses.length===1?'partida':'partidas')+'</span></div>'
+      +'<div class="jg-barras">'+(barras||'<em>—</em>')+'</div></div>';
+  }).join('')+'<p class="mini" style="text-align:left;margin-top:10px">Cada barra es una partida; su altura, el nivel en que jugaste. Si suben, tu memoria está aguantando más carga.</p>';
 }
 
 /* ==================================================================
@@ -2179,6 +2534,7 @@ function pintarSoporteInfo(){
 ================================================================== */
 document.getElementById('fecha-inicio').max=hoyISO();
 document.getElementById('fecha-inicio').value=hoyISO();
+if(!S.v2desde){S.v2desde=hoyISO();guardar()}
 pintarSoporteInfo();
 render();
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&S.inicio&&!enTest&&!BL_TEST)render()});
@@ -2191,12 +2547,17 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&S.inicio&
      · tiempo de reacción (5 intentos) ...... 30 puntos
 ================================================================== */
 let BL_TEST=null;
-const BL_PALABRAS=['Ventana','Río','Lápiz','Caballo','Verde','Puente','Guitarra','Nube','Botella','Jardín'];
+const BL_LISTAS=[   // rotan en cada medición, para que el puntaje no suba solo por repetir la lista
+ ['Ventana','Río','Lápiz','Caballo','Verde','Puente','Guitarra','Nube','Botella','Jardín'],
+ ['Tijera','Pozo','Cometa','Tortuga','Gris','Escuela','Tambor','Rayo','Maleta','Huerto'],
+ ['Cesta','Isla','Pincel','Oveja','Morado','Iglesia','Violín','Niebla','Jarra','Granja']
+];
 function blBarra(n){return '<div class="progreso-test"><i style="width:'+(n*25)+'%"></i></div>'}
 function blCancelar(){if(!BL_TEST)return;clearTimeout(BL_TEST.to);clearInterval(BL_TEST.iv);BL_TEST=null}
 function blIniciar(alTerminar){
   blCancelar();
-  BL_TEST={rts:[],span:0,falla:0,largo:3,rec:0,cb:alTerminar,to:null,iv:null,serie:''};
+  let previas=0;try{previas=(JSON.parse(localStorage.getItem('bn-baseline-mediciones'))||[]).length}catch(e){}
+  BL_TEST={rts:[],span:0,falla:0,largo:3,rec:0,cb:alTerminar,to:null,iv:null,serie:'',pal:BL_LISTAS[previas%BL_LISTAS.length]};
   modal('Baseline cognitivo',blBarra(0)
     +'<p>Cuatro pruebas cortas, unos 3 minutos. Al final obtienes un número de 0 a 100 que puedes repetir cada mes para ver si tu memoria se mantiene.</p>'
     +'<div class="nota"><b>Para que el número sea comparable:</b><br>· Hazlo siempre a una hora parecida.<br>· Lugar tranquilo, sin ayuda y sin pausas.<br>· No anotes nada en papel.</div>'
@@ -2208,7 +2569,7 @@ function blPalabras(){
   modal('Prueba 1 · Memoriza',blBarra(1)
     +'<p>Memoriza estas 10 palabras. Te las preguntaremos <b>al final</b>, después de las otras pruebas.</p>'
     +'<div class="big-num" id="bl-t">30</div>'
-    +'<div class="palabras">'+BL_PALABRAS.map(p=>'<div>'+p+'</div>').join('')+'</div>'
+    +'<div class="palabras">'+BL_TEST.pal.map(p=>'<div>'+p+'</div>').join('')+'</div>'
     +'<button class="btn" type="button" onclick="blReaccionIntro()">Ya las memoricé</button>');
   BL_TEST.iv=setInterval(()=>{
     t--;const e=document.getElementById('bl-t');
@@ -2307,13 +2668,13 @@ function blRecuerdo(){
   clearInterval(BL_TEST.iv);
   modal('Prueba 4 · Recuerdo',blBarra(4)
     +'<p>¿Qué palabras de la <b>prueba 1</b> recuerdas? Escríbelas separadas por coma.</p>'
-    +'<textarea class="campo" id="bl-rec" rows="3" placeholder="ventana, río, ..."></textarea>'
+    +'<textarea class="campo" id="bl-rec" rows="3" placeholder="'+norm(BL_TEST.pal[0])+', '+norm(BL_TEST.pal[1])+', ..."></textarea>'
     +'<button class="btn oro" type="button" style="margin-top:14px" onclick="blFin()">Ver mi resultado</button>');
   setTimeout(()=>{const e=document.getElementById('bl-rec');if(e)e.focus()},250);
 }
 function blFin(){
   const v=(document.getElementById('bl-rec').value||'').split(/[,\n;]+/).map(norm).filter(Boolean);
-  const rec=BL_PALABRAS.filter(p=>v.indexOf(norm(p))>-1).length;
+  const rec=BL_TEST.pal.filter(p=>v.indexOf(norm(p))>-1).length;
   const rts=BL_TEST.rts.slice().sort((a,b)=>a-b);
   const rt=rts.length?rts[Math.floor(rts.length/2)]:1000;       // mediana: un despiste no arruina el resultado
   const pRec=rec/10*40;
