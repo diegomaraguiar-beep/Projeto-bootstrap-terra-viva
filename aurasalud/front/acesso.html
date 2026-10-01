@@ -873,7 +873,7 @@ select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:i
         <li>Los 7 signos que tu familia ve antes que tú</li>
         <li>Protocolo de emergencia · qué hacer en las primeras 72 horas</li>
         <li>Los 4 hábitos diarios con evidencia real (no crucigramas)</li>
-        <li>Acceso al Grupo VIP de WhatsApp: un desafío nuevo cada semana</li>
+        <li>Acceso a la Comunidad VIP NeuroHoney en WhatsApp: un desafío nuevo cada semana</li>
       </ul>
 
       <div class="bn-precio">
@@ -909,10 +909,10 @@ select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:i
 
   <!-- estado aberto — placeholder onde o desbloquear.php injeta o conteúdo -->
   <div data-bn-vista="abierto" hidden>
-    <!-- el acceso al Grupo VIP vive en la pestaña Soporte -->
+    <!-- el acceso a la Comunidad VIP vive en la pestaña Soporte -->
     <button type="button" class="card vip-atajo" id="bn-vip-atajo" hidden onclick="ir('soporte')">
       <span class="vip-ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M3 19c.8-3.2 3.2-5 6-5s5.2 1.8 6 5"/><path d="M15.5 14.2c2.6-.4 4.7 1.2 5.5 4.3"/></svg></span>
-      <span class="tx"><b>Tu acceso al Grupo VIP</b><span>Está en la pestaña Soporte</span></span>
+      <span class="tx"><b>Tu acceso a la Comunidad VIP</b><span>Está en la pestaña Soporte</span></span>
       <svg class="fl" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
     </button>
     <div id="bn-contenido"></div>
@@ -924,7 +924,7 @@ select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:i
 <section class="vista" id="v-soporte">
   <div class="cap">Estamos contigo</div>
   <h1 class="h-vista">Soporte</h1>
-  <p class="sub-vista">Tu Grupo VIP y ayuda de personas reales. Respondemos en menos de 24 horas.</p>
+  <p class="sub-vista">Tu Comunidad VIP y ayuda de personas reales. Respondemos en menos de 24 horas.</p>
 
   <!-- GRUPO VIP: abierto para quien compró Blindaje Neural, bloqueado para los demás -->
   <div class="card vip" id="vip" hidden>
@@ -932,7 +932,7 @@ select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:i
       <span class="vip-ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M3 19c.8-3.2 3.2-5 6-5s5.2 1.8 6 5"/><path d="M15.5 14.2c2.6-.4 4.7 1.2 5.5 4.3"/></svg></span>
       <div style="min-width:0">
         <span class="vip-tag" id="vip-tag">Exclusivo Blindaje Neural</span>
-        <h3>Grupo VIP de WhatsApp</h3>
+        <h3>Comunidad VIP NeuroHoney</h3>
       </div>
     </div>
     <ul class="vip-lista">
@@ -1238,7 +1238,7 @@ const CONFIG={
   DESCRIPTOR:'',                  // cómo aparece el cargo en el extracto, ej. 'HOTMART*AURASALUD'.
   API_USO:'/front/api/uso.php',   // registro de uso (prueba de entrega ante contracargos). '' para desactivar.
   VERSION_TERMINOS:'2026-10',     // cambia este valor si cambias el texto de aceptación.
-  GRUPO_VIP:true                  // muestra el Grupo VIP en Soporte. El enlace llega del servidor (desbloquear.php → "comunidad").
+  GRUPO_VIP:true                  // muestra la Comunidad VIP en Soporte. El enlace llega del servidor (desbloquear.php → "comunidad").
 };
 
 /* ==================================================================
@@ -2478,9 +2478,9 @@ function pintarVip(){
   if(VIP.estado==='abierto'){
     acc.innerHTML=VIP.url
       ?'<a class="btn oro" id="vip-link" href="'+esc(VIP.url)+'" target="_blank" rel="noopener">'
-        +'<svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-5A8.5 8.5 0 1 1 21 11.5z"/></svg>Entrar al Grupo VIP</a>'
+        +'<svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-5A8.5 8.5 0 1 1 21 11.5z"/></svg>Entrar a la Comunidad VIP</a>'
         +'<p class="vip-nota">Se abre WhatsApp. Si te pide aprobación, la confirmamos en pocas horas.</p>'
-      :'<p class="vip-nota">Tu acceso está confirmado. Estamos preparando el enlace del grupo: escríbenos abajo con el asunto <b>"Grupo VIP"</b> y te lo enviamos.</p>';
+      :'<p class="vip-nota">Tu acceso está confirmado. Estamos preparando el enlace del grupo: escríbenos abajo con el asunto <b>"Comunidad VIP"</b> y te lo enviamos.</p>';
     const l=document.getElementById('vip-link');if(l)l.addEventListener('click',()=>registrar('comunidad'));
     return;
   }
@@ -2499,7 +2499,7 @@ function vipVerificar(){
   decir('Comprobando…');b.disabled=true;
   window.bnComprobar(c).then(r=>{
     const b2=document.getElementById('vip-verificar');if(b2)b2.disabled=false;
-    if(r&&r.ok){toast('¡Listo! Ya tienes acceso al Grupo VIP.','verde');return}
+    if(r&&r.ok){toast('¡Listo! Ya tienes acceso a la Comunidad VIP.','verde');return}
     if(r&&r.motivo==='sin_acceso')decir('Ese correo no tiene Blindaje Neural. Si compraste con otro correo, prueba con ese. Si crees que es un error, escríbenos abajo.','mal');
     else if(r&&r.motivo==='demasiadas_consultas')decir('Demasiados intentos. Espera unos minutos.','mal');
     else decir('No pudimos comprobarlo ahora. Inténtalo en un minuto.','mal');
@@ -2842,10 +2842,11 @@ function blFin(){
   }
 
   var abierto = false;
-  /* enlace del Grupo VIP: viene del servidor junto con el contenido pagado */
+  /* enlace de la Comunidad VIP: viene del servidor junto con el contenido pagado */
   function mostrarComunidad(url){
-    var ok = typeof url === 'string' && /^https:\/\/chat\.whatsapp\.com\/[A-Za-z0-9]+$/.test(url);
-    vipActualizar({ estado:'abierto', url: ok ? url : '' });
+    /* el WhatsApp entrega el enlace con parámetros extra (?s=cl&p=i…): se acepta y se limpia */
+    var m = typeof url === 'string' && url.trim().match(/^https:\/\/chat\.whatsapp\.com\/(?:invite\/)?([A-Za-z0-9]{10,40})(?:[?#].*)?$/);
+    vipActualizar({ estado:'abierto', url: m ? 'https://chat.whatsapp.com/' + m[1] : '' });
   }
   function abrir(html, comunidad){
     mostrarComunidad(comunidad);
@@ -2969,7 +2970,7 @@ function blFin(){
       } else if (!abierto) vipActualizar({ estado:'cerrado' });
     });
   };
-  /* verificación manual desde Soporte → Grupo VIP */
+  /* verificación manual desde Soporte → Comunidad VIP */
   window.bnComprobar = function(c){
     return pedir(c).then(function(r){
       if (r && r.ok){
