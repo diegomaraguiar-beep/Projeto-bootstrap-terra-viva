@@ -13,6 +13,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
 
+<!-- KashPay: upsell one-click do Blindaje Neural (script obrigatório no <head>) -->
+<script src="https://checkout.kashpay.com.br/scripts/upsell-processor.js"></script>
+
 <style>
 :root{
   --tinta:#1a3a4a; --tinta2:#24505f; --oro:#e8b44d; --oro-d:#b8862a;
@@ -290,6 +293,8 @@ ol.pasos li{margin-bottom:9px;font-size:15.5px}
   box-shadow:0 8px 22px rgba(232,180,77,.28);
 }
 .bn-cerrojo .bn-cta:hover{transform:translateY(-1px)}
+.bn-cerrojo .bn-cta.ocupado{opacity:.6;pointer-events:none}
+.bn-cerrojo .bn-procesando{font-size:13px;color:#c8dae4;text-align:center;margin:10px 0 0}
 .bn-cerrojo .bn-ya{
   margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);
 }
@@ -882,7 +887,9 @@ select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:i
         <small>· pago único</small>
       </div>
 
-      <a class="bn-cta" data-bn-comprar href="#">Quiero blindar mi cerebro</a>
+      <!-- KashPay one-click: el clic llama acceptUpsell(); si el script no cargó, el enlace lleva al checkout normal -->
+      <a class="bn-cta" data-bn-comprar href="#">Sí, quiero blindar mi cerebro</a>
+      <p class="bn-procesando" data-bn-procesando hidden>Procesando tu compra… no cierres esta pantalla.</p>
       <p style="font-size:12.5px;color:#a8c1cd;text-align:center;margin:10px 0 0" data-bn-garantia></p>
 
       <div class="bn-ya">
@@ -1238,6 +1245,7 @@ const CONFIG={
   DESCRIPTOR:'',                  // cómo aparece el cargo en el extracto, ej. 'HOTMART*AURASALUD'.
   API_USO:'/front/api/uso.php',   // registro de uso (prueba de entrega ante contracargos). '' para desactivar.
   VERSION_TERMINOS:'2026-10',     // cambia este valor si cambias el texto de aceptación.
+  KASHPAY_UPSELL:'https://checkout.kashpay.com.br/u/ad4e1529015d22fa', // etapa "Upsell 2" (Blindaje Neural) en KashPay
   GRUPO_VIP:true                  // muestra la Comunidad VIP en Soporte. El enlace llega del servidor (desbloquear.php → "comunidad").
 };
 
@@ -2825,7 +2833,25 @@ function blFin(){
   var btnNav   = document.querySelector('.nav button[data-v="blindaje"]');
 
   var comprar = vista.querySelector('[data-bn-comprar]');
-  if (comprar) comprar.href = LINK_OFERTA;
+  var procesando = vista.querySelector('[data-bn-procesando]');
+  if (comprar){
+    comprar.href = LINK_OFERTA;   // plan B: checkout normal
+    comprar.addEventListener('click', function(e){
+      registrar('contenido', { id:'upsell-clic' });
+      /* plan A: compra con un clic de KashPay (usa la tarjeta de la compra anterior) */
+      if (CONFIG.KASHPAY_UPSELL && typeof window.acceptUpsell === 'function'){
+        e.preventDefault();
+        if (comprar.classList.contains('ocupado')) return;   // evita cobro doble por doble toque
+        comprar.classList.add('ocupado');
+        if (procesando) procesando.hidden = false;
+        try { window.acceptUpsell(CONFIG.KASHPAY_UPSELL); }
+        catch(err){ location.href = LINK_OFERTA; return; }
+        /* si en 12 s no pasó nada, se libera el botón */
+        setTimeout(function(){ comprar.classList.remove('ocupado'); if (procesando) procesando.hidden = true; }, 12000);
+      }
+      /* si el script de KashPay no cargó, el enlace sigue su curso normal al checkout */
+    });
+  }
 
   var campo   = vista.querySelector('[data-bn-correo]');
   var botao   = vista.querySelector('[data-bn-verificar]');
