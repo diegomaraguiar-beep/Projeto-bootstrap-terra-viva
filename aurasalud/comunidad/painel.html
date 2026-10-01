@@ -105,7 +105,7 @@ ol.passos b{color:var(--ink)}
 <div class="wrap">
   <header>
     <span class="eyebrow">AuraSalud · Blindaje Neural</span>
-    <h1>Comunidade Blindaje</h1>
+    <h1>Grupo VIP Blindaje</h1>
     <p>O post de cada semana pronto para colar no grupo de avisos da comunidade. Toda segunda-feira: abra este painel, copie, cole e marque como postado. Leva dois minutos.</p>
   </header>
 
@@ -129,7 +129,7 @@ ol.passos b{color:var(--ink)}
     </div>
     <p class="meta-sem" id="atual-meta"></p>
     <div class="chat">
-      <span class="grupo">Comunidad Blindaje · Avisos</span>
+      <span class="grupo">Grupo VIP Blindaje · Avisos</span>
       <div class="bolha" id="atual-bolha"></div>
     </div>
     <div class="acoes">
@@ -154,11 +154,11 @@ ol.passos b{color:var(--ink)}
       <div class="bloco-c">
         <ol class="passos">
           <li>Use um <b>número só do suporte</b>, não o pessoal. Se um dia trocar de pessoa no atendimento, a comunidade continua.</li>
-          <li>No WhatsApp: aba <b>Comunidades → Nova comunidade</b>. Nome: <b>Comunidad Blindaje · AuraSalud</b>. Cole a descrição abaixo.</li>
+          <li>No WhatsApp: aba <b>Comunidades → Nova comunidade</b>. Nome: <b>Grupo VIP Blindaje · AuraSalud</b>. Cole a descrição abaixo.</li>
           <li>Em <b>Configurações da comunidade</b>: ative <b>Aprovar novos membros</b>. Assim, se o link vazar, só entra quem você aprovar.</li>
           <li>O grupo <b>Avisos</b> já vem só para administradores postarem. Não crie outros grupos dentro da comunidade: é isso que mantém os números dos clientes ocultos entre eles e evita reclamações em público.</li>
           <li>Em <b>Convidar membros → Link de convite</b>, copie o link (<code>https://chat.whatsapp.com/…</code>).</li>
-          <li>No seu servidor, no <code>desbloquear.php</code>, inclua esse link na resposta de quem comprou o Blindaje: <code>"comunidad": "https://chat.whatsapp.com/SEU-CODIGO"</code>. O app passa a mostrar o botão <b>Unirme a la comunidad</b> só para compradores.</li>
+          <li>No seu servidor, no <code>desbloquear.php</code>, inclua esse link na resposta de quem comprou o Blindaje: <code>"comunidad": "https://chat.whatsapp.com/SEU-CODIGO"</code>. Na aba <b>Soporte</b> do app, o botão <b>Entrar al Grupo VIP</b> passa a aparecer só para compradores; quem não comprou vê o grupo bloqueado com o convite para conhecer o Blindaje.</li>
           <li>Poste a <b>mensagem de boas-vindas</b> e fixe-a no grupo de avisos.</li>
         </ol>
       </div>
@@ -201,7 +201,7 @@ ol.passos b{color:var(--ink)}
    CONTEÚDO — espanhol, formatação do WhatsApp (*negrito*, _itálico_)
    {app} é trocado pelo link do app (ou a linha é removida se vazio)
 ================================================================== */
-const DESCRIPCION=`Comunidad exclusiva para quienes tienen el Protocolo Blindaje Neural.
+const DESCRIPCION=`Grupo VIP exclusivo para quienes tienen el Protocolo Blindaje Neural.
 
 Cada lunes: el desafío de la semana, una técnica de memoria y el recordatorio de tu test mensual.
 
@@ -211,7 +211,7 @@ Solo publica el equipo de AuraSalud. Tus datos y tu número no son visibles para
 
 Contenido informativo y de hábitos. No sustituye la consulta médica.`;
 
-const BIENVENIDA=`👋 *¡Bienvenida, bienvenido a la Comunidad Blindaje!*
+const BIENVENIDA=`👋 *¡Bienvenida, bienvenido al Grupo VIP Blindaje!*
 
 Aquí no hay ruido: solo publicamos nosotros, *una vez por semana, los lunes*.
 
@@ -396,7 +396,7 @@ Si tomas anticoagulantes u otra medicación diaria, consulta con tu médico ante
 
 Elige *uno solo* para el próximo trimestre. Un hábito sostenido vale más que diez abandonados.
 
-La próxima semana empieza un nuevo ciclo de desafíos. Gracias por ser parte de la comunidad. 💛
+La próxima semana empieza un nuevo ciclo de desafíos. Gracias por ser parte del Grupo VIP. 💛
 {app}${PIE}`}
 ];
 

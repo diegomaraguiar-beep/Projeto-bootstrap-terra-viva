@@ -507,6 +507,36 @@ ol.pasos li{margin-bottom:9px;font-size:15.5px}
 .ajuste.rojo .ic svg{stroke:var(--rojo)}
 select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b8a9a' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center/16px}
 
+/* ---- grupo VIP ---- */
+.vip{background:linear-gradient(160deg,var(--tinta),var(--tinta2));color:#dbe8ef;padding:20px}
+.vip-cab{display:flex;align-items:center;gap:13px;margin-bottom:12px}
+.vip-ic{width:48px;height:48px;border-radius:14px;background:rgba(232,180,77,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.vip-ic svg{width:26px;height:26px;stroke:var(--oro);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.vip h3{color:#fff;font-size:20px}
+.vip-tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin-bottom:3px}
+.vip-tag.activo{color:#8be0b6}
+.vip-lista{list-style:none;padding:0;margin:0 0 16px}
+.vip-lista li{position:relative;padding:7px 0 7px 24px;font-size:14.5px;line-height:1.45;border-bottom:1px solid rgba(255,255,255,.08)}
+.vip-lista li:last-child{border-bottom:none}
+.vip-lista li::before{content:'';position:absolute;left:2px;top:12px;width:9px;height:5px;border-left:2px solid var(--oro);border-bottom:2px solid var(--oro);transform:rotate(-45deg)}
+.vip .btn{text-decoration:none}
+.vip-nota{font-size:13.5px;color:#a9c6d3;margin:10px 0 0;line-height:1.5}
+.vip-nota.bien{color:#8be0b6;font-weight:700}
+.vip-nota.mal{color:#ffb59a}
+.vip-cerrado{border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin-top:14px}
+.vip-cerrado p{font-size:13.5px;font-weight:700;color:#c8dae4;margin-bottom:8px}
+.vip-fila{display:flex;gap:8px;flex-wrap:wrap}
+.vip-fila input{flex:1 1 170px;min-width:0;border:none;border-radius:10px;padding:12px 13px;font-size:15px;background:rgba(255,255,255,.94);color:var(--tinta)}
+.vip-fila button{border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:12px 16px;font-weight:700;color:#fff;white-space:nowrap}
+.vip-fila button[disabled]{opacity:.55}
+.vip-atajo{display:flex;align-items:center;gap:13px;width:100%;text-align:left;padding:14px 16px}
+.vip-atajo .vip-ic{width:40px;height:40px;background:var(--amb)}
+.vip-atajo .vip-ic svg{width:22px;height:22px;stroke:var(--oro-d)}
+.vip-atajo .tx{flex:1;min-width:0}
+.vip-atajo .tx b{display:block;color:var(--tinta);font-size:15.5px}
+.vip-atajo .tx span{font-size:13px;color:var(--suave)}
+.vip-atajo .fl{width:16px;height:16px;stroke:#b6c9d4;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
 /* ---- juegos de memoria ---- */
 .jg-item{display:block;width:100%;text-align:left}
 .jg-nivel{display:flex;align-items:center;gap:10px;margin-top:9px;font-size:13px;color:var(--suave);font-weight:700}
@@ -618,9 +648,6 @@ select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:i
     </div>
     <div class="chip-dia" id="chip-dia">Día 1</div>
     <div class="acciones">
-      <button class="ico-btn" type="button" onclick="ir('soporte')" aria-label="Soporte">
-        <svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg>
-      </button>
       <button class="ico-btn" type="button" onclick="ir('cuenta')" aria-label="Mi cuenta y ajustes">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
       </button>
@@ -846,6 +873,7 @@ select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:i
         <li>Los 7 signos que tu familia ve antes que tú</li>
         <li>Protocolo de emergencia · qué hacer en las primeras 72 horas</li>
         <li>Los 4 hábitos diarios con evidencia real (no crucigramas)</li>
+        <li>Acceso al Grupo VIP de WhatsApp: un desafío nuevo cada semana</li>
       </ul>
 
       <div class="bn-precio">
@@ -881,18 +909,12 @@ select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:i
 
   <!-- estado aberto — placeholder onde o desbloquear.php injeta o conteúdo -->
   <div data-bn-vista="abierto" hidden>
-    <!-- invitación a la Comunidad: solo aparece si el servidor la envía (r.comunidad) -->
-    <div class="card comunidad" id="bn-comunidad" hidden>
-      <div class="garantia">
-        <div class="sello"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M3 19c.8-3.2 3.2-5 6-5s5.2 1.8 6 5"/><path d="M15.5 14.2c2.6-.4 4.7 1.2 5.5 4.3"/></svg></div>
-        <div style="min-width:0">
-          <h3>Comunidad Blindaje en WhatsApp</h3>
-          <p>Cada lunes, el desafío de la semana, una técnica de memoria y el recordatorio de tu test mensual. Solo publica nuestro equipo: tu número no lo ven los demás miembros.</p>
-        </div>
-      </div>
-      <a class="btn oro chico" id="bn-comunidad-link" href="#" target="_blank" rel="noopener" style="margin-top:14px;text-decoration:none">
-        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-5A8.5 8.5 0 1 1 21 11.5z"/></svg>Unirme a la comunidad</a>
-    </div>
+    <!-- el acceso al Grupo VIP vive en la pestaña Soporte -->
+    <button type="button" class="card vip-atajo" id="bn-vip-atajo" hidden onclick="ir('soporte')">
+      <span class="vip-ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M3 19c.8-3.2 3.2-5 6-5s5.2 1.8 6 5"/><path d="M15.5 14.2c2.6-.4 4.7 1.2 5.5 4.3"/></svg></span>
+      <span class="tx"><b>Tu acceso al Grupo VIP</b><span>Está en la pestaña Soporte</span></span>
+      <svg class="fl" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
     <div id="bn-contenido"></div>
   </div>
 
@@ -901,8 +923,26 @@ select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:i
 <!-- =============== SOPORTE ONLINE =============== -->
 <section class="vista" id="v-soporte">
   <div class="cap">Estamos contigo</div>
-  <h1 class="h-vista">Soporte Online</h1>
-  <p class="sub-vista">Personas reales, no robots. Respondemos en menos de 24 horas.</p>
+  <h1 class="h-vista">Soporte</h1>
+  <p class="sub-vista">Tu Grupo VIP y ayuda de personas reales. Respondemos en menos de 24 horas.</p>
+
+  <!-- GRUPO VIP: abierto para quien compró Blindaje Neural, bloqueado para los demás -->
+  <div class="card vip" id="vip" hidden>
+    <div class="vip-cab">
+      <span class="vip-ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M3 19c.8-3.2 3.2-5 6-5s5.2 1.8 6 5"/><path d="M15.5 14.2c2.6-.4 4.7 1.2 5.5 4.3"/></svg></span>
+      <div style="min-width:0">
+        <span class="vip-tag" id="vip-tag">Exclusivo Blindaje Neural</span>
+        <h3>Grupo VIP de WhatsApp</h3>
+      </div>
+    </div>
+    <ul class="vip-lista">
+      <li>Cada lunes, el desafío de la semana con tus juegos</li>
+      <li>Una técnica de memoria nueva para usar en tu día</li>
+      <li>El recordatorio de tu test mensual</li>
+      <li>Solo publica nuestro equipo: tu número no lo ven los demás</li>
+    </ul>
+    <div id="vip-accion"></div>
+  </div>
 
   <!-- garantía + preguntas frecuentes (resuelven la mayoría de las dudas al instante) -->
   <div class="card" id="sp-garantia" hidden>
@@ -1042,6 +1082,10 @@ select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:i
     <svg viewBox="0 0 24 24"><path d="M12 3l7.5 2.8v5.4c0 4.6-3.2 8.6-7.5 10.3-4.3-1.7-7.5-5.7-7.5-10.3V5.8L12 3z"/><path d="M9 12.2l2 2 4-4.4"/></svg>
     <span>Blindaje</span>
     <span class="bn-pip" aria-hidden="true"></span>
+  </button>
+  <button data-v="soporte" onclick="ir('soporte')">
+    <svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg>
+    <span>Soporte</span>
   </button>
 </nav>
 
@@ -1193,7 +1237,8 @@ const CONFIG={
   PLATAFORMA:'',                  // ej. 'Hotmart' — dónde se procesó el pago.
   DESCRIPTOR:'',                  // cómo aparece el cargo en el extracto, ej. 'HOTMART*AURASALUD'.
   API_USO:'/front/api/uso.php',   // registro de uso (prueba de entrega ante contracargos). '' para desactivar.
-  VERSION_TERMINOS:'2026-10'      // cambia este valor si cambias el texto de aceptación.
+  VERSION_TERMINOS:'2026-10',     // cambia este valor si cambias el texto de aceptación.
+  GRUPO_VIP:true                  // muestra el Grupo VIP en Soporte. El enlace llega del servidor (desbloquear.php → "comunidad").
 };
 
 /* ==================================================================
@@ -2414,6 +2459,54 @@ function pintarJuegosProgreso(){
 }
 
 /* ==================================================================
+   GRUPO VIP (pestaña Soporte)
+   Estados: 'verificando' · 'abierto' (compró Blindaje) · 'cerrado'
+   El enlace de WhatsApp nunca está en esta página: llega del servidor
+   solo para quien compró (respuesta de desbloquear.php, campo "comunidad").
+================================================================== */
+let VIP={estado:'cerrado',url:''};
+function vipActualizar(cambios){Object.assign(VIP,cambios||{});pintarVip()}
+function pintarVip(){
+  const card=document.getElementById('vip');if(!card)return;
+  card.hidden=!CONFIG.GRUPO_VIP;
+  const atajo=document.getElementById('bn-vip-atajo');if(atajo)atajo.hidden=!CONFIG.GRUPO_VIP;
+  if(!CONFIG.GRUPO_VIP)return;
+  const tag=document.getElementById('vip-tag'),acc=document.getElementById('vip-accion');
+  tag.className='vip-tag'+(VIP.estado==='abierto'?' activo':'');
+  tag.textContent=VIP.estado==='abierto'?'Tu acceso está activo':'Exclusivo Blindaje Neural';
+  if(VIP.estado==='verificando'){acc.innerHTML='<p class="vip-nota">Comprobando tu acceso…</p>';return}
+  if(VIP.estado==='abierto'){
+    acc.innerHTML=VIP.url
+      ?'<a class="btn oro" id="vip-link" href="'+esc(VIP.url)+'" target="_blank" rel="noopener">'
+        +'<svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-5A8.5 8.5 0 1 1 21 11.5z"/></svg>Entrar al Grupo VIP</a>'
+        +'<p class="vip-nota">Se abre WhatsApp. Si te pide aprobación, la confirmamos en pocas horas.</p>'
+      :'<p class="vip-nota">Tu acceso está confirmado. Estamos preparando el enlace del grupo: escríbenos abajo con el asunto <b>"Grupo VIP"</b> y te lo enviamos.</p>';
+    const l=document.getElementById('vip-link');if(l)l.addEventListener('click',()=>registrar('comunidad'));
+    return;
+  }
+  acc.innerHTML='<button class="btn oro" type="button" onclick="ir(\'blindaje\')">Conocer Blindaje Neural</button>'
+    +'<div class="vip-cerrado"><p>¿Ya compraste Blindaje Neural?</p>'
+    +'<div class="vip-fila"><input type="email" id="vip-correo" placeholder="Tu correo de compra" autocomplete="email" inputmode="email" spellcheck="false" value="'+esc(correoActual())+'">'
+    +'<button type="button" id="vip-verificar" onclick="vipVerificar()">Verificar</button></div>'
+    +'<p class="vip-nota" id="vip-aviso" role="status"></p></div>';
+  document.getElementById('vip-correo').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();vipVerificar()}});
+}
+function vipVerificar(){
+  const c=(document.getElementById('vip-correo').value||'').trim(),av=document.getElementById('vip-aviso'),b=document.getElementById('vip-verificar');
+  const decir=(t,cl)=>{av.className='vip-nota'+(cl?' '+cl:'');av.textContent=t};
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c)){decir('Escribe un correo válido.','mal');return}
+  if(!window.bnComprobar){decir('No pudimos comprobarlo ahora. Inténtalo en un minuto.','mal');return}
+  decir('Comprobando…');b.disabled=true;
+  window.bnComprobar(c).then(r=>{
+    const b2=document.getElementById('vip-verificar');if(b2)b2.disabled=false;
+    if(r&&r.ok){toast('¡Listo! Ya tienes acceso al Grupo VIP.','verde');return}
+    if(r&&r.motivo==='sin_acceso')decir('Ese correo no tiene Blindaje Neural. Si compraste con otro correo, prueba con ese. Si crees que es un error, escríbenos abajo.','mal');
+    else if(r&&r.motivo==='demasiadas_consultas')decir('Demasiados intentos. Espera unos minutos.','mal');
+    else decir('No pudimos comprobarlo ahora. Inténtalo en un minuto.','mal');
+  });
+}
+
+/* ==================================================================
    MI CUENTA
 ================================================================== */
 function enlaceAcceso(){
@@ -2548,6 +2641,7 @@ document.getElementById('fecha-inicio').max=hoyISO();
 document.getElementById('fecha-inicio').value=hoyISO();
 if(!S.v2desde){S.v2desde=hoyISO();guardar()}
 pintarSoporteInfo();
+pintarVip();
 render();
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&S.inicio&&!enTest&&!BL_TEST)render()});
 
@@ -2748,12 +2842,10 @@ function blFin(){
   }
 
   var abierto = false;
-  /* enlace de la comunidad: viene del servidor junto con el contenido pagado */
+  /* enlace del Grupo VIP: viene del servidor junto con el contenido pagado */
   function mostrarComunidad(url){
-    var c = document.getElementById('bn-comunidad'), a = document.getElementById('bn-comunidad-link');
-    if (!c || !a || typeof url !== 'string' || !/^https:\/\/chat\.whatsapp\.com\/[A-Za-z0-9]+$/.test(url)) return;
-    a.href = url; c.hidden = false;
-    if (!a.dataset.ok){ a.dataset.ok = '1'; a.addEventListener('click', function(){ registrar('comunidad'); }); }
+    var ok = typeof url === 'string' && /^https:\/\/chat\.whatsapp\.com\/[A-Za-z0-9]+$/.test(url);
+    vipActualizar({ estado:'abierto', url: ok ? url : '' });
   }
   function abrir(html, comunidad){
     mostrarComunidad(comunidad);
@@ -2869,11 +2961,23 @@ function blFin(){
   window.bnVerificar = function(c){
     if (abierto || !c) return;
     if (campo && !campo.value) campo.value = c;
+    vipActualizar({ estado:'verificando' });
     pedir(c).then(function(r){
       if (r && r.ok){
         try{ localStorage.setItem(LS_CORREO, c); }catch(e){}
         abrir(r.html, r.comunidad);
+      } else if (!abierto) vipActualizar({ estado:'cerrado' });
+    });
+  };
+  /* verificación manual desde Soporte → Grupo VIP */
+  window.bnComprobar = function(c){
+    return pedir(c).then(function(r){
+      if (r && r.ok){
+        try{ localStorage.setItem(LS_CORREO, c); }catch(e){}
+        if (campo) campo.value = c;
+        abrir(r.html, r.comunidad);
       }
+      return r;
     });
   };
   window.bnVerificar(correoConocido() || (S && S.correo) || '');
