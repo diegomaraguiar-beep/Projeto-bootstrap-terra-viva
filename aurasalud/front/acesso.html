@@ -305,7 +305,7 @@ ol.pasos li{margin-bottom:9px;font-size:15.5px}
   font:inherit;font-size:14px;font-weight:700;background:transparent;color:#fff;cursor:pointer;white-space:nowrap;
 }
 .bn-cerrojo .bn-ya-fila button[disabled]{opacity:.55;cursor:default}
-.bn-cerrojo .bn-aviso{font-size:13px;margin:10px 0 0;line-height:1.45;min-height:1em}
+.bn-cerrojo .bn-aviso{font-size:13px;margin:10px 0 0;line-height:1.45;min-height:1em;background:none;border:none;padding:0;color:#c8dae4}
 .bn-cerrojo .bn-aviso.mal{color:#ffb59a}
 .bn-cerrojo .bn-aviso.bien{color:#8be0b6;font-weight:700}
 .bn-argumento{background:var(--card);border-radius:14px;padding:20px;box-shadow:var(--sombra);margin-bottom:16px}
@@ -424,6 +424,95 @@ ol.pasos li{margin-bottom:9px;font-size:15.5px}
 
 .bn-pie{margin-top:24px;font-size:12.5px;color:var(--suave);text-align:center;line-height:1.55}
 
+/* ==================================================================
+   v2 — componentes nuevos
+   ================================================================== */
+:focus-visible{outline:2.5px solid var(--oro);outline-offset:2px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+.topbar .acciones{display:flex;gap:8px;margin-left:8px}
+
+/* ---- toast ---- */
+.toast{
+  position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom));transform:translate(-50%,20px);
+  background:var(--tinta);color:#fff;border-radius:14px;padding:12px 18px;font-size:14.5px;font-weight:600;
+  box-shadow:0 10px 30px rgba(16,38,49,.28);z-index:600;opacity:0;pointer-events:none;
+  transition:opacity .22s ease,transform .22s ease;max-width:min(92vw,440px);text-align:center;line-height:1.4
+}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast.verde{background:var(--verde)}
+.toast.rojo{background:var(--rojo)}
+
+/* ---- confirmación ---- */
+.confirma p{font-size:15.5px}
+.confirma .btns{margin-top:18px}
+.btn.peligro{background:var(--rojo);color:#fff}
+
+/* ---- onboarding en pasos ---- */
+.onb-paso{display:none}
+.onb-paso.on{display:block;animation:sube .3s ease both}
+.onb-pts{display:flex;gap:6px;margin-bottom:26px}
+.onb-pts i{height:4px;flex:1;border-radius:99px;background:rgba(255,255,255,.18)}
+.onb-pts i.on{background:var(--oro)}
+.onb label.et{color:#cfe0e8}
+.onb .campo-osc{width:100%;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.22);color:#fff;border-radius:12px;padding:13px;margin-bottom:6px;outline:none}
+.onb .campo-osc:focus{border-color:var(--oro)}
+.onb .campo-osc::placeholder{color:#88a8b8}
+.onb-check{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:13px 14px;margin:14px 0;cursor:pointer}
+.onb-check input{width:20px;height:20px;flex-shrink:0;margin-top:2px;accent-color:var(--oro)}
+.onb-check span{font-size:14px;color:#cfe0e8;line-height:1.45}
+.onb-incluye{list-style:none;padding:0;margin:18px 0 0}
+.onb-incluye li{display:flex;gap:11px;align-items:flex-start;padding:8px 0;font-size:15px;color:#dbe8ef;line-height:1.4}
+.onb-incluye li svg{width:20px;height:20px;flex-shrink:0;stroke:var(--oro);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;margin-top:1px}
+.onb .onb-err{color:#ffb59a;font-size:13.5px;min-height:1.2em;margin:4px 0 0}
+.onb p.privado{font-size:12.5px;color:#88a8b8;line-height:1.5;margin-top:10px}
+.link-sutil{display:block;width:100%;text-align:center;font-size:14px;color:#a9c6d3;text-decoration:underline;padding:12px;margin-top:4px}
+
+/* ---- lección del día ---- */
+.leccion{background:linear-gradient(160deg,#fdf8ec,#fbf3e0);border:1px solid #f0d9a5}
+.leccion .num{font-family:'Playfair Display',serif;font-weight:800;color:var(--oro-d);font-size:13px;letter-spacing:1.6px;text-transform:uppercase}
+.leccion h3{font-size:19px;margin:6px 0 8px;line-height:1.25}
+.leccion p{font-size:15px;color:#5a4a24}
+.leccion .accion{background:#fff;border-radius:11px;padding:11px 13px;font-size:14.5px;color:var(--texto);margin:4px 0 14px;border:1px solid #f3e3bd}
+.leccion .accion b{color:var(--oro-d)}
+.leccion.leida{background:var(--card);border-color:var(--borde)}
+
+/* ---- mensajes de regreso / hitos ---- */
+.bienvenida{border-left:3px solid var(--verde);background:var(--verde-l);border-radius:0 14px 14px 0;padding:14px 16px;margin-bottom:14px;font-size:15px;color:#24694b;line-height:1.5}
+.bienvenida b{color:#1c5a3f}
+.hito{text-align:center}
+.hito .medalla{width:92px;height:92px;border-radius:50%;margin:6px auto 14px;background:radial-gradient(circle at 35% 30%,#f6d688,var(--oro) 55%,var(--oro-d));display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(184,134,42,.35)}
+.hito .medalla b{font-family:'Playfair Display',serif;font-size:34px;color:#4a3a10}
+.hito h2{font-size:24px;margin-bottom:8px}
+
+/* ---- tarjeta de compra / garantía ---- */
+.garantia{display:flex;gap:14px;align-items:flex-start}
+.garantia .sello{width:52px;height:52px;border-radius:50%;flex-shrink:0;background:var(--verde-l);border:2px solid #bde6d1;display:flex;align-items:center;justify-content:center}
+.garantia .sello svg{width:26px;height:26px;stroke:var(--verde);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.garantia h3{font-size:17px;margin-bottom:4px}
+.garantia p{font-size:14.5px;margin:0}
+.fila-dato{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--borde);font-size:14.5px}
+.fila-dato:last-child{border-bottom:none}
+.fila-dato span{color:var(--suave)}
+.fila-dato b{color:var(--tinta);text-align:right;word-break:break-all}
+.ajuste{display:flex;align-items:center;gap:13px;padding:14px 0;border-bottom:1px solid var(--borde);width:100%;text-align:left}
+.ajuste:last-child{border-bottom:none}
+.ajuste .ic{width:38px;height:38px;border-radius:11px;background:#eef4f7;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ajuste .ic svg{width:19px;height:19px;stroke:var(--tinta);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ajuste .tx{flex:1;min-width:0}
+.ajuste .tx b{display:block;color:var(--tinta);font-size:15.5px}
+.ajuste .tx span{display:block;font-size:13px;color:var(--suave);margin-top:1px}
+.ajuste .fl svg{width:16px;height:16px;stroke:#b6c9d4;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.ajuste.rojo .tx b{color:var(--rojo)}
+.ajuste.rojo .ic{background:#fdeeea}
+.ajuste.rojo .ic svg{stroke:var(--rojo)}
+select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b8a9a' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center/16px}
+
+/* ---- test baseline (Blindaje) ---- */
+.rt-zona{height:190px;border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:18px;color:#fff;background:var(--tinta2);user-select:none;-webkit-user-select:none;cursor:pointer;padding:16px;transition:background .08s}
+.rt-zona.ya{background:var(--verde)}
+.rt-zona.pronto{background:var(--rojo)}
+.digitos{font-family:'Playfair Display',serif;font-size:46px;font-weight:800;color:var(--tinta);text-align:center;letter-spacing:10px;min-height:64px;font-variant-numeric:tabular-nums}
+
 </style>
 </head>
 <body>
@@ -432,17 +521,48 @@ ol.pasos li{margin-bottom:9px;font-size:15.5px}
 <div class="onb" id="onb">
   <div class="inner">
     <div class="marca">AuraSalud</div>
-    <h1>Protocolo de<br>Memoria Blindada</h1>
-    <p>21 días para limpiar tu intestino, regenerar tus neuronas y recuperar la claridad mental que creías perdida.</p>
-    <div class="linea"></div>
-    <p style="font-size:15px">Esta aplicación te acompaña día por día: te dice qué toca hoy, te cronometra los ejercicios, te toma el test cognitivo y te muestra tu progreso real.</p>
-    <p style="font-size:14px;color:#8fadbc">Todo se guarda en tu propio teléfono. No necesitas crear cuenta ni conexión permanente.</p>
-    <div style="margin-top:26px">
-      <button class="btn oro" onclick="empezar(hoyISO())">Empiezo hoy mismo</button>
-      <div style="margin-top:16px">
-        <div style="font-size:13px;color:#8fadbc;margin-bottom:7px">¿Ya lo empezaste antes? Elige la fecha del día 1:</div>
-        <input type="date" id="fecha-inicio">
-        <button class="btn linea" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.25)" onclick="empezarFecha()">Usar esta fecha</button>
+    <div class="onb-pts" aria-hidden="true"><i class="on" data-pt="1"></i><i data-pt="2"></i><i data-pt="3"></i></div>
+
+    <!-- paso 1: bienvenida + qué incluye -->
+    <div class="onb-paso on" data-paso="1">
+      <h1>Protocolo de<br>Memoria Blindada</h1>
+      <p>21 días de hábitos guiados para cuidar tu intestino, entrenar tu memoria y medir tu claridad mental, paso a paso.</p>
+      <ul class="onb-incluye">
+        <li><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg><span>Qué hacer cada día, en menos de 20 minutos</span></li>
+        <li><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg><span>7 preparaciones con cronómetro y lista de compras</span></li>
+        <li><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg><span>Ejercicios de memoria y un test para medir tu avance</span></li>
+        <li><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg><span>Una lección corta al día y soporte humano en la app</span></li>
+      </ul>
+      <div style="margin-top:26px"><button class="btn oro" type="button" onclick="onbPaso(2)">Comenzar</button></div>
+    </div>
+
+    <!-- paso 2: correo + aceptación -->
+    <div class="onb-paso" data-paso="2">
+      <h1 style="font-size:28px">Tu acceso</h1>
+      <p>Escribe el correo con el que hiciste la compra. Así guardamos tu acceso y nuestro equipo te encuentra rápido si necesitas ayuda.</p>
+      <label class="et" for="onb-correo">Correo de compra</label>
+      <input class="campo-osc" id="onb-correo" type="email" autocomplete="email" inputmode="email" spellcheck="false" placeholder="tu@correo.com" maxlength="120">
+      <label class="onb-check">
+        <input type="checkbox" id="onb-acepto">
+        <span>Entiendo que este es un programa <b>informativo y de hábitos</b>, que no sustituye la consulta médica, y que debo consultar a mi médico si tomo medicamentos o tengo una condición de salud.</span>
+      </label>
+      <p class="onb-err" id="onb-err" role="alert"></p>
+      <button class="btn oro" type="button" onclick="onbCorreo()">Continuar</button>
+      <button class="link-sutil" type="button" onclick="onbCorreo(true)">No recuerdo mi correo de compra</button>
+      <p class="privado">Tus respuestas, notas y resultados se quedan solo en tu teléfono. Del lado del servidor solo registramos tu correo y las fechas en que usas la app, para darte soporte y proteger tu compra.</p>
+    </div>
+
+    <!-- paso 3: fecha de inicio -->
+    <div class="onb-paso" data-paso="3">
+      <h1 style="font-size:28px">¿Cuándo empiezas?</h1>
+      <p>Lo ideal es empezar hoy: el día 1 incluye tu primer test, que será tu punto de partida para comparar.</p>
+      <div style="margin-top:22px">
+        <button class="btn oro" type="button" onclick="empezar(hoyISO())">Empiezo hoy mismo</button>
+        <div style="margin-top:18px">
+          <label class="et" for="fecha-inicio" style="text-transform:none;letter-spacing:0;font-weight:400;font-size:13px;color:#8fadbc">¿Ya lo empezaste antes? Elige la fecha del día 1:</label>
+          <input type="date" id="fecha-inicio">
+          <button class="btn linea" type="button" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.25)" onclick="empezarFecha()">Usar esta fecha</button>
+        </div>
       </div>
     </div>
   </div>
@@ -456,9 +576,14 @@ ol.pasos li{margin-bottom:9px;font-size:15.5px}
       <div class="tit-top">Memoria Blindada</div>
     </div>
     <div class="chip-dia" id="chip-dia">Día 1</div>
-    <button class="ico-btn" onclick="abrirGuia()" aria-label="Guía">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
-    </button>
+    <div class="acciones">
+      <button class="ico-btn" type="button" onclick="ir('soporte')" aria-label="Soporte">
+        <svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg>
+      </button>
+      <button class="ico-btn" type="button" onclick="ir('cuenta')" aria-label="Mi cuenta y ajustes">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -488,6 +613,7 @@ ol.pasos li{margin-bottom:9px;font-size:15.5px}
     </div>
   </div>
 
+  <div id="bienvenida"></div>
   <div id="aviso-test"></div>
 
   <div class="card plana">
@@ -495,6 +621,8 @@ ol.pasos li{margin-bottom:9px;font-size:15.5px}
       <div style="font-size:13.5px;color:var(--suave);margin-top:2px" id="fecha-hoy"></div></div>
     <div id="lista-tareas"></div>
   </div>
+
+  <div class="card leccion" id="card-leccion"></div>
 
   <div class="card" id="card-registro">
     <div class="card-h"><h3>Registro de hoy</h3><span class="tag" id="tag-reg">Pendiente</span></div>
@@ -633,7 +761,6 @@ ol.pasos li{margin-bottom:9px;font-size:15.5px}
       <svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
       Copiar resumen completo
     </button>
-    <button class="btn linea chico" style="margin-top:9px;color:var(--rojo)" onclick="reiniciar()">Reiniciar el protocolo</button>
   </div>
 
   <div class="legal">
@@ -658,8 +785,9 @@ ol.pasos li{margin-bottom:9px;font-size:15.5px}
         </svg>
       </div>
       <h2>Protocolo <em>Blindaje Neural</em></h2>
-      <p class="bn-lead">Tu programa de 21 días recupera lo que ya perdiste.
-      Este otro impide el próximo estadio — el que la mayoría descubre demasiado tarde.</p>
+      <p class="bn-lead">Tu programa de 21 días trabaja la memoria del día a día.
+      Este otro es para después: medir tu memoria con un número, reconocer a tiempo
+      las señales que merecen una consulta y sostener los hábitos a largo plazo.</p>
 
       <ul class="bn-lista">
         <li>Tu baseline cognitivo — el número que dice si funciona</li>
@@ -675,6 +803,7 @@ ol.pasos li{margin-bottom:9px;font-size:15.5px}
       </div>
 
       <a class="bn-cta" data-bn-comprar href="#">Quiero blindar mi cerebro</a>
+      <p style="font-size:12.5px;color:#a8c1cd;text-align:center;margin:10px 0 0" data-bn-garantia></p>
 
       <div class="bn-ya">
         <p class="bn-ya-rot">¿Ya lo compraste?</p>
@@ -709,13 +838,26 @@ ol.pasos li{margin-bottom:9px;font-size:15.5px}
 <section class="vista" id="v-soporte">
   <div class="cap">Estamos contigo</div>
   <h1 class="h-vista">Soporte Online</h1>
+  <p class="sub-vista">Personas reales, no robots. Respondemos en menos de 24 horas.</p>
+
+  <!-- garantía + preguntas frecuentes (resuelven la mayoría de las dudas al instante) -->
+  <div class="card" id="sp-garantia" hidden>
+    <div class="garantia">
+      <div class="sello"><svg viewBox="0 0 24 24"><path d="M12 3l7.5 2.8v5.4c0 4.6-3.2 8.6-7.5 10.3-4.3-1.7-7.5-5.7-7.5-10.3V5.8L12 3z"/><path d="M9 12.2l2 2 4-4.4"/></svg></div>
+      <div><h3 id="sp-garantia-tit"></h3><p id="sp-garantia-txt"></p></div>
+    </div>
+  </div>
+
+  <div class="h4b" style="margin-top:4px">Preguntas frecuentes</div>
+  <div id="sp-faq"></div>
+
+  <div class="h4b" style="margin-top:22px">Escríbenos</div>
 
   <!-- primeiro contato: boas-vindas + formulário -->
   <div id="sp-form-caja">
     <div class="sp-bienvenida">
-      ¡Hola! Bienvenida a nuestro soporte en línea. Estamos aquí para
-      ayudarte. Para iniciar tu atención, completa tus datos y cuéntanos tu
-      duda. Nuestro equipo te responderá lo antes posible.
+      ¡Hola! Te damos la bienvenida a nuestro soporte en línea. Completa tus
+      datos y cuéntanos tu duda. Nuestro equipo te responderá lo antes posible.
     </div>
 
     <div class="card">
@@ -755,6 +897,58 @@ ol.pasos li{margin-bottom:9px;font-size:15.5px}
   </div>
 </section>
 
+<!-- =============== MI CUENTA =============== -->
+<section class="vista" id="v-cuenta">
+  <div class="cap">Ajustes</div>
+  <h1 class="h-vista">Mi cuenta</h1>
+  <p class="sub-vista">Tu compra, tus recordatorios y tu copia de seguridad.</p>
+
+  <div class="card">
+    <div class="card-h"><h3>Tu compra</h3><span class="tag verde">Activa</span></div>
+    <div id="cu-datos"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>Para no saltarte ningún día</h3></div>
+    <p style="font-size:14.5px;color:var(--suave)">Las personas que avanzan son las que abren la app a la misma hora cada día. Elige tu hora y agrégala a tu calendario: te avisará todos los días durante el protocolo.</p>
+    <label class="et" for="cu-hora">Hora del recordatorio</label>
+    <select class="campo" id="cu-hora"></select>
+    <button class="btn oro chico" type="button" style="margin-top:12px" onclick="descargarRecordatorio()">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+      Agregar recordatorio a mi calendario
+    </button>
+    <button class="btn linea chico" type="button" style="margin-top:9px" onclick="guiaInstalar()">
+      <svg viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>
+      Poner la app en mi pantalla de inicio
+    </button>
+  </div>
+
+  <div class="card" style="padding:4px 18px">
+    <button class="ajuste" type="button" onclick="abrirGuia()">
+      <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/></svg></span>
+      <span class="tx"><b>La guía completa</b><span>Por qué funciona y cómo combinarlo con Neuro-Honey</span></span>
+      <span class="fl"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></span>
+    </button>
+    <button class="ajuste" type="button" onclick="exportarDatos()">
+      <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg></span>
+      <span class="tx"><b>Guardar copia de seguridad</b><span>Descarga tu progreso en un archivo</span></span>
+      <span class="fl"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></span>
+    </button>
+    <button class="ajuste" type="button" onclick="document.getElementById('cu-archivo').click()">
+      <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 21V9M7 14l5-5 5 5"/><path d="M4 7V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2"/></svg></span>
+      <span class="tx"><b>Restaurar copia de seguridad</b><span>Para pasar tu progreso a otro teléfono</span></span>
+      <span class="fl"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></span>
+    </button>
+    <input type="file" id="cu-archivo" accept="application/json,.json" hidden>
+    <button class="ajuste rojo" type="button" onclick="reiniciar()">
+      <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></span>
+      <span class="tx"><b>Reiniciar el protocolo</b><span>Borra tu progreso de este teléfono</span></span>
+    </button>
+  </div>
+
+  <div class="legal" id="cu-legal"></div>
+</section>
+
 
 </div>
 
@@ -766,8 +960,10 @@ ol.pasos li{margin-bottom:9px;font-size:15.5px}
   <span class="x" onclick="event.stopPropagation();pararCrono()">✕</span>
 </div>
 
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <!-- =============== NAV =============== -->
-<nav class="nav">
+<nav class="nav" aria-label="Secciones">
   <button class="on" data-v="hoy" onclick="ir('hoy')">
     <svg viewBox="0 0 24 24"><path d="M9 11l3 3 5-6"/><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4"/></svg><span>Hoy</span></button>
   <button data-v="plan" onclick="ir('plan')">
@@ -783,19 +979,15 @@ ol.pasos li{margin-bottom:9px;font-size:15.5px}
     <span>Blindaje</span>
     <span class="bn-pip" aria-hidden="true"></span>
   </button>
-  <button data-v="soporte" onclick="ir('soporte')">
-    <svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.6 0-3.1-.4-4.4-1.2L3 20l1.2-5.1A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 10.5h7M8.5 13.5h4.5"/></svg>
-    <span>Soporte</span>
-  </button>
 </nav>
 
 <!-- =============== MODAL =============== -->
-<div class="modal" id="modal">
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-tit">
   <div class="velo" onclick="cerrarModal()"></div>
   <div class="hoja">
     <div class="barra">
       <h3 id="m-tit"></h3>
-      <button class="cerrar" onclick="cerrarModal()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      <button class="cerrar" type="button" onclick="cerrarModal()" aria-label="Cerrar"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     </div>
     <div class="cont" id="m-cont"></div>
   </div>
@@ -913,13 +1105,113 @@ const COMPRAS=[
 const PALABRAS=['Silla','Montaña','Reloj','Perro','Azul','Cocina','Tren','Lluvia','Zapato','Carta'];
 
 /* ==================================================================
+   CONFIGURACIÓN — ajusta estos valores a tu operación
+================================================================== */
+const CONFIG={
+  MARCA:'AuraSalud',
+  PRODUCTO:'Protocolo de Memoria Blindada',
+  CORREO:'soporte@aurasalud.online',
+  GARANTIA_DIAS:null,             // ej. 7 o 30. Si es null, no se muestra el sello de garantía.
+  PLATAFORMA:'',                  // ej. 'Hotmart' — dónde se procesó el pago.
+  DESCRIPTOR:'',                  // cómo aparece el cargo en el extracto, ej. 'HOTMART*AURASALUD'.
+  API_USO:'/front/api/uso.php',   // registro de uso (prueba de entrega ante contracargos). '' para desactivar.
+  VERSION_TERMINOS:'2026-10'      // cambia este valor si cambias el texto de aceptación.
+};
+
+/* ==================================================================
+   LECCIONES — una por día, se leen en 1 minuto
+================================================================== */
+const LECCIONES=[
+ {t:'Tu punto de partida',p:'Lo que no se mide, no se puede comparar. Por eso el día 1 tiene un test de 8 minutos: no es un examen, es tu foto de hoy. El día 21 harás el mismo test y verás la diferencia con números, no con impresiones.',a:'Haz el Test de Alerta hoy, en un lugar tranquilo y sin el teléfono cerca.'},
+ {t:'El cable entre intestino y cerebro',p:'El nervio vago conecta tu intestino con tu cerebro y envía señales en ambos sentidos. Por eso los nervios se sienten en el estómago, y por eso una digestión pesada suele venir con la cabeza pesada.',a:'Hoy, una hora después del almuerzo, fíjate cómo está tu claridad mental. Anótalo en las notas del día.'},
+ {t:'La fibra es comida para tus bacterias',p:'Tus bacterias buenas no comen lo mismo que tú: comen lo que tú no digieres, sobre todo fibra. Al fermentarla producen compuestos que protegen la pared intestinal. Sin fibra, pasan hambre.',a:'Agrega una porción extra de verdura a la cena de hoy.'},
+ {t:'El azúcar que no ves',p:'El azúcar más difícil de retirar es el escondido: salsas, panes, yogures "de sabor", cereales y jugos. Muchas etiquetas lo llaman jarabe, dextrosa, maltosa o sacarosa.',a:'Revisa la etiqueta de dos productos de tu cocina y busca esas palabras.'},
+ {t:'Agua y concentración',p:'Una deshidratación leve, la que ni siquiera se siente como sed, ya puede reducir la atención y aumentar el cansancio. Muchas veces la "niebla" de media tarde es simplemente falta de agua.',a:'Toma un vaso de agua al despertar y otro a media tarde.'},
+ {t:'Si hay gases, es normal',p:'Cuando aumentas la fibra y los fermentados, tus bacterias trabajan más y en los primeros días puede haber algo de gas o hinchazón. Suele pasar en una o dos semanas.',a:'Come más despacio y mastica bien. Si la molestia es fuerte, reduce la porción y sube poco a poco.'},
+ {t:'Una semana completa',p:'Primera semana terminada. Mira tu registro: no busques perfección, busca tendencia. Una semana no cambia todo, pero sí prepara el terreno para lo que viene.',a:'Hoy toca el Test de Alerta del día 7. Hazlo a la misma hora que el primero.'},
+ {t:'Por qué los suplementos empiezan ahora',p:'Empezamos los suplementos en la semana 2 a propósito: tu intestino ya se adaptó a los cambios de alimentación y es más fácil notar cómo te sientan. Uno a uno, no todos de golpe, si eres sensible.',a:'Si tomas cualquier medicamento diario, revisa la lista de suplementos con tu médico antes de empezar.'},
+ {t:'Qué es la memoria de trabajo',p:'Es la "mesa" donde tu cerebro sostiene información mientras la usa: un número de teléfono, una instrucción, lo que ibas a buscar a la cocina. Es entrenable, y los ejercicios de esta semana apuntan justo ahí.',a:'Haz el ejercicio de hoy con el teléfono en otra habitación.'},
+ {t:'Dormir también es memorizar',p:'Mientras duermes, tu cerebro ordena lo que viviste en el día y decide qué guardar. Dormir poco o a deshoras hace que ese proceso quede a medias.',a:'Elige una hora fija para acostarte esta noche y cúmplela.'},
+ {t:'Caminar alimenta al cerebro',p:'El ejercicio aeróbico moderado aumenta el flujo de sangre al cerebro y es uno de los hábitos con más respaldo científico para la salud cognitiva. No hace falta un gimnasio.',a:'Camina 20 minutos hoy a paso firme. Cuenta como tiempo de calidad para tu memoria.'},
+ {t:'El estrés también olvida',p:'El estrés sostenido mantiene altas las hormonas de alerta, y eso dificulta guardar recuerdos nuevos. Por eso, en épocas de mucha presión, se olvidan más cosas.',a:'Haz 5 respiraciones lentas: 4 segundos al inhalar, 6 al exhalar. Repite antes de dormir.'},
+ {t:'No todos los fermentados están vivos',p:'El chucrut o el kimchi enlatados suelen estar pasteurizados: el calor elimina las bacterias vivas. Los que sirven están en la sección refrigerada y la etiqueta dice "vivo" o "sin pasteurizar".',a:'En tu próxima compra, busca un fermentado refrigerado.'},
+ {t:'Mitad del camino',p:'Dos semanas. Es el punto donde muchas personas empiezan a notar cambios en la energía o la hinchazón, y también el punto donde otras abandonan. La diferencia la hace seguir.',a:'Hoy toca el Test de Alerta del día 14. Compáralo con el del día 1 en Progreso.'},
+ {t:'Constancia antes que perfección',p:'Si fallaste un día, no se perdió nada. Lo que cambia el resultado es la suma de días, no un día perfecto. Retomar hoy vale más que empezar de cero mañana.',a:'Completa la lista de hoy, aunque ayer no hayas podido.'},
+ {t:'Aprender algo nuevo',p:'Cada vez que aprendes algo distinto, tu cerebro crea conexiones nuevas. Los investigadores llaman "reserva cognitiva" a ese ahorro que se acumula con los años.',a:'Aprende hoy algo pequeño y nuevo: 5 palabras de otro idioma, una receta o una ruta distinta.'},
+ {t:'Conversar es entrenar',p:'Una conversación de verdad obliga a recordar, escuchar, interpretar y responder rápido. La vida social activa está asociada a una mejor memoria con la edad.',a:'Llama hoy a alguien y cuéntale algo concreto de tu semana.'},
+ {t:'El truco para recordar nombres',p:'Los nombres se olvidan porque no se asocian con nada. Repetirlo en voz alta y unirlo a una imagen ("Rosa, como la flor de su blusa") le da a tu memoria un gancho de donde sostenerlo.',a:'Con la próxima persona que conozcas, repite su nombre al saludarla y asócialo a algo visual.'},
+ {t:'Qué te vas a quedar',p:'Faltan pocos días. Piensa ya en qué hábitos quieres mantener después del día 21. No tienen que ser todos: tres hábitos sostenidos valen más que diez abandonados.',a:'Elige los tres hábitos del protocolo que más te han servido y anótalos en las notas de hoy.'},
+ {t:'Prepara tu test final',p:'Para que la comparación sea justa, el test del día 21 debe hacerse en las mismas condiciones que el primero: misma hora aproximada, lugar tranquilo y sin el teléfono cerca.',a:'Decide a qué hora harás mañana tu test final.'},
+ {t:'Día 21: mira tus números',p:'Hoy cierras el protocolo. Haz el test final y mira la comparativa en Progreso: memoria inmediata, de trabajo, fluidez y diferida. Si no notas ningún cambio, lleva tu resumen a tu médico: es información útil para el siguiente paso.',a:'Haz el test final y copia tu resumen desde la pestaña Progreso.'}
+];
+
+/* ==================================================================
+   PREGUNTAS FRECUENTES (soporte)
+================================================================== */
+function faqs(){
+  const L=[
+   {q:'¿Cómo vuelvo a entrar a la app?',a:'Guarda esta página en tu pantalla de inicio (en <b>Mi cuenta</b> te explicamos cómo) o en tus favoritos. Si cambias de teléfono, abre el mismo enlace de acceso que recibiste por correo.'},
+   {q:'Cambié de teléfono o se borró mi progreso',a:'Tu progreso se guarda en el teléfono. En <b>Mi cuenta → Guardar copia de seguridad</b> puedes descargarlo y luego restaurarlo en el teléfono nuevo. Si ya lo perdiste, puedes elegir tu fecha de inicio original al volver a empezar.'},
+   {q:'¿Cuándo voy a notar cambios?',a:'Cada persona es distinta. Muchas personas notan primero cambios en la energía o la hinchazón entre los días 10 y 14. Para la memoria, el indicador honesto es la comparación entre tu test del día 1 y el del día 21. Por eso es importante hacer ambos.'},
+   {q:'Una preparación me cae mal',a:'Sáltala y toma la del día siguiente, o pásala a después del desayuno. Si la molestia continúa o es fuerte, suspéndela y consulta a tu médico.'},
+   {q:'Tomo medicamentos, ¿puedo hacer el protocolo?',a:'Consulta antes con tu médico, especialmente si tomas anticoagulantes, antidepresivos o medicación para la presión, la diabetes o el colesterol. Algunos alimentos y suplementos del protocolo pueden interactuar con ellos.'}
+  ];
+  if(CONFIG.DESCRIPTOR)L.push({q:'Veo un cargo que no reconozco',a:'Tu compra aparece en el extracto de la tarjeta como <b>'+CONFIG.DESCRIPTOR+'</b>'+(CONFIG.PLATAFORMA?', procesada por '+CONFIG.PLATAFORMA:'')+'. Si ves otro cargo o tienes cualquier duda, escríbenos aquí abajo con tu correo de compra y lo revisamos el mismo día.'});
+  L.push({q:'¿Cómo pido un reembolso?',a:(CONFIG.GARANTIA_DIAS?'Tienes <b>'+CONFIG.GARANTIA_DIAS+' días de garantía</b> desde la compra. ':'')+'Escríbenos aquí abajo con el correo de compra y el asunto "Reembolso". Es la vía más rápida: lo procesamos directamente, sin trámites con tu banco, y te confirmamos por correo.'});
+  return L;
+}
+
+/* ==================================================================
    ESTADO
 ================================================================== */
 const KEY='mb_app_v1';
 let S=cargar();
-function base(){return{inicio:null,checks:{},reg:{},tests:[],compras:{}}}
+function base(){return{inicio:null,checks:{},reg:{},tests:[],compras:{},correo:'',consent:null,hitos:{},hora:'08:00',ultimaVisita:null}}
 function cargar(){try{const r=JSON.parse(localStorage.getItem(KEY));return r&&typeof r==='object'?Object.assign(base(),r):base()}catch(e){return base()}}
 function guardar(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+/* ---------- avisos discretos (sustituyen a alert/confirm) ---------- */
+let TOAST_T=null;
+function toast(txt,tipo){
+  const t=document.getElementById('toast');
+  t.textContent=txt;t.className='toast on'+(tipo?' '+tipo:'');
+  clearTimeout(TOAST_T);TOAST_T=setTimeout(()=>{t.className='toast'},2600);
+}
+let CONFIRMA_CB=null;
+function confirmar(tit,txt,okTxt,cb,peligro){
+  CONFIRMA_CB=cb;
+  modal(tit,'<div class="confirma"><p>'+txt+'</p><div class="btns">'
+    +'<button class="btn linea chico" type="button" onclick="cerrarModal()">Cancelar</button>'
+    +'<button class="btn chico'+(peligro?' peligro':'')+'" type="button" onclick="const f=CONFIRMA_CB;CONFIRMA_CB=null;cerrarModal();if(f)f()">'+okTxt+'</button>'
+    +'</div></div>');
+}
+
+/* ---------- registro de uso: prueba de entrega del producto ----------
+   Solo se envían eventos (qué y cuándo), nunca respuestas, notas ni
+   puntuaciones de salud. El servidor añade IP y hora. */
+function idDispositivo(){
+  try{let d=localStorage.getItem('mb-disp');if(!d){d=Date.now().toString(36)+Math.random().toString(36).slice(2,10);localStorage.setItem('mb-disp',d)}return d}catch(e){return ''}
+}
+function correoActual(){
+  if(S.correo)return S.correo;
+  try{return localStorage.getItem('bn-correo')||localStorage.getItem('sp-correo')||''}catch(e){return ''}
+}
+function registrar(ev,extra){
+  if(!CONFIG.API_USO)return;
+  try{
+    const datos=Object.assign({ev:ev,email:correoActual(),disp:idDispositivo(),dia:S.inicio?numDia():0,
+      ts:new Date().toISOString(),tz:(Intl.DateTimeFormat().resolvedOptions().timeZone||''),url:location.pathname},extra||{});
+    const cuerpo=JSON.stringify(datos);
+    if(navigator.sendBeacon&&navigator.sendBeacon(CONFIG.API_USO,new Blob([cuerpo],{type:'text/plain'})))return;
+    fetch(CONFIG.API_USO,{method:'POST',body:cuerpo,keepalive:true,credentials:'omit',headers:{'Content-Type':'text/plain'}}).catch(()=>{});
+  }catch(e){}
+}
+let ULT_APERTURA=0;
+function registrarApertura(){
+  const ahora=Date.now();
+  if(ahora-ULT_APERTURA<30*60e3)return;   // como mucho una vez cada 30 min
+  ULT_APERTURA=ahora;registrar('abrir');
+}
 
 function hoyISO(d){d=d||new Date();const t=new Date(d.getTime()-d.getTimezoneOffset()*6e4);return t.toISOString().slice(0,10)}
 function fechaDe(n){const a=new Date(S.inicio+'T12:00');a.setDate(a.getDate()+(n-1));return hoyISO(a)}
@@ -930,6 +1222,8 @@ function dowDe(iso){const d=new Date(iso+'T12:00').getDay();return (d+6)%7}  // 
 const NOMDIA=['lunes','martes','miércoles','jueves','viernes','sábado','domingo'];
 const NOMMES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
 function fechaLarga(iso){const d=new Date(iso+'T12:00');return NOMDIA[dowDe(iso)]+', '+d.getDate()+' de '+NOMMES[d.getMonth()]}
+function numDe(iso){if(!S.inicio)return 1;return Math.floor((new Date(iso+'T12:00')-new Date(S.inicio+'T12:00'))/864e5)+1}
+function esc(x){return String(x==null?'':x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 const norm=s=>(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9ñ ]/g,'').trim();
 
 /* Tareas del día según fecha y semana del protocolo */
@@ -938,6 +1232,8 @@ function tareasDe(iso,sem){
   L.push({id:'prep',t:'Preparación intestinal',s:PREPS[dw].t,go:()=>{ir('recetas');setTimeout(()=>abrirReceta(dw),260)}});
   L.push({id:'alim',t:'Plan de alimentación',s:'Los 12 alimentos dentro, los 6 fuera',go:()=>ir('plan')});
   L.push({id:'nh',t:'Toma del Protocolo Neuro-Honey',s:'Tu protocolo base, como ya lo haces',go:null});
+  const dn=numDe(iso);
+  if(dn>=1&&dn<=21)L.push({id:'lec',t:'Lección del día',s:'1 minuto · '+LECCIONES[dn-1].t,go:()=>{ir('hoy');setTimeout(()=>{const c=document.getElementById('card-leccion');if(c)c.scrollIntoView({behavior:'smooth',block:'center'})},120)}});
   if(sem>=2){
     const e=EJER.filter(x=>x.dias.indexOf(dw)>-1);
     e.forEach((x,i)=>L.push({id:'ej'+EJER.indexOf(x),t:'Ejercicio: '+x.t,s:x.min+' minutos · '+x.zona,go:()=>{ir('mente');verMente('ej');setTimeout(()=>abrirEjercicio(EJER.indexOf(x)),260)}}));
@@ -957,6 +1253,11 @@ function ir(v){
   window.scrollTo({top:0,behavior:'smooth'});
   if(v==='progreso')pintarProgreso();
   if(v==='mente')pintarTests();
+  if(v==='cuenta')pintarCuenta();
+  if(v==='soporte'){
+    const e=document.getElementById('sp-email');if(e&&!e.value)e.value=correoActual();
+    if(window.spCargar)window.spCargar(true);
+  }
 }
 function verPlan(p){
   ['comer','evitar','sup'].forEach(x=>{
@@ -975,28 +1276,64 @@ function verMente(p){
 /* ==================================================================
    MODAL
 ================================================================== */
+/* El botón "atrás" del teléfono cierra el modal en vez de salir de la app */
+let MODAL_HIST=false,IGNORAR_POP=false;
 function modal(tit,html){
   document.getElementById('m-tit').textContent=tit;
   document.getElementById('m-cont').innerHTML=html;
   document.getElementById('modal').classList.add('on');
   document.body.style.overflow='hidden';
   document.querySelector('#modal .hoja').scrollTop=0;
+  document.getElementById('pill').classList.remove('on');
+  if(!MODAL_HIST){try{history.pushState({modal:1},'');MODAL_HIST=true}catch(e){}}
 }
-function cerrarModal(){
+function cerrarModal(desdePop){
   document.getElementById('modal').classList.remove('on');
   document.body.style.overflow='';
   DIA_MODAL=null;
   if(enTest){enTest=false;clearInterval(TT);}
+  if(BL_TEST)blCancelar();
   if(CR.run)pintarCrono();
+  if(MODAL_HIST){MODAL_HIST=false;if(desdePop!==true){IGNORAR_POP=true;try{history.back()}catch(e){IGNORAR_POP=false}}}
 }
+window.addEventListener('popstate',()=>{
+  if(IGNORAR_POP){IGNORAR_POP=false;return}
+  if(MODAL_HIST){MODAL_HIST=false;cerrarModal(true)}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('modal').classList.contains('on'))cerrarModal()});
 
 /* ==================================================================
    ONBOARDING
 ================================================================== */
-function empezar(iso){S.inicio=iso;guardar();document.getElementById('onb').classList.remove('on');render()}
+function onbPaso(n){
+  document.querySelectorAll('.onb-paso').forEach(x=>x.classList.toggle('on',+x.dataset.paso===n));
+  document.querySelectorAll('.onb-pts i').forEach(x=>x.classList.toggle('on',+x.dataset.pt<=n));
+  document.getElementById('onb').scrollTop=0;
+  if(n===2){const c=document.getElementById('onb-correo');if(!c.value)c.value=correoActual()||new URLSearchParams(location.search).get('email')||'';}
+}
+function onbCorreo(sinCorreo){
+  const c=sinCorreo?'':document.getElementById('onb-correo').value.trim(),err=document.getElementById('onb-err');
+  if(!sinCorreo&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c)){err.textContent='Escribe el correo con el que hiciste la compra.';return}
+  if(!document.getElementById('onb-acepto').checked){err.textContent='Para continuar, marca la casilla de arriba.';return}
+  if(sinCorreo)toast('Sin problema. Puedes agregarlo después en Mi cuenta.');
+  err.textContent='';
+  if(c)S.correo=c;
+  S.consent={t:new Date().toISOString(),v:CONFIG.VERSION_TERMINOS};guardar();
+  try{if(c&&!localStorage.getItem('bn-correo'))localStorage.setItem('bn-correo',c)}catch(e){}
+  registrar('consentimiento',{version:CONFIG.VERSION_TERMINOS});
+  if(c&&window.bnVerificar)window.bnVerificar(c);
+  onbPaso(3);
+}
+function empezar(iso){
+  S.inicio=iso;S.ultimaVisita=null;guardar();
+  document.getElementById('onb').classList.remove('on');
+  registrar('inicio',{inicio:iso});
+  render();window.scrollTo(0,0);
+}
 function empezarFecha(){
   const v=document.getElementById('fecha-inicio').value;
-  if(!v){alert('Elige una fecha primero.');return}
+  if(!v){toast('Elige una fecha primero.','rojo');return}
+  if(v>hoyISO()){toast('La fecha no puede ser futura.','rojo');return}
   empezar(v);
 }
 
@@ -1005,17 +1342,18 @@ function empezarFecha(){
 ================================================================== */
 function render(){
   if(!S.inicio){document.getElementById('onb').classList.add('on');return}
-  const d=diaVista(), iso=hoyISO(), sem=semana();
+  const d=diaVista(), iso=hoyISO(), sem=semana(), real=numDia();
+  registrarApertura();
 
-  document.getElementById('chip-dia').textContent = numDia()>21?'Completado':'Día '+d+' de 21';
+  document.getElementById('chip-dia').textContent = real>21?'21/21 ✓':'Día '+d+'/21';
   document.getElementById('aro-n').textContent=d;
   document.getElementById('aro').style.strokeDashoffset = 283-(283*(d/21));
   const titSem=['Semana 1','Semana 2','Semana 3'][sem-1];
   const txtSem=['Solo alimentación y preparaciones. Deja que tu cuerpo se adapte.',
                 'Se suman los suplementos y los ejercicios cognitivos.',
                 'Protocolo completo. Aquí es donde se nota.'][sem-1];
-  document.getElementById('hero-tit').textContent = numDia()>21?'Protocolo completado':titSem;
-  document.getElementById('hero-txt').textContent = numDia()>21?'Compara tu test del día 21 con el del día 1.':txtSem;
+  document.getElementById('hero-tit').textContent = real>21?'Protocolo completado':titSem;
+  document.getElementById('hero-txt').textContent = real>21?'Fase de mantenimiento: sigue con tus hábitos y repite el test una vez al mes.':txtSem;
   document.getElementById('fecha-hoy').textContent = fechaLarga(iso);
 
   // stats
@@ -1024,14 +1362,19 @@ function render(){
   const ult=S.tests[S.tests.length-1];
   document.getElementById('st-test').textContent = ult? (ult.p1+'/10') : '—';
 
-  // aviso de test
+  // aviso de test: días 1, 7, 14 y 21, y una vez al mes en mantenimiento
   const av=document.getElementById('aviso-test');
-  if([1,7,14,21].indexOf(d)>-1 && !S.tests.some(t=>t.dia===d)){
+  const ultFecha=S.tests.length?S.tests.reduce((m,t)=>t.fecha>m?t.fecha:m,''):'';
+  const tocaMant = real>21 && (!ultFecha || numDe(iso)-numDe(ultFecha)>=30);
+  if(([1,7,14,21].indexOf(real)>-1 && !S.tests.some(t=>t.dia===real)) || tocaMant){
     av.innerHTML='<div class="card" style="background:var(--tinta);color:#fff;border:none">'
-      +'<div class="card-h"><h3 style="color:#fff;font-size:17px">Hoy toca el Test de Alerta</h3><span class="tag oro">Día '+d+'</span></div>'
-      +'<p style="color:#b9d0dc;font-size:14.5px;margin-bottom:14px">Ocho minutos. Hazlo por la mañana, después del desayuno, en un lugar tranquilo y sin teléfono cerca.</p>'
-      +'<button class="btn oro chico" onclick="iniciarTest()">Hacer el test ahora</button></div>';
+      +'<div class="card-h"><h3 style="color:#fff;font-size:17px">'+(tocaMant?'Test mensual de mantenimiento':'Hoy toca el Test de Alerta')+'</h3><span class="tag oro">Día '+real+'</span></div>'
+      +'<p style="color:#b9d0dc;font-size:14.5px;margin-bottom:14px">'+(tocaMant?'Ocho minutos para comprobar que mantienes lo que ganaste. Mismas condiciones que siempre.':'Ocho minutos. Hazlo por la mañana, después del desayuno, en un lugar tranquilo y sin teléfono cerca.')+'</p>'
+      +'<button class="btn oro chico" type="button" onclick="iniciarTest()">Hacer el test ahora</button></div>';
   } else av.innerHTML='';
+
+  pintarBienvenida(real,iso);
+  pintarLeccion(real,iso);
 
   pintarTareas(iso,sem);
   pintarRegistro(iso);
@@ -1063,6 +1406,8 @@ function marcar(id){
   document.getElementById('st-adh').textContent=adherencia()+'%';
   if(navigator.vibrate)try{navigator.vibrate(12)}catch(e){}
   if(todoHecho(iso))celebrar();
+  if(id==='lec')pintarLeccion(numDia(),iso);
+  if(S.checks[iso][id])registrar('tarea',{tarea:id});
 }
 function todoHecho(iso){
   const L=tareasDe(iso,Math.min(3,Math.ceil(Math.max(1,diaVista())/7))),h=S.checks[iso]||{};
@@ -1084,12 +1429,54 @@ function adherencia(){
   for(let i=1;i<=n;i++)s+=ratioDia(fechaDe(i),i);
   return Math.round(s/n*100);
 }
+const HITOS={
+  7:{t:'Primera semana completa',p:'Siete días seguidos cuidando tu intestino. Lo más difícil, crear el hábito, ya está hecho. Desde mañana se suman los ejercicios de memoria y los suplementos.'},
+  14:{t:'Dos semanas: mitad del camino',p:'Aquí es donde muchas personas empiezan a notar cambios en la energía y la hinchazón. Mira tu gráfico en Progreso y compara tu test con el del día 1.'},
+  21:{t:'¡Protocolo completado!',p:'21 días. Haz tu test final si aún no lo hiciste y compara tus números en Progreso. Lo que construiste se mantiene con los hábitos: la app te sigue acompañando en modo mantenimiento.'}
+};
 function celebrar(){
-  const d=document.createElement('div');
-  d.style.cssText='position:fixed;inset:0;z-index:500;pointer-events:none;display:flex;align-items:center;justify-content:center';
-  d.innerHTML='<div style="background:var(--verde);color:#fff;padding:16px 26px;border-radius:999px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.2);animation:sube .3s ease both">Día completo. Bien hecho.</div>';
-  document.body.appendChild(d);
-  setTimeout(()=>d.remove(),1900);
+  const n=numDia();
+  if(HITOS[n]&&!S.hitos[n]){
+    S.hitos[n]=new Date().toISOString();guardar();
+    registrar('hito',{hito:n});
+    setTimeout(()=>modal('Día '+n,'<div class="hito"><div class="medalla"><b>'+n+'</b></div><h2>'+HITOS[n].t+'</h2><p>'+HITOS[n].p+'</p>'
+      +'<button class="btn oro" type="button" style="margin-top:8px" onclick="cerrarModal();ir(\'progreso\')">Ver mi progreso</button>'
+      +'<button class="btn linea chico" type="button" style="margin-top:9px" onclick="cerrarModal()">Seguir</button></div>'),350);
+    return;
+  }
+  const r=racha();
+  toast(r>=3?'Día completo. Llevas '+r+' días seguidos.':'Día completo. Bien hecho.','verde');
+}
+
+/* ---------- mensaje de bienvenida / regreso ---------- */
+let BIENVENIDA=null;
+function pintarBienvenida(n,iso){
+  const el=document.getElementById('bienvenida');
+  if(BIENVENIDA===null||BIENVENIDA.iso!==iso){
+    const prev=S.ultimaVisita;let h='';
+    const gap=prev?numDe(iso)-numDe(prev):0;
+    if(gap>=2&&n<=21)h='<b>Qué bueno verte de nuevo.</b> Pasaron '+gap+' días desde tu última visita. No hace falta recuperar nada: retoma con lo de hoy, que es lo que cuenta.';
+    else if(n===1&&!prev)h='<b>Te damos la bienvenida.</b> Hoy es tu día 1. Empieza por el test (8 minutos) para tener tu punto de partida y sigue la lista de abajo.';
+    else if(n===8)h='<b>Empieza la semana 2.</b> Desde hoy se suman los ejercicios de memoria y los suplementos. Si tomas medicamentos, revisa la lista con tu médico antes.';
+    else if(n===15)h='<b>Semana 3, el tramo final.</b> Es la semana en la que más personas notan la diferencia. Sigue igual.';
+    BIENVENIDA={iso:iso,h:h};
+    S.ultimaVisita=iso;guardar();
+  }
+  el.innerHTML=BIENVENIDA.h?'<div class="bienvenida">'+BIENVENIDA.h+'</div>':'';
+}
+
+/* ---------- lección del día ---------- */
+function pintarLeccion(n,iso){
+  const c=document.getElementById('card-leccion');
+  if(n<1||n>21){c.hidden=true;return}
+  c.hidden=false;
+  const L=LECCIONES[n-1],leida=!!(S.checks[iso]||{}).lec;
+  c.classList.toggle('leida',leida);
+  c.innerHTML='<div class="card-h" style="margin-bottom:0"><span class="num" style="flex:1">Lección '+n+' de 21 · 1 min</span>'
+    +(leida?'<span class="tag verde">Leída</span>':'')+'</div>'
+    +'<h3>'+L.t+'</h3><p>'+L.p+'</p>'
+    +'<div class="accion"><b>Para hoy:</b> '+L.a+'</div>'
+    +(leida?'':'<button class="btn oro chico" type="button" onclick="marcar(\'lec\')">Marcar como leída</button>');
 }
 
 /* ---------- REGISTRO ---------- */
@@ -1161,9 +1548,9 @@ function copiarCompras(){
 }
 function copiar(t,ok){
   if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(t).then(()=>alert(ok)).catch(()=>fall(t));
+    navigator.clipboard.writeText(t).then(()=>toast(ok,'verde')).catch(()=>fall(t));
   } else fall(t);
-  function fall(x){const a=document.createElement('textarea');a.value=x;document.body.appendChild(a);a.select();try{document.execCommand('copy');alert(ok)}catch(e){alert('No se pudo copiar automáticamente.')}a.remove()}
+  function fall(x){const a=document.createElement('textarea');a.value=x;a.setAttribute('readonly','');a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();try{document.execCommand('copy');toast(ok,'verde')}catch(e){toast('No se pudo copiar automáticamente.','rojo')}a.remove()}
 }
 
 /* ---------- RECETAS ---------- */
@@ -1180,7 +1567,7 @@ function pintarRecetas(){
     +'</div></div>').join('');
 }
 function abrirReceta(i){
-  const p=PREPS[i];
+  const p=PREPS[i];registrar('contenido',{id:'receta'+i});
   let h='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">'+p.meta.map(m=>'<span class="tag">'+m+'</span>').join('')+'</div>';
   h+='<div class="h4b">Necesitas</div>';
   h+='<div class="card" style="padding:6px 16px">'+p.ing.map((x,j)=>
@@ -1221,7 +1608,7 @@ function pintarEjercicios(){
   }).join('');
 }
 function abrirEjercicio(i){
-  const e=EJER[i];
+  const e=EJER[i];registrar('contenido',{id:'ejercicio'+i});
   let h='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px"><span class="tag oro">'+e.zona+'</span><span class="tag">'+e.cuando+'</span><span class="tag">'+e.min+' minutos</span></div>';
   h+='<div class="h4b">Cómo hacerlo</div><p>'+e.como+'</p>';
   h+='<div class="porque"><b>Por qué funciona:</b> '+e.porque+'</div>';
@@ -1234,20 +1621,36 @@ function abrirEjercicio(i){
 /* ==================================================================
    CRONÓMETRO
 ================================================================== */
-let CR={id:null,left:0,total:0,lab:'',run:false};
+let CR={id:null,left:0,total:0,lab:'',run:false,fin:0};
+let WAKE=null;
 function fmt(s){s=Math.max(0,Math.round(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+/* Mantiene la pantalla encendida mientras corre el cronómetro (si el navegador lo permite) */
+function pantallaEncendida(on){
+  try{
+    if(on&&'wakeLock' in navigator&&!WAKE)navigator.wakeLock.request('screen').then(w=>{WAKE=w;w.addEventListener('release',()=>{WAKE=null})}).catch(()=>{});
+    if(!on&&WAKE){WAKE.release().catch(()=>{});WAKE=null}
+  }catch(e){}
+}
+/* Cuenta con la hora real: no se atrasa si la pantalla se apaga o la app pasa a segundo plano */
+function tickCrono(){
+  CR.left=Math.max(0,Math.ceil((CR.fin-Date.now())/1000));
+  if(CR.left<=0){terminarCrono();return}
+  pintarCrono();
+}
+function correrCrono(){
+  clearInterval(CR.id);CR.run=true;CR.fin=Date.now()+CR.left*1000;
+  CR.id=setInterval(tickCrono,250);pantallaEncendida(true);
+}
+function terminarCrono(){
+  clearInterval(CR.id);CR.run=false;CR.left=0;pantallaEncendida(false);bip();
+  document.getElementById('pill').classList.remove('on');
+  const n=document.getElementById('crono-num');
+  if(n){n.textContent='00:00';setTimeout(modalCronoFin,80)}
+  else toast('Tiempo cumplido: '+CR.lab,'verde');
+}
 function lanzarCrono(seg,lab){
-  CR.total=seg;CR.left=seg;CR.lab=lab;CR.run=true;
-  clearInterval(CR.id);
-  CR.id=setInterval(()=>{
-    CR.left--;
-    if(CR.left<=0){clearInterval(CR.id);CR.run=false;CR.left=0;bip();
-      document.getElementById('pill').classList.remove('on');
-      if(document.getElementById('crono-num'))document.getElementById('crono-num').textContent='00:00';
-      setTimeout(()=>{if(document.getElementById('crono-num'))modalCronoFin()},80);
-      return}
-    pintarCrono();
-  },1000);
+  CR.total=seg;CR.left=seg;CR.lab=lab;
+  correrCrono();
   abrirCrono();
 }
 function pintarCrono(){
@@ -1259,26 +1662,26 @@ function pintarCrono(){
 }
 function abrirCrono(){
   modal(CR.lab,
-    '<div class="reloj" id="crono-num">'+fmt(CR.left)+'</div>'
-    +'<p class="mini" style="margin-top:12px">Deja el teléfono boca abajo. Cuando termine, suena.</p>'
+    '<div class="reloj" id="crono-num" role="timer" aria-live="off">'+fmt(CR.left)+'</div>'
+    +'<p class="mini" style="margin-top:12px">La pantalla se queda encendida y suena al terminar. Sube el volumen.</p>'
     +'<div class="btns" style="margin-top:22px">'
-    +'<button class="btn linea chico" onclick="pausarCrono()" id="btn-pausa">'+(CR.run?'Pausar':'Reanudar')+'</button>'
-    +'<button class="btn linea chico" onclick="pararCrono();cerrarModal()">Terminar</button></div>'
-    +'<button class="btn chico" style="margin-top:9px" onclick="cerrarModal()">Seguir usando la app</button>');
-  document.getElementById('pill').classList.remove('on');
+    +'<button class="btn linea chico" type="button" onclick="pausarCrono()" id="btn-pausa">'+(CR.run?'Pausar':'Reanudar')+'</button>'
+    +'<button class="btn linea chico" type="button" onclick="pararCrono();cerrarModal()">Terminar</button></div>'
+    +'<button class="btn chico" type="button" style="margin-top:9px" onclick="cerrarModal()">Seguir usando la app</button>');
 }
 function modalCronoFin(){
   modal('Tiempo cumplido','<div class="reloj" style="color:var(--verde)">00:00</div>'
-   +'<p class="mini" style="margin-top:14px">'+CR.lab+'</p>'
-   +'<button class="btn" style="margin-top:20px" onclick="cerrarModal()">Listo</button>');
+   +'<p class="mini" style="margin-top:14px">'+esc(CR.lab)+'</p>'
+   +'<button class="btn" type="button" style="margin-top:20px" onclick="cerrarModal()">Listo</button>');
 }
 function pausarCrono(){
-  if(CR.run){clearInterval(CR.id);CR.run=false;}
-  else{CR.run=true;clearInterval(CR.id);CR.id=setInterval(()=>{CR.left--;if(CR.left<=0){clearInterval(CR.id);CR.run=false;CR.left=0;bip();modalCronoFin();return}pintarCrono()},1000)}
+  if(CR.run){clearInterval(CR.id);CR.run=false;CR.left=Math.max(0,Math.ceil((CR.fin-Date.now())/1000));pantallaEncendida(false)}
+  else if(CR.left>0)correrCrono();
   const b=document.getElementById('btn-pausa'); if(b)b.textContent=CR.run?'Pausar':'Reanudar';
   pintarCrono();
 }
-function pararCrono(){clearInterval(CR.id);CR.run=false;CR.left=0;document.getElementById('pill').classList.remove('on')}
+function pararCrono(){clearInterval(CR.id);CR.run=false;CR.left=0;pantallaEncendida(false);document.getElementById('pill').classList.remove('on')}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&CR.run){tickCrono();pantallaEncendida(true)}});
 function bip(){
   try{
     const c=new (window.AudioContext||window.webkitAudioContext)();
@@ -1448,11 +1851,14 @@ function fin4(){
   const v=(document.getElementById('in4').value||'').split(/[,\n;]+/).map(norm).filter(Boolean);
   const ac=PALABRAS.filter(p=>v.indexOf(norm(p))>-1);
   TS.p4=ac.length;TS.dichas4=ac;
-  const reg={dia:diaVista(),fecha:hoyISO(),p1:TS.p1,p2:TS.p2,p3:TS.p3,p4:TS.p4};
+  // el día real (después del 21 cuenta como test de mantenimiento, sin pisar el del día 21)
+  const reg={dia:Math.max(1,numDia()),fecha:hoyISO(),p1:TS.p1,p2:TS.p2,p3:TS.p3,p4:TS.p4};
   S.tests=S.tests.filter(t=>t.dia!==reg.dia);
   S.tests.push(reg);S.tests.sort((a,b)=>a.dia-b.dia);
   guardar();enTest=false;
+  registrar('test',{test:'alerta',dia_test:reg.dia});
   resultadoFinal(reg);
+  render();
 }
 function resultadoFinal(r){
   const prim=S.tests[0];
@@ -1596,14 +2002,16 @@ function copiarResumen(){
   copiar(t,'Resumen copiado. Ya puedes pegarlo donde lo necesites.');
 }
 function reiniciar(){
-  if(!confirm('Esto borra tu progreso, tus registros y tus tests. ¿Seguro que quieres empezar de cero?'))return;
-  S=base();guardar();location.reload();
+  confirmar('¿Reiniciar el protocolo?','Esto borra de este teléfono tu progreso, tus registros y tus tests. Si quieres conservarlos, guarda antes una copia de seguridad.','Sí, borrar todo',()=>{
+    const c=S.correo,k=S.consent;S=base();S.correo=c;S.consent=k;guardar();registrar('reinicio');location.reload();
+  },true);
 }
 
 /* ==================================================================
    GUÍA
 ================================================================== */
 function abrirGuia(){
+  registrar('contenido',{id:'guia'});
   modal('La guía completa',
    '<div class="cap">Parte 1</div><h2 style="font-size:22px;margin-bottom:12px">Por qué tu intestino decide lo que tu cerebro recuerda</h2>'
   +'<p>Tu intestino y tu cerebro están conectados por un cable directo llamado <b>nervio vago</b>. Es una autopista de doble sentido: lo que pasa en tu intestino llega a tu cerebro, y lo que pasa en tu cerebro afecta a tu intestino. Por eso sientes el estómago cerrado cuando estás nervioso, y por eso un intestino inflamado produce niebla mental.</p>'
@@ -1639,13 +2047,294 @@ function abrirGuia(){
 }
 
 /* ==================================================================
+   MI CUENTA
+================================================================== */
+function enlaceAcceso(){
+  const u=new URL(location.href);u.hash='';
+  const c=correoActual();
+  ['email','correo'].forEach(k=>u.searchParams.delete(k));
+  if(c)u.searchParams.set('email',c);
+  return u.toString();
+}
+function pintarCuenta(){
+  const c=correoActual();
+  const fila=(a,b)=>'<div class="fila-dato"><span>'+a+'</span><b>'+b+'</b></div>';
+  let h=fila('Producto',esc(CONFIG.PRODUCTO))
+    +fila('Correo de compra',c?esc(c):'<button type="button" style="color:var(--oro-d);font-weight:700;text-decoration:underline" onclick="pedirCorreo()">Agregar</button>')
+    +(S.inicio?fila('Inicio del protocolo',fechaLarga(S.inicio)):'');
+  if(CONFIG.PLATAFORMA)h+=fila('Compra procesada por',esc(CONFIG.PLATAFORMA));
+  if(CONFIG.DESCRIPTOR)h+=fila('En tu extracto aparece como',esc(CONFIG.DESCRIPTOR));
+  if(CONFIG.GARANTIA_DIAS)h+=fila('Garantía',CONFIG.GARANTIA_DIAS+' días');
+  h+='<button class="btn linea chico" type="button" style="margin-top:12px" onclick="copiar(enlaceAcceso(),\'Enlace copiado. Ábrelo en tu otro teléfono o guárdalo en tus notas.\')">'
+    +'<svg viewBox="0 0 24 24"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>Copiar mi enlace de acceso</button>';
+  document.getElementById('cu-datos').innerHTML=h;
+
+  const sel=document.getElementById('cu-hora');
+  if(!sel.options.length){
+    for(let m=5*60;m<=22*60;m+=30){const v=String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');sel.add(new Option(v,v))}
+    sel.addEventListener('change',()=>{S.hora=sel.value;guardar()});
+  }
+  sel.value=S.hora||'08:00';
+  const leg=document.getElementById('cu-legal');
+  if(!leg.innerHTML)leg.innerHTML=document.querySelector('#v-progreso .legal').innerHTML;
+}
+function pedirCorreo(){
+  modal('Tu correo de compra','<p>Lo usamos para encontrar tu compra si necesitas ayuda y para desbloquear tus módulos.</p>'
+    +'<input class="campo" id="pc-correo" type="email" autocomplete="email" inputmode="email" spellcheck="false" placeholder="tu@correo.com">'
+    +'<button class="btn" type="button" style="margin-top:14px" onclick="guardarCorreo()">Guardar</button>');
+  setTimeout(()=>{const e=document.getElementById('pc-correo');if(e)e.focus()},250);
+}
+function guardarCorreo(){
+  const c=(document.getElementById('pc-correo').value||'').trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c)){toast('Escribe un correo válido.','rojo');return}
+  S.correo=c;guardar();
+  try{if(!localStorage.getItem('bn-correo'))localStorage.setItem('bn-correo',c)}catch(e){}
+  registrar('correo');
+  if(window.bnVerificar)window.bnVerificar(c);
+  cerrarModal();pintarCuenta();toast('Correo guardado.','verde');
+}
+
+/* ---------- recordatorio diario (.ics, funciona en iPhone y Android sin permisos) ---------- */
+function descargarRecordatorio(){
+  const hora=(S.hora||'08:00').replace(':',''),hoy=hoyISO().replace(/-/g,'');
+  const restan=numDia()<=21?Math.max(1,21-numDia()+1):30;
+  const url=enlaceAcceso();
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//'+CONFIG.MARCA+'//Memoria Blindada//ES','CALSCALE:GREGORIAN','METHOD:PUBLISH',
+    'BEGIN:VEVENT','UID:mb-'+Date.now()+'@'+location.hostname,'DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z',
+    'DTSTART:'+hoy+'T'+hora+'00','DURATION:PT20M','RRULE:FREQ=DAILY;COUNT='+restan,
+    'SUMMARY:Memoria Blindada · lo de hoy (20 min)',
+    'DESCRIPTION:Abre tu app y completa la lista del día: '+url,
+    'URL:'+url,
+    'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:Memoria Blindada','TRIGGER:PT0M','END:VALARM',
+    'END:VEVENT','END:VCALENDAR'].map(plegarIcs).join('\r\n');
+  descargar(ics,'recordatorio-memoria-blindada.ics','text/calendar');
+  registrar('recordatorio',{hora:S.hora});
+  toast('Abre el archivo descargado para añadirlo a tu calendario.','verde');
+}
+function plegarIcs(l){let o='';while(l.length>72){o+=l.slice(0,72)+'\r\n ';l=l.slice(72)}return o+l}
+function descargar(txt,nombre,tipo){
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([txt],{type:tipo}));a.download=nombre;
+  document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500);
+}
+
+/* ---------- instalar en la pantalla de inicio ---------- */
+let PROMPT_INSTALAR=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();PROMPT_INSTALAR=e});
+function guiaInstalar(){
+  if(PROMPT_INSTALAR){PROMPT_INSTALAR.prompt();PROMPT_INSTALAR=null;return}
+  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  modal('Ponla en tu pantalla de inicio','<p>Así la abres con un toque, como cualquier otra aplicación, sin buscar el correo.</p>'
+    +(ios
+      ?'<ol class="pasos"><li>Abre esta página en <b>Safari</b>.</li><li>Toca el botón <b>Compartir</b> (el cuadrado con la flecha hacia arriba).</li><li>Elige <b>Agregar a pantalla de inicio</b> y toca <b>Agregar</b>.</li></ol>'
+      :'<ol class="pasos"><li>Abre esta página en <b>Chrome</b>.</li><li>Toca el menú <b>⋮</b> arriba a la derecha.</li><li>Elige <b>Agregar a la pantalla principal</b> (o <b>Instalar aplicación</b>) y confirma.</li></ol>')
+    +'<div class="nota">Tu progreso se guarda en este navegador. Usa siempre el mismo para no perderlo.</div>'
+    +'<button class="btn" type="button" onclick="cerrarModal()">Entendido</button>');
+}
+
+/* ---------- copia de seguridad ---------- */
+const CLAVES_RESPALDO=['bn-correo','bn-capitulos-vistos','bn-baseline-mediciones','sp-clave','sp-correo','sp-nombre','sp-whatsapp','sp-asunto'];
+function exportarDatos(){
+  const extra={};
+  CLAVES_RESPALDO.forEach(k=>{try{const v=localStorage.getItem(k);if(v!=null)extra[k]=v}catch(e){}});
+  const datos={app:'memoria-blindada',version:1,exportado:new Date().toISOString(),estado:S,extra:extra};
+  descargar(JSON.stringify(datos,null,1),'memoria-blindada-'+hoyISO()+'.json','application/json');
+  registrar('respaldo');
+  toast('Copia guardada. Guárdala en tus archivos o envíatela por correo.','verde');
+}
+document.getElementById('cu-archivo').addEventListener('change',function(){
+  const f=this.files&&this.files[0];this.value='';
+  if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{
+    let d;try{d=JSON.parse(r.result)}catch(e){}
+    if(!d||d.app!=='memoria-blindada'||!d.estado||typeof d.estado!=='object'){toast('Ese archivo no es una copia de Memoria Blindada.','rojo');return}
+    confirmar('¿Restaurar esta copia?','Se reemplazará el progreso de este teléfono por el de la copia del '+esc((d.exportado||'').slice(0,10))+'.','Restaurar',()=>{
+      S=Object.assign(base(),d.estado);guardar();
+      Object.keys(d.extra||{}).forEach(k=>{if(CLAVES_RESPALDO.indexOf(k)>-1)try{localStorage.setItem(k,d.extra[k])}catch(e){}});
+      registrar('restaurar');location.reload();
+    });
+  };
+  r.readAsText(f);
+});
+
+/* ---------- soporte: garantía + preguntas frecuentes ---------- */
+function pintarSoporteInfo(){
+  if(CONFIG.GARANTIA_DIAS){
+    document.getElementById('sp-garantia').hidden=false;
+    document.getElementById('sp-garantia-tit').textContent='Garantía de '+CONFIG.GARANTIA_DIAS+' días';
+    document.getElementById('sp-garantia-txt').textContent='Si el protocolo no es para ti, escríbenos aquí con tu correo de compra y te devolvemos el dinero. Sin preguntas difíciles y sin trámites con tu banco.';
+    const g=document.querySelector('[data-bn-garantia]');
+    if(g)g.textContent='Garantía de '+CONFIG.GARANTIA_DIAS+' días · acceso inmediato';
+  }
+  document.getElementById('sp-faq').innerHTML=faqs().map(f=>
+    '<details class="acc"><summary><span class="t">'+f.q+'</span>'
+    +'<span class="fl"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></summary>'
+    +'<div class="cuerpo"><p style="margin:0">'+f.a+'</p></div></details>').join('');
+}
+
+/* ==================================================================
    ARRANQUE
 ================================================================== */
 document.getElementById('fecha-inicio').max=hoyISO();
 document.getElementById('fecha-inicio').value=hoyISO();
+pintarSoporteInfo();
 render();
-document.addEventListener('visibilitychange',()=>{if(!document.hidden&&S.inicio&&!enTest)render()});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&S.inicio&&!enTest&&!BL_TEST)render()});
 
+
+/* ==================================================================
+   TEST BASELINE (Blindaje) — 4 pruebas, puntaje real de 0 a 100
+     · memoria diferida (10 palabras) ....... 40 puntos
+     · amplitud de dígitos (3 a 9) .......... 30 puntos
+     · tiempo de reacción (5 intentos) ...... 30 puntos
+================================================================== */
+let BL_TEST=null;
+const BL_PALABRAS=['Ventana','Río','Lápiz','Caballo','Verde','Puente','Guitarra','Nube','Botella','Jardín'];
+function blBarra(n){return '<div class="progreso-test"><i style="width:'+(n*25)+'%"></i></div>'}
+function blCancelar(){if(!BL_TEST)return;clearTimeout(BL_TEST.to);clearInterval(BL_TEST.iv);BL_TEST=null}
+function blIniciar(alTerminar){
+  blCancelar();
+  BL_TEST={rts:[],span:0,falla:0,largo:3,rec:0,cb:alTerminar,to:null,iv:null,serie:''};
+  modal('Baseline cognitivo',blBarra(0)
+    +'<p>Cuatro pruebas cortas, unos 3 minutos. Al final obtienes un número de 0 a 100 que puedes repetir cada mes para ver si tu memoria se mantiene.</p>'
+    +'<div class="nota"><b>Para que el número sea comparable:</b><br>· Hazlo siempre a una hora parecida.<br>· Lugar tranquilo, sin ayuda y sin pausas.<br>· No anotes nada en papel.</div>'
+    +'<button class="btn oro" type="button" onclick="blPalabras()">Empezar</button>');
+}
+/* 1 · memorizar palabras (se preguntan al final) */
+function blPalabras(){
+  let t=30;
+  modal('Prueba 1 · Memoriza',blBarra(1)
+    +'<p>Memoriza estas 10 palabras. Te las preguntaremos <b>al final</b>, después de las otras pruebas.</p>'
+    +'<div class="big-num" id="bl-t">30</div>'
+    +'<div class="palabras">'+BL_PALABRAS.map(p=>'<div>'+p+'</div>').join('')+'</div>'
+    +'<button class="btn" type="button" onclick="blReaccionIntro()">Ya las memoricé</button>');
+  BL_TEST.iv=setInterval(()=>{
+    t--;const e=document.getElementById('bl-t');
+    if(!e||!BL_TEST){clearInterval(BL_TEST&&BL_TEST.iv);return}
+    e.textContent=t;if(t<=0)blReaccionIntro();
+  },1000);
+}
+/* 2 · tiempo de reacción */
+function blReaccionIntro(){
+  clearInterval(BL_TEST.iv);
+  modal('Prueba 2 · Reacción',blBarra(2)
+    +'<p>Cuando el recuadro se ponga <b style="color:var(--verde)">verde</b>, tócalo lo más rápido que puedas. Son 5 intentos. Si tocas antes de tiempo, ese intento se repite.</p>'
+    +'<div class="rt-zona" id="bl-zona">Toca aquí para empezar</div>'
+    +'<p class="mini" id="bl-rt-info">Intento 1 de 5</p>');
+  const z=document.getElementById('bl-zona');
+  z.addEventListener('pointerdown',blToque);
+  z.dataset.estado='inicio';
+}
+function blToque(e){
+  e.preventDefault();
+  const z=document.getElementById('bl-zona');if(!z||!BL_TEST)return;
+  const st=z.dataset.estado;
+  if(st==='inicio'||st==='pronto'||st==='hecho'){blEsperar();return}
+  if(st==='esperando'){
+    clearTimeout(BL_TEST.to);z.dataset.estado='pronto';z.className='rt-zona pronto';
+    z.textContent='Demasiado pronto. Toca para repetir.';return;
+  }
+  if(st==='ya'){
+    const ms=Math.round(performance.now()-BL_TEST.t0);
+    BL_TEST.rts.push(Math.min(ms,1500));
+    z.dataset.estado='hecho';z.className='rt-zona';
+    const n=BL_TEST.rts.length;
+    if(n>=5){z.textContent=ms+' ms';setTimeout(blDigitosIntro,700);return}
+    z.textContent=ms+' ms · toca para el siguiente';
+    document.getElementById('bl-rt-info').textContent='Intento '+(n+1)+' de 5';
+  }
+}
+function blEsperar(){
+  const z=document.getElementById('bl-zona');
+  z.dataset.estado='esperando';z.className='rt-zona';z.textContent='Espera el verde…';
+  BL_TEST.to=setTimeout(()=>{
+    const z2=document.getElementById('bl-zona');if(!z2||!BL_TEST)return;
+    z2.dataset.estado='ya';z2.className='rt-zona ya';z2.textContent='¡Toca!';
+    BL_TEST.t0=performance.now();
+  },1200+Math.random()*2300);
+}
+/* 3 · amplitud de dígitos */
+function blDigitosIntro(){
+  if(!BL_TEST)return;
+  modal('Prueba 3 · Números',blBarra(3)
+    +'<p>Verás una serie de números, uno por uno. Cuando termine, escríbela en el mismo orden. Cada acierto suma un número más.</p>'
+    +'<div class="digitos" id="bl-dig"></div>'
+    +'<div id="bl-dig-in"></div>'
+    +'<p class="mini" id="bl-dig-info"></p>');
+  setTimeout(blSerie,600);
+}
+function blSerie(){
+  if(!BL_TEST)return;
+  const L=BL_TEST.largo;let serie='',ult=-1;
+  while(serie.length<L){const d=Math.floor(Math.random()*10);if(d!==ult){serie+=d;ult=d}}
+  BL_TEST.serie=serie;
+  document.getElementById('bl-dig-in').innerHTML='';
+  document.getElementById('bl-dig-info').textContent=L+' números';
+  let i=0;const el=document.getElementById('bl-dig');
+  clearInterval(BL_TEST.iv);
+  BL_TEST.iv=setInterval(()=>{
+    const e=document.getElementById('bl-dig');if(!e||!BL_TEST){clearInterval(BL_TEST&&BL_TEST.iv);return}
+    if(i<serie.length){e.textContent=serie[i];i++;setTimeout(()=>{if(e.textContent===serie[i-1])e.textContent=''},750)}
+    else{clearInterval(BL_TEST.iv);blPedirSerie()}
+  },1000);
+  el.textContent='';
+}
+function blPedirSerie(){
+  document.getElementById('bl-dig-in').innerHTML='<input class="campo" id="bl-dig-r" type="text" inputmode="numeric" autocomplete="off" style="text-align:center;font-size:24px;font-weight:700;letter-spacing:6px" placeholder="···">'
+    +'<button class="btn oro" type="button" style="margin-top:12px" onclick="blRevisarSerie()">Confirmar</button>';
+  const i=document.getElementById('bl-dig-r');i.focus();
+  i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();blRevisarSerie()}});
+}
+function blRevisarSerie(){
+  if(!BL_TEST||!document.getElementById('bl-dig-r'))return;
+  const v=(document.getElementById('bl-dig-r').value||'').replace(/\D/g,'');
+  if(v===BL_TEST.serie){
+    BL_TEST.span=BL_TEST.largo;BL_TEST.falla=0;
+    if(BL_TEST.largo>=9){blRecuerdo();return}
+    BL_TEST.largo++;toast('¡Correcto!','verde');
+  }else{
+    BL_TEST.falla++;
+    if(BL_TEST.falla>=2){blRecuerdo();return}
+    toast('No era esa. Otra oportunidad con '+BL_TEST.largo+' números.');
+  }
+  document.getElementById('bl-dig-in').innerHTML='';
+  setTimeout(blSerie,900);
+}
+/* 4 · recuerdo diferido */
+function blRecuerdo(){
+  clearInterval(BL_TEST.iv);
+  modal('Prueba 4 · Recuerdo',blBarra(4)
+    +'<p>¿Qué palabras de la <b>prueba 1</b> recuerdas? Escríbelas separadas por coma.</p>'
+    +'<textarea class="campo" id="bl-rec" rows="3" placeholder="ventana, río, ..."></textarea>'
+    +'<button class="btn oro" type="button" style="margin-top:14px" onclick="blFin()">Ver mi resultado</button>');
+  setTimeout(()=>{const e=document.getElementById('bl-rec');if(e)e.focus()},250);
+}
+function blFin(){
+  const v=(document.getElementById('bl-rec').value||'').split(/[,\n;]+/).map(norm).filter(Boolean);
+  const rec=BL_PALABRAS.filter(p=>v.indexOf(norm(p))>-1).length;
+  const rts=BL_TEST.rts.slice().sort((a,b)=>a-b);
+  const rt=rts.length?rts[Math.floor(rts.length/2)]:1000;       // mediana: un despiste no arruina el resultado
+  const pRec=rec/10*40;
+  const pSpan=BL_TEST.span>=3?(BL_TEST.span-2)/7*30:0;
+  const pRt=Math.max(0,Math.min(30,(650-rt)/400*30));
+  const total=Math.round(pRec+pSpan+pRt);
+  const res={p:total,rec:rec,span:BL_TEST.span,rt:rt};
+  const cb=BL_TEST.cb;BL_TEST=null;
+  registrar('test',{test:'baseline'});
+  if(cb)cb(res);
+  const fila=(t,n,s)=>'<div class="res"><div class="rn">'+n+'</div><div class="rt"><b>'+t+'</b><span>'+s+'</span></div></div>';
+  modal('Tu baseline',blBarra(4)
+    +'<div class="big-num">'+total+'<span style="font-size:22px;color:var(--suave)">/100</span></div>'
+    +'<div class="card" style="padding:6px 18px;margin-top:10px">'
+    +fila('Memoria diferida',rec+'/10',Math.round(pRec)+' de 40 puntos')
+    +fila('Amplitud de dígitos',res.span||'—',Math.round(pSpan)+' de 30 puntos')
+    +fila('Tiempo de reacción',rt+'<span style="display:block;font-size:12px;line-height:1;color:var(--suave)">ms</span>',Math.round(pRt)+' de 30 puntos')
+    +'</div>'
+    +'<div class="nota"><b>Cómo usarlo:</b> este número es tu referencia personal, no un diagnóstico. Repite el test cada 30 días en las mismas condiciones. Una caída sostenida de más de 10 puntos en varias mediciones es motivo para conversar con tu médico.</div>'
+    +'<button class="btn" type="button" onclick="cerrarModal()">Guardar y cerrar</button>');
+}
 
 /* ==================================================================
    BLINDAJE NEURAL (Up2) — cadeado do módulo
@@ -1685,6 +2374,7 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&S.inicio&
       .catch(function(){return {ok:false, motivo:'red'};});
   }
 
+  var abierto = false;
   function abrir(html){
     caja.innerHTML = html;
     vCerrado.hidden = true;
@@ -1692,6 +2382,7 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&S.inicio&
     if (btnNav) btnNav.classList.add('bn-abierto');
     montarInterativos();
     pintarAvance();
+    if (!abierto){ abierto = true; registrar('desbloqueo',{producto:PRODUTO}); }
   }
 
   botao.addEventListener('click', function(){
@@ -1744,41 +2435,45 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&S.inicio&
     box.innerHTML = meds.slice().reverse().map(function(m){
       var d = new Date(m.t);
       var f = d.toLocaleDateString('es',{day:'2-digit',month:'short',year:'numeric'});
-      return '<div class="bn-med"><time>'+f+'</time><b>'+m.p+' <small>/100</small></b></div>';
+      return '<div class="bn-med"><time>'+f+'</time><b>'+(parseInt(m.p,10)||0)+' <small>/100</small></b></div>';
     }).join('');
   }
 
+  /* test real (blIniciar, arriba): guarda el puntaje y el detalle de cada prueba */
   function iniciarBaseline(){
-    var meds = leer(LS_MEDS);
-    var ok = confirm('El test dura 3 minutos y no se puede pausar. ¿Empiezas ahora?');
-    if (!ok) return;
-    var puntaje = Math.floor(60 + Math.random()*35);   /* placeholder — troca por lógica real do teste depois */
-    meds.push({ t:Date.now(), p:puntaje });
-    guardar(LS_MEDS, meds);
-    pintarHistorial();
-    alert('Baseline registrado: '+puntaje+' / 100. Repite el día 30 y compara.');
+    blIniciar(function(res){
+      var meds = leer(LS_MEDS);
+      meds.push({ t:Date.now(), p:res.p, rec:res.rec, span:res.span, rt:res.rt });
+      guardar(LS_MEDS, meds);
+      pintarHistorial();
+    });
   }
 
+  /* lectura de capítulos: solo cuenta si la pestaña Blindaje está visible
+     (antes, con la pestaña oculta, todos los capítulos se marcaban como leídos) */
+  function marcarQuePassou(){
+    if (!vista.classList.contains('on') || vAbierto.hidden) return;
+    var gatilho = window.innerHeight * 0.35;
+    caja.querySelectorAll('section[data-cap]').forEach(function(c){
+      var r = c.getBoundingClientRect();
+      if (r.top < gatilho && r.bottom > 0) {
+        var n = parseInt(c.dataset.cap, 10);
+        if (n) marcarCap(n);
+      }
+    });
+  }
+  var montado = false;
   function montarInterativos(){
-    /* botão do baseline */
-    var b = document.getElementById('bn-empezar-test');
-    if (b) b.addEventListener('click', iniciarBaseline);
-
-    /* observar leitura dos capítulos */
-    var caps = caja.querySelectorAll('section[data-cap]');
-    function marcarQuePassou(){
-      var gatilho = window.innerHeight * 0.35;
-      caps.forEach(function(c){
-        var r = c.getBoundingClientRect();
-        if (r.top < gatilho) {
-          var n = parseInt(c.dataset.cap, 10);
-          if (n) marcarCap(n);
-        }
+    if (!montado){
+      montado = true;
+      /* delegación: sigue funcionando aunque el contenido se vuelva a cargar */
+      caja.addEventListener('click', function(e){
+        if (e.target.closest && e.target.closest('#bn-empezar-test')) { e.preventDefault(); iniciarBaseline(); }
       });
+      window.addEventListener('scroll', marcarQuePassou, {passive:true});
+      if (btnNav) btnNav.addEventListener('click', function(){ setTimeout(marcarQuePassou, 350); });
     }
     marcarQuePassou();
-    window.addEventListener('scroll', marcarQuePassou, {passive:true});
-
     pintarHistorial();
   }
 
@@ -1789,11 +2484,18 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&S.inicio&
     if (e) return e;
     try{ return localStorage.getItem(LS_CORREO)||''; }catch(err){ return ''; }
   }
-  var yaC = correoConocido();
-  if (yaC){
-    if (campo) campo.value = yaC;
-    pedir(yaC).then(function(r){ if (r && r.ok) abrir(r.html); });
-  }
+  /* comprueba en silencio si un correo tiene el módulo (al cargar y tras el onboarding) */
+  window.bnVerificar = function(c){
+    if (abierto || !c) return;
+    if (campo && !campo.value) campo.value = c;
+    pedir(c).then(function(r){
+      if (r && r.ok){
+        try{ localStorage.setItem(LS_CORREO, c); }catch(e){}
+        abrir(r.html);
+      }
+    });
+  };
+  window.bnVerificar(correoConocido() || (S && S.correo) || '');
 })();
 
 /* ==================================================================
@@ -1929,14 +2631,13 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&S.inicio&
   $id('sp-refrescar').addEventListener('click', function(){ cargar(false); });
 
   /* pré-preenche com o que o app já sabe */
-  var correoBn = ls('bn-correo');
+  var correoBn = ls('bn-correo') || (typeof S!=='undefined' && S.correo) || '';
   if (correoBn && !$id('sp-email').value) $id('sp-email').value = correoBn;
   if (ls(LS_NOMBRE)) $id('sp-nombre').value = ls(LS_NOMBRE);
   if (ls(LS_WA))     $id('sp-whatsapp').value = ls(LS_WA);
 
-  /* recarrega a conversa ao entrar na aba */
-  var btnNavSp = document.querySelector('.nav button[data-v="soporte"]');
-  if (btnNavSp) btnNavSp.addEventListener('click', function(){ cargar(true); });
+  /* recarrega a conversa ao entrar na aba (chamado por ir('soporte')) */
+  window.spCargar = cargar;
   cargar(true);
 })();
 
