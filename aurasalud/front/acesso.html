@@ -520,6 +520,7 @@ select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:i
 .vip h3{color:#fff;font-size:20px}
 .vip-tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin-bottom:3px}
 .vip-tag.activo{color:#8be0b6}
+.vip-con{display:block;font-size:13.5px;color:#a9c6d3;margin-top:2px}
 .vip-lista{list-style:none;padding:0;margin:0 0 16px}
 .vip-lista li{position:relative;padding:7px 0 7px 24px;font-size:14.5px;line-height:1.45;border-bottom:1px solid rgba(255,255,255,.08)}
 .vip-lista li:last-child{border-bottom:none}
@@ -878,7 +879,7 @@ select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:i
         <li>Los 7 signos que tu familia ve antes que tú</li>
         <li>Protocolo de emergencia · qué hacer en las primeras 72 horas</li>
         <li>Los 4 hábitos diarios con evidencia real (no crucigramas)</li>
-        <li>Acceso a la Comunidad VIP NeuroHoney en WhatsApp: un desafío nuevo cada semana</li>
+        <li>Acceso a la Comunidad VIP NeuroHoney en WhatsApp: cada semana, un desafío nuevo de Ruth Barbosa</li>
       </ul>
 
       <div class="bn-precio">
@@ -940,13 +941,14 @@ select.campo{appearance:none;-webkit-appearance:none;background:#fff url("data:i
       <div style="min-width:0">
         <span class="vip-tag" id="vip-tag">Exclusivo Blindaje Neural</span>
         <h3>Comunidad VIP NeuroHoney</h3>
+        <span class="vip-con">con Ruth Barbosa</span>
       </div>
     </div>
     <ul class="vip-lista">
       <li>Cada lunes, el desafío de la semana con tus juegos</li>
       <li>Una técnica de memoria nueva para usar en tu día</li>
       <li>El recordatorio de tu test mensual</li>
-      <li>Solo publica nuestro equipo: tu número no lo ven los demás</li>
+      <li>Solo publican Ruth y su equipo: nada de spam ni cadenas</li>
     </ul>
     <div id="vip-accion"></div>
   </div>
@@ -2487,7 +2489,7 @@ function pintarVip(){
     acc.innerHTML=VIP.url
       ?'<a class="btn oro" id="vip-link" href="'+esc(VIP.url)+'" target="_blank" rel="noopener">'
         +'<svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-5A8.5 8.5 0 1 1 21 11.5z"/></svg>Entrar a la Comunidad VIP</a>'
-        +'<p class="vip-nota">Se abre WhatsApp. Si te pide aprobación, la confirmamos en pocas horas.</p>'
+        +'<p class="vip-nota">Se abre WhatsApp. Es un grupo: los demás miembros pueden ver tu número de teléfono. Si te pide aprobación, la confirmamos en pocas horas.</p>'
       :'<p class="vip-nota">Tu acceso está confirmado. Estamos preparando el enlace del grupo: escríbenos abajo con el asunto <b>"Comunidad VIP"</b> y te lo enviamos.</p>';
     const l=document.getElementById('vip-link');if(l)l.addEventListener('click',()=>registrar('comunidad'));
     return;

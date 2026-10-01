@@ -106,12 +106,12 @@ ol.passos b{color:var(--ink)}
   <header>
     <span class="eyebrow">AuraSalud · Blindaje Neural</span>
     <h1>Comunidad VIP NeuroHoney</h1>
-    <p>O post de cada semana pronto para colar no grupo de avisos da comunidade. Toda segunda-feira: abra este painel, copie, cole e marque como postado. Leva dois minutos.</p>
+    <p>O post de cada semana, assinado pela Ruth Barbosa, pronto para colar no grupo VIP. Toda segunda-feira: abra este painel, copie, cole e marque como postado. Leva dois minutos.</p>
   </header>
 
   <div class="ajustes">
     <div class="campo">
-      <label for="cfg-inicio">Início da comunidade</label>
+      <label for="cfg-inicio">Início do grupo</label>
       <input type="date" id="cfg-inicio">
       <small>A segunda-feira da semana 1.</small>
     </div>
@@ -129,7 +129,7 @@ ol.passos b{color:var(--ink)}
     </div>
     <p class="meta-sem" id="atual-meta"></p>
     <div class="chat">
-      <span class="grupo">Comunidad VIP NeuroHoney · Avisos</span>
+      <span class="grupo">VIP NeuroHoney · Ruth Barbosa</span>
       <div class="bolha" id="atual-bolha"></div>
     </div>
     <div class="acoes">
@@ -150,22 +150,24 @@ ol.passos b{color:var(--ink)}
     <h2 class="sec" id="kit-tit">Kit de criação</h2>
 
     <details class="bloco" open>
-      <summary><span>Criar a comunidade (uma vez só)<small>10 minutos, pelo celular com o WhatsApp Business</small></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <summary><span>Configurar o grupo (uma vez só)<small>5 minutos, no WhatsApp Business do número da Vivo</small></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
       <div class="bloco-c">
         <ol class="passos">
-          <li>Use um <b>número só do suporte</b>, não o pessoal. Se um dia trocar de pessoa no atendimento, a comunidade continua.</li>
-          <li>No WhatsApp: aba <b>Comunidades → Nova comunidade</b>. Nome: <b>Comunidad VIP NeuroHoney</b>. Cole a descrição abaixo.</li>
-          <li>Em <b>Configurações da comunidade</b>: ative <b>Aprovar novos membros</b>. Assim, se o link vazar, só entra quem você aprovar.</li>
-          <li>O grupo <b>Avisos</b> já vem só para administradores postarem. Não crie outros grupos dentro da comunidade: é isso que mantém os números dos clientes ocultos entre eles e evita reclamações em público.</li>
-          <li>Em <b>Convidar membros → Link de convite</b>, copie o link (<code>https://chat.whatsapp.com/…</code>).</li>
+          <li>Nome do grupo: <b>VIP NeuroHoney · Ruth Barbosa</b>. Foto: a da Ruth ou o logo NeuroHoney. Cole a descrição abaixo.</li>
+          <li>Em <b>Configurações do grupo → Enviar mensagens</b>: <b>somente admins</b>. Sem isso, qualquer cliente escreve para todos, inclusive reclamações.</li>
+          <li>Em <b>Editar configurações do grupo</b>: <b>somente admins</b>.</li>
+          <li>Ative <b>Aprovar novos membros</b>. Assim, se o link circular, só entra quem você aprovar.</li>
+          <li>Adicione um <b>segundo administrador</b> (outro número seu ou da equipe). Se o eSIM tiver problema, o grupo não fica sem dono.</li>
+          <li>Ative a <b>verificação em duas etapas</b> no WhatsApp e mantenha a linha Vivo com recarga: linha cancelada é grupo perdido.</li>
+          <li>Num grupo, <b>os membros veem o número uns dos outros</b>. O app e a mensagem de boas-vindas já avisam isso ao cliente; não prometa privacidade em outros textos.</li>
           <li>No seu servidor, no <code>desbloquear.php</code>, inclua esse link na resposta de quem comprou o Blindaje: <code>"comunidad": "https://chat.whatsapp.com/BoeRQdsuTgx4qbwi6DTE3e"</code>. Na aba <b>Soporte</b> do app, o botão <b>Entrar a la Comunidad VIP</b> passa a aparecer só para compradores; quem não comprou vê o grupo bloqueado com o convite para conhecer o Blindaje.</li>
-          <li>Poste a <b>mensagem de boas-vindas</b> e fixe-a no grupo de avisos.</li>
+          <li>Poste a <b>mensagem de boas-vindas</b> e fixe-a no grupo.</li>
         </ol>
       </div>
     </details>
 
     <details class="bloco">
-      <summary><span>Descrição da comunidade<small>Campo "Descrição" ao criar</small></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <summary><span>Descrição do grupo<small>Campo "Descrição" do grupo</small></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
       <div class="bloco-c"><div class="texto" id="t-desc"></div><button class="btn" type="button" data-copiar="t-desc">Copiar descrição</button></div>
     </details>
 
@@ -183,13 +185,14 @@ ol.passos b{color:var(--ink)}
     </details>
 
     <details class="bloco">
-      <summary><span>Regras de ouro do conteúdo<small>Para a comunidade proteger a venda, não colocá-la em risco</small></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <summary><span>Regras de ouro do conteúdo<small>Para o grupo proteger a venda, não colocá-la em risco</small></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
       <div class="bloco-c">
         <ol class="passos">
           <li><b>Nada de promessa de cura</b> ("previne Alzheimer", "regenera neurônios"). É o que mais gera denúncia, bloqueio de anúncio e pedido de reembolso.</li>
           <li><b>Todo post leva de volta ao app</b> (um jogo, o teste, uma lição). Cliente que usa o produto não pede chargeback.</li>
-          <li><b>Dúvida individual vai para o Suporte do app</b>, nunca para a comunidade. Os posts já terminam lembrando disso.</li>
-          <li><b>No máximo 1 ou 2 posts por semana.</b> Mais que isso, as pessoas silenciam a comunidade.</li>
+          <li><b>Dúvida individual vai para o Suporte do app</b>, nunca para o grupo. Os posts já terminam lembrando disso.</li>
+          <li><b>No máximo 1 ou 2 posts por semana.</b> Mais que isso, as pessoas silenciam o grupo.</li>
+          <li><b>A Ruth fala de hábitos, não receita.</b> Não use título que ela não tem ("Dra.", "neurocientista") e não responda dúvidas de saúde individuais no grupo.</li>
         </ol>
       </div>
     </details>
@@ -201,21 +204,21 @@ ol.passos b{color:var(--ink)}
    CONTEÚDO — espanhol, formatação do WhatsApp (*negrito*, _itálico_)
    {app} é trocado pelo link do app (ou a linha é removida se vazio)
 ================================================================== */
-const DESCRIPCION=`Comunidad VIP exclusiva para quienes tienen el Protocolo Blindaje Neural de NeuroHoney.
+const DESCRIPCION=`Comunidad VIP NeuroHoney de Ruth Barbosa, exclusiva para quienes tienen el Protocolo Blindaje Neural.
 
 Cada lunes: el desafío de la semana, una técnica de memoria y el recordatorio de tu test mensual.
 
-Solo publica el equipo de AuraSalud. Tus datos y tu número no son visibles para los demás miembros.
+Solo publican Ruth y su equipo. Al ser un grupo de WhatsApp, los demás miembros pueden ver tu número: no compartas aquí datos personales ni de salud.
 
 ¿Dudas personales? Escríbenos desde la pestaña *Soporte* de tu app. Respondemos en menos de 24 horas.
 
 Contenido informativo y de hábitos. No sustituye la consulta médica.`;
 
-const BIENVENIDA=`👋 *¡Bienvenida, bienvenido a la Comunidad VIP NeuroHoney!*
+const BIENVENIDA=`👋 *¡Hola! Soy Ruth Barbosa y te doy la bienvenida a la Comunidad VIP NeuroHoney.*
 
-Aquí no hay ruido: solo publicamos nosotros, *una vez por semana, los lunes*.
+Aquí no hay ruido: solo publicamos mi equipo y yo, *una vez por semana, los lunes*.
 
-Cada semana vas a encontrar:
+Cada semana te traigo:
 ✅ Un *desafío* con los juegos de tu app
 ✅ Una *técnica* de memoria para usar en tu día
 ✅ El *recordatorio* de tu test mensual cuando toque
@@ -223,13 +226,19 @@ Cada semana vas a encontrar:
 📌 *Para empezar hoy:* abre tu app → pestaña *Blindaje* → haz tu *test baseline* (3 minutos). Ese número es tu punto de partida.
 {app}
 
-🔒 Tu número no lo ven los demás miembros.
-📱 Este es el número oficial del equipo NeuroHoney (+55). Guárdalo para reconocer nuestros avisos.
-💬 ¿Una duda personal? Escríbenos en la pestaña *Soporte* de tu app.
+📱 Este es el número oficial de NeuroHoney (+55, Brasil). Guárdalo para reconocer nuestros avisos.
+👥 Es un grupo de WhatsApp: los demás miembros pueden ver tu número. Tus dudas personales y de salud, mejor por la pestaña *Soporte* de tu app: allí te respondemos en privado.
+
+Nos vemos el lunes. 💛
+— Ruth
 
 _Contenido informativo y de hábitos. No sustituye la consulta médica._`;
 
 const PIE=`
+
+Un abrazo,
+*Ruth Barbosa*
+
 💬 ¿Dudas? Escríbenos en la pestaña *Soporte* de tu app.`;
 
 const SEMANAS=[
@@ -471,7 +480,7 @@ $('cfg-inicio').value=E.inicio;
 $('cfg-app').value=E.app;
 $('cfg-inicio').addEventListener('change',e=>{if(e.target.value){E.inicio=iso(segundaDe(new Date(e.target.value+'T12:00')));e.target.value=E.inicio;E.sel=null;salvar();pintar()}});
 $('cfg-app').addEventListener('input',e=>{E.app=e.target.value;salvar();pintar();pintarKit()});
-$('b-copiar').addEventListener('click',()=>{const abs=E.sel==null?semanaAtual():E.sel;copiar(textoDe(abs%12),'Copiado. Cole no grupo Avisos da comunidade.')});
+$('b-copiar').addEventListener('click',()=>{const abs=E.sel==null?semanaAtual():E.sel;copiar(textoDe(abs%12),'Copiado. Cole no grupo VIP.')});
 $('b-marcar').addEventListener('click',()=>{
   const abs=E.sel==null?semanaAtual():E.sel,k=chavePost(abs);
   if(E.postado[k])delete E.postado[k];else E.postado[k]=curta(new Date());
@@ -488,7 +497,7 @@ function pintarKit(){
   const ini=new Date(E.inicio+'T09:00'),fim=new Date(E.inicio+'T09:15');
   const f=d=>d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'T'+String(d.getHours()).padStart(2,'0')+String(d.getMinutes()).padStart(2,'0')+'00';
   $('b-agenda').href='https://calendar.google.com/calendar/render?action=TEMPLATE'
-    +'&text='+encodeURIComponent('Postar na Comunidad VIP NeuroHoney')
+    +'&text='+encodeURIComponent('Postar no grupo VIP NeuroHoney')
     +'&dates='+f(ini)+'/'+f(fim)
     +'&recur='+encodeURIComponent('RRULE:FREQ=WEEKLY;BYDAY=MO')
     +'&details='+encodeURIComponent('Abrir o painel, copiar o post da semana, colar no grupo Avisos e marcar como postado.');
