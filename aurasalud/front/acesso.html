@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#1a3a4a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="robots" content="noindex, nofollow">
+<title>Protocolo de Memoria Blindada — AuraSalud</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --tinta:#1a3a4a; --tinta2:#24505f; --oro:#e8b44d; --oro-d:#b8862a;
+  --texto:#3d5a6a; --suave:#6b8a9a; --fondo:#f1f5f8; --card:#ffffff;
+  --borde:#e2ecf1; --verde:#2f9e6f; --verde-l:#e7f5ee; --rojo:#c9553d;
+  --amb:#fdf8ec; --sombra:0 1px 3px rgba(26,58,74,.06), 0 6px 20px rgba(26,58,74,.05);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  font-family:'Source Sans Pro',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--fondo); color:var(--texto); line-height:1.55; font-size:16px;
+  padding-bottom:calc(80px + env(safe-area-inset-bottom));
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:'Playfair Display',Georgia,serif;color:var(--tinta);margin:0;line-height:1.2}
+p{margin:0 0 14px}
+button{font-family:inherit;font-size:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea{font-family:inherit;font-size:16px}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+
+/* ---------- TOPBAR ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;background:var(--tinta);color:#fff;
+  padding:calc(12px + env(safe-area-inset-top)) 0 12px;
+}
+.topbar .wrap{display:flex;align-items:center;gap:12px}
+.marca{font-size:11px;letter-spacing:2.6px;text-transform:uppercase;color:var(--oro);font-weight:700;line-height:1}
+.tit-top{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff;line-height:1.2;margin-top:3px}
+.chip-dia{
+  margin-left:auto;background:rgba(232,180,77,.15);border:1px solid rgba(232,180,77,.45);
+  color:var(--oro);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:700;white-space:nowrap;
+}
+.ico-btn{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ico-btn svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- VISTAS ---------- */
+.vista{display:none;padding:20px 0 30px;animation:sube .28s ease both}
+.vista.on{display:block}
+@keyframes sube{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.cap{font-size:11px;letter-spacing:2.4px;text-transform:uppercase;color:var(--oro-d);font-weight:700;margin-bottom:6px}
+.h-vista{font-size:26px;margin-bottom:6px}
+.sub-vista{font-size:15px;color:var(--suave);margin-bottom:20px}
+
+/* ---------- CARDS ---------- */
+.card{background:var(--card);border-radius:16px;box-shadow:var(--sombra);padding:18px;margin-bottom:14px}
+.card.plana{padding:0;overflow:hidden}
+.card-h{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.card-h h3{font-size:18px;flex:1}
+.tag{display:inline-block;background:#eef4f7;border:1px solid var(--borde);border-radius:999px;padding:3px 11px;font-size:12px;font-weight:700;color:var(--suave);white-space:nowrap}
+.tag.oro{background:var(--amb);border-color:#f0d9a5;color:var(--oro-d)}
+.tag.verde{background:var(--verde-l);border-color:#bde6d1;color:var(--verde)}
+
+/* ---------- HERO / ANILLO ---------- */
+.hero{background:linear-gradient(160deg,var(--tinta) 0%,var(--tinta2) 100%);color:#fff;border-radius:20px;padding:22px;margin-bottom:16px;box-shadow:0 10px 30px rgba(26,58,74,.18)}
+.hero-fila{display:flex;align-items:center;gap:18px}
+.anillo{position:relative;width:104px;height:104px;flex-shrink:0}
+.anillo svg{transform:rotate(-90deg);width:104px;height:104px}
+.anillo .val{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.anillo .n{font-family:'Playfair Display',serif;font-size:32px;font-weight:800;color:#fff;line-height:1}
+.anillo .l{font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#a9c6d3;margin-top:2px}
+.hero h2{color:#fff;font-size:22px;margin-bottom:4px}
+.hero p{color:#b9d0dc;font-size:14.5px;margin:0}
+.hero-stats{display:flex;gap:8px;margin-top:16px}
+.hs{flex:1;background:rgba(255,255,255,.09);border-radius:12px;padding:10px 8px;text-align:center}
+.hs b{display:block;font-family:'Playfair Display',serif;font-size:21px;color:var(--oro);line-height:1.1}
+.hs span{font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;color:#a9c6d3}
+
+/* ---------- CHECKLIST ---------- */
+.tarea{display:flex;align-items:flex-start;gap:13px;padding:14px 16px;border-bottom:1px solid var(--borde);transition:background .18s}
+.tarea:last-child{border-bottom:none}
+.tarea:active{background:#f7fafb}
+.tk{
+  flex-shrink:0;width:26px;height:26px;border-radius:50%;border:2px solid #cfdde5;background:#fff;
+  display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all .2s
+}
+.tk svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0;transform:scale(.5);transition:all .2s}
+.tarea.hecha .tk{background:var(--verde);border-color:var(--verde)}
+.tarea.hecha .tk svg{opacity:1;transform:scale(1)}
+.tarea-txt{flex:1;min-width:0}
+.tarea-txt b{display:block;font-size:16px;color:var(--tinta);font-weight:700;line-height:1.3}
+.tarea.hecha .tarea-txt b{color:var(--suave);text-decoration:line-through}
+.tarea-txt span{display:block;font-size:13.5px;color:var(--suave);margin-top:2px}
+.tarea .ir{flex-shrink:0;align-self:center;padding:4px}
+.tarea .ir svg{width:18px;height:18px;stroke:#b6c9d4;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- ESCALA 1-5 ---------- */
+.escala{display:flex;gap:6px;margin-top:8px}
+.escala button{
+  flex:1;height:44px;border-radius:11px;border:1.5px solid var(--borde);background:#fff;
+  font-weight:700;font-size:16px;color:var(--suave);transition:all .16s
+}
+.escala button.sel{background:var(--tinta);border-color:var(--tinta);color:#fff;transform:scale(1.04)}
+.escala-lbl{display:flex;justify-content:space-between;font-size:11.5px;color:#9db3bf;margin-top:5px}
+.campo{width:100%;border:1.5px solid var(--borde);border-radius:12px;padding:11px 13px;color:var(--texto);background:#fff;outline:none;resize:vertical}
+.campo:focus{border-color:var(--oro)}
+label.et{display:block;font-size:13px;font-weight:700;color:var(--tinta);text-transform:uppercase;letter-spacing:1.1px;margin:16px 0 4px}
+
+/* ---------- BOTONES ---------- */
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--tinta);color:#fff;border-radius:13px;padding:15px;font-weight:700;font-size:16px;transition:transform .12s,opacity .12s}
+.btn:active{transform:scale(.98)}
+.btn.oro{background:var(--oro);color:#4a3a10}
+.btn.linea{background:#fff;color:var(--tinta);border:1.5px solid var(--borde)}
+.btn.chico{padding:11px;font-size:14.5px;border-radius:11px}
+.btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.btns{display:flex;gap:9px}
+
+/* ---------- ACORDEÓN ---------- */
+.acc{background:var(--card);border-radius:14px;box-shadow:var(--sombra);margin-bottom:10px;overflow:hidden}
+.acc>summary{list-style:none;padding:15px 17px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.acc>summary::-webkit-details-marker{display:none}
+.acc summary .n{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--oro);flex-shrink:0;width:26px}
+.acc summary .t{flex:1;font-weight:700;color:var(--tinta);font-size:16px;line-height:1.3}
+.acc summary .t small{display:block;font-weight:400;font-size:13px;color:var(--suave);margin-top:1px}
+.acc summary .fl{flex-shrink:0;transition:transform .25s}
+.acc summary .fl svg{width:16px;height:16px;stroke:#b6c9d4;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.acc[open] summary .fl{transform:rotate(180deg)}
+.acc .cuerpo{padding:2px 17px 17px;border-top:1px solid var(--borde);margin-top:-1px;padding-top:15px}
+.acc .cuerpo p{font-size:15.5px}
+
+/* ---------- CAJAS INFO ---------- */
+.porque{background:var(--amb);border-left:3px solid var(--oro);border-radius:0 10px 10px 0;padding:12px 15px;margin:12px 0;font-size:14.5px;color:#6d5a2c;line-height:1.5}
+.porque b{color:#8a6100}
+.aviso{background:#fff6e5;border:1px solid #f0d27a;border-radius:11px;padding:13px 15px;margin:12px 0;font-size:14.5px;color:#7a5900;line-height:1.5}
+.aviso b{color:#8a6100}
+.nota{background:#eef4f7;border-radius:11px;padding:14px 16px;margin:14px 0;font-size:15px}
+.h4b{font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--suave);font-weight:700;margin:16px 0 7px;font-family:'Source Sans Pro',sans-serif}
+
+/* ---------- LISTAS ---------- */
+ul.pasos{margin:0 0 6px;padding-left:19px}
+ul.pasos li{margin-bottom:7px;font-size:15.5px}
+ol.pasos{margin:0 0 6px;padding-left:19px}
+ol.pasos li{margin-bottom:9px;font-size:15.5px}
+.ing{display:flex;align-items:flex-start;gap:11px;padding:9px 0;border-bottom:1px solid #f0f5f7;font-size:15.5px}
+.ing:last-child{border-bottom:none}
+.ing .bx{flex-shrink:0;width:21px;height:21px;border-radius:6px;border:2px solid #cfdde5;background:#fff;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .18s}
+.ing .bx svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+.ing.ok .bx{background:var(--verde);border-color:var(--verde)}
+.ing.ok .bx svg{opacity:1}
+.ing.ok span{color:#a8bcc7;text-decoration:line-through}
+
+/* ---------- CRONÓMETRO ---------- */
+.crono-btn{display:inline-flex;align-items:center;gap:7px;background:var(--verde-l);border:1px solid #bde6d1;color:var(--verde);border-radius:999px;padding:7px 14px;font-size:13.5px;font-weight:700;margin:4px 6px 4px 0}
+.crono-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.pill-crono{
+  position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom));
+  background:var(--tinta);color:#fff;border-radius:999px;padding:11px 20px;display:none;align-items:center;gap:11px;
+  z-index:70;box-shadow:0 8px 24px rgba(26,58,74,.3);font-weight:700;font-size:15px;white-space:nowrap;max-width:92vw
+}
+.pill-crono.on{display:flex}
+.pill-crono .lb{font-size:12px;color:#a9c6d3;font-weight:400;overflow:hidden;text-overflow:ellipsis;max-width:36vw}
+.pill-crono .x{opacity:.6;padding:0 2px}
+.reloj{font-family:'Playfair Display',serif;font-size:60px;font-weight:800;color:var(--tinta);text-align:center;line-height:1;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+
+/* ---------- TABLAS ---------- */
+.tabla{width:100%;border-collapse:collapse;font-size:14.5px}
+.tabla th{background:var(--tinta);color:#fff;text-align:left;padding:10px 12px;font-weight:600;font-size:12.5px;letter-spacing:.4px}
+.tabla td{padding:10px 12px;border-bottom:1px solid var(--borde);vertical-align:top}
+.tabla tr:nth-child(even) td{background:#f8fbfc}
+.scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px}
+
+/* ---------- PROGRESO ---------- */
+.puntos{display:grid;grid-template-columns:repeat(7,1fr);gap:9px;margin:6px 0 4px}
+.pt{aspect-ratio:1;border-radius:11px;background:#e8eff3;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;color:#a3b8c4;position:relative}
+.pt.p25{background:#d8ecdf;color:#5f9d7c}
+.pt.p50{background:#b5ddc6;color:#3d8a63}
+.pt.p75{background:#7fc9a3;color:#fff}
+.pt.p100{background:var(--verde);color:#fff}
+.pt.hoy{box-shadow:0 0 0 2.5px var(--oro)}
+.leyenda{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:12px;font-size:13px}
+.leyenda i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+/* ---------- MODAL ---------- */
+.modal{position:fixed;inset:0;z-index:200;display:none}
+.modal.on{display:block}
+.modal .velo{position:absolute;inset:0;background:rgba(16,38,49,.55);backdrop-filter:blur(3px);animation:fade .2s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.modal .hoja{
+  position:absolute;left:0;right:0;bottom:0;max-height:93vh;background:var(--fondo);
+  border-radius:22px 22px 0 0;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  animation:sale .3s cubic-bezier(.2,.8,.3,1) both;padding-bottom:calc(26px + env(safe-area-inset-bottom))
+}
+@keyframes sale{from{transform:translateY(100%)}to{transform:none}}
+.modal .barra{position:sticky;top:0;background:var(--fondo);padding:14px 18px 10px;display:flex;align-items:center;gap:12px;z-index:5;border-bottom:1px solid var(--borde)}
+.modal .barra h3{flex:1;font-size:19px;line-height:1.25}
+.modal .cerrar{width:34px;height:34px;border-radius:50%;background:#e4edf2;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.modal .cerrar svg{width:16px;height:16px;stroke:var(--suave);fill:none;stroke-width:2.6;stroke-linecap:round}
+.modal .cont{padding:18px}
+@media(min-width:680px){
+  .modal .hoja{max-width:600px;margin:0 auto;border-radius:22px;top:50%;bottom:auto;transform:translateY(-50%);max-height:88vh}
+  @keyframes sale{from{opacity:0;transform:translateY(-46%)}to{opacity:1;transform:translateY(-50%)}}
+}
+
+/* ---------- NAV ---------- */
+.nav{
+  position:fixed;left:0;right:0;bottom:0;z-index:80;background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);border-top:1px solid var(--borde);
+  display:flex;padding:7px 4px calc(7px + env(safe-area-inset-bottom))
+}
+.nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px 2px;color:#9db3bf;transition:color .18s}
+.nav button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.nav button span{font-size:10.5px;font-weight:700;letter-spacing:.2px}
+.nav button.on{color:var(--tinta)}
+.nav button.on svg{stroke-width:2.3}
+.nav .badge{position:absolute;top:2px;margin-left:20px;width:8px;height:8px;border-radius:50%;background:var(--oro)}
+
+/* ---------- ONBOARDING ---------- */
+.onb{position:fixed;inset:0;z-index:300;background:var(--tinta);color:#fff;display:none;flex-direction:column;justify-content:center;padding:32px 24px calc(32px + env(safe-area-inset-bottom));overflow-y:auto}
+.onb.on{display:flex}
+.onb .inner{max-width:420px;margin:0 auto;width:100%}
+.onb .marca{margin-bottom:22px}
+.onb h1{color:#fff;font-size:34px;margin-bottom:14px;line-height:1.12}
+.onb p{color:#b9d0dc;font-size:16px}
+.onb .linea{width:60px;height:3px;background:var(--oro);margin:22px 0}
+.onb input[type=date]{width:100%;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.22);color:#fff;border-radius:12px;padding:13px;margin-bottom:12px}
+
+/* ---------- TEST ---------- */
+.palabras{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:18px 0}
+.palabras div{background:#fff;border:1.5px solid var(--borde);border-radius:12px;padding:15px 8px;text-align:center;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--tinta)}
+.big-num{font-family:'Playfair Display',serif;font-size:46px;font-weight:800;color:var(--tinta);text-align:center;font-variant-numeric:tabular-nums}
+.progreso-test{height:5px;background:var(--borde);border-radius:99px;overflow:hidden;margin-bottom:18px}
+.progreso-test i{display:block;height:100%;background:var(--oro);transition:width .3s}
+.res{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--borde)}
+.res:last-child{border-bottom:none}
+.res .rn{font-family:'Playfair Display',serif;font-size:27px;font-weight:800;color:var(--tinta);width:64px;text-align:center;flex-shrink:0}
+.res .rt b{display:block;color:var(--tinta);font-size:15.5px}
+.res .rt span{font-size:13.5px;color:var(--suave)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.chips span{background:#eef4f7;border:1px solid var(--borde);border-radius:8px;padding:5px 11px;font-size:14px;font-weight:600}
+.chips span.ok{background:var(--verde-l);border-color:#bde6d1;color:var(--verde)}
+.chips span.no{background:#fdeeea;border-color:#f2c4b8;color:var(--rojo)}
+.serie{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:14px 0}
+.serie span{background:var(--verde-l);color:var(--verde);border-radius:8px;padding:4px 10px;font-weight:700;font-size:15px}
+.mini{font-size:13px;color:var(--suave);text-align:center;margin-top:8px}
+.legal{border-top:1px solid var(--borde);margin-top:26px;padding-top:18px;font-size:12.5px;color:#8fa3ae;line-height:1.55}
+.legal p{font-size:12.5px;margin:0 0 9px}
+
+/* ==================================================================
+   BLINDAJE NEURAL — módulo pago (Up2)
+   ================================================================== */
+.bn-cerrojo{
+  background:linear-gradient(160deg,#1a3a4a,#24505f);
+  color:#fff;border-radius:20px;padding:26px 22px 24px;
+  margin-bottom:18px;box-shadow:var(--sombra);
+}
+.bn-cerrojo .bn-escudo-c{
+  width:56px;height:56px;border-radius:14px;background:rgba(232,180,77,.18);
+  color:var(--oro);display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+}
+.bn-cerrojo .bn-escudo-c svg{width:30px;height:30px;stroke-width:1.7}
+.bn-cerrojo h2{
+  font-family:'Playfair Display',serif;font-size:24px;color:#fff;line-height:1.15;margin-bottom:10px;
+}
+.bn-cerrojo h2 em{font-style:italic;color:var(--oro);font-weight:400}
+.bn-cerrojo p.bn-lead{color:#c8dae4;font-size:15px;margin-bottom:16px;line-height:1.5}
+.bn-cerrojo .bn-lista{list-style:none;padding:0;margin:0 0 20px}
+.bn-cerrojo .bn-lista li{
+  color:#dbe8ef;font-size:14.5px;padding:8px 0 8px 24px;position:relative;line-height:1.45;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.bn-cerrojo .bn-lista li:last-child{border-bottom:none}
+.bn-cerrojo .bn-lista li::before{
+  content:'';position:absolute;left:0;top:14px;width:12px;height:12px;
+  border:2px solid var(--oro);border-radius:3px;
+}
+.bn-cerrojo .bn-precio{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.bn-cerrojo .bn-precio-viejo{color:#7ea1b3;text-decoration:line-through;font-size:15px}
+.bn-cerrojo .bn-precio-nuevo{font-family:'Playfair Display',serif;font-size:34px;font-weight:800;color:var(--oro)}
+.bn-cerrojo .bn-precio small{color:#a8c1cd;font-size:13px;font-weight:600}
+.bn-cerrojo .bn-cta{
+  display:block;width:100%;text-align:center;text-decoration:none;
+  padding:16px 18px;border-radius:12px;font-size:15.5px;font-weight:800;
+  letter-spacing:.4px;text-transform:uppercase;
+  background:var(--oro);color:#3d2c05;border:none;cursor:pointer;
+  box-shadow:0 8px 22px rgba(232,180,77,.28);
+}
+.bn-cerrojo .bn-cta:hover{transform:translateY(-1px)}
+.bn-cerrojo .bn-ya{
+  margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);
+}
+.bn-cerrojo .bn-ya-rot{font-size:13px;color:#c8dae4;font-weight:700;margin-bottom:9px}
+.bn-cerrojo .bn-ya-fila{display:flex;gap:8px;flex-wrap:wrap}
+.bn-cerrojo .bn-ya-fila input{
+  flex:1 1 180px;min-width:0;border:none;border-radius:10px;
+  padding:12px 13px;font:inherit;font-size:14.5px;background:rgba(255,255,255,.94);color:var(--tinta);
+}
+.bn-cerrojo .bn-ya-fila input:focus{outline:2px solid var(--oro)}
+.bn-cerrojo .bn-ya-fila button{
+  border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:12px 16px;
+  font:inherit;font-size:14px;font-weight:700;background:transparent;color:#fff;cursor:pointer;white-space:nowrap;
+}
+.bn-cerrojo .bn-ya-fila button[disabled]{opacity:.55;cursor:default}
+.bn-cerrojo .bn-aviso{font-size:13px;margin:10px 0 0;line-height:1.45;min-height:1em}
+.bn-cerrojo .bn-aviso.mal{color:#ffb59a}
+.bn-cerrojo .bn-aviso.bien{color:#8be0b6;font-weight:700}
+.bn-argumento{background:var(--card);border-radius:14px;padding:20px;box-shadow:var(--sombra);margin-bottom:16px}
+.bn-argumento h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--tinta);margin-bottom:8px}
+.bn-argumento p{font-size:14.5px;color:var(--texto);line-height:1.55;margin-bottom:10px}
+.bn-argumento p:last-child{margin-bottom:0}
+
+/* ---- badge dourada no nav (quando o módulo NÃO foi liberado ainda) ---- */
+.nav button[data-v="blindaje"] .bn-pip{
+  position:absolute;top:2px;right:calc(50% - 22px);
+  width:8px;height:8px;border-radius:50%;background:var(--oro);
+}
+.nav button[data-v="blindaje"].bn-abierto .bn-pip{display:none}
+
+/* ---------- SOPORTE ONLINE ---------- */
+.sp-bienvenida{background:var(--amb);border-left:3px solid var(--oro);border-radius:0 12px 12px 0;padding:14px 16px;margin-bottom:14px;font-size:15px;color:#6d5a2c;line-height:1.55}
+.sp-hilo{display:flex;flex-direction:column;gap:9px;margin:4px 0 16px;max-height:52vh;overflow-y:auto}
+.sp-msg{max-width:88%;border-radius:13px;padding:10px 13px;font-size:14.5px;line-height:1.5;white-space:pre-wrap;word-break:break-word}
+.sp-msg.cliente{align-self:flex-end;background:var(--tinta);color:#fff}
+.sp-msg.equipo{align-self:flex-start;background:#eef4f7;color:var(--tinta)}
+.sp-msg .sp-meta{font-size:11px;opacity:.65;margin-top:4px}
+.sp-msg .sp-asunto{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;opacity:.85}
+.sp-estado{font-size:14px;margin-top:10px;display:none;border-radius:10px;padding:10px 13px;line-height:1.45}
+.sp-estado.bien{display:block;background:#e7f6ee;color:#1f9d61}
+.sp-estado.mal{display:block;background:#fdecec;color:#c9553d}
+.sp-estado.info{display:block;background:#eef4f7;color:var(--suave)}
+#v-soporte textarea.campo{resize:vertical;min-height:70px}
+
+/* ---- conteúdo do módulo (aparece só depois de desbloquear) ---- */
+.bn-doc{color:var(--texto);font-size:15.5px;line-height:1.68}
+.bn-portada{
+  background:linear-gradient(160deg,#1a3a4a,#24505f);
+  color:#fff;border-radius:20px;padding:28px 24px;margin-bottom:20px;text-align:left;box-shadow:var(--sombra);
+}
+.bn-escudo{
+  width:52px;height:52px;border-radius:14px;background:rgba(232,180,77,.2);
+  color:var(--oro);display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+}
+.bn-escudo svg{width:28px;height:28px}
+.bn-kicker{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro);margin-bottom:6px}
+.bn-portada h1{font-family:'Playfair Display',serif;font-size:28px;color:#fff;line-height:1.15;margin-bottom:10px}
+.bn-portada p{color:#c8dae4;font-size:15px;margin:0}
+
+.bn-avance{background:var(--card);border-radius:12px;padding:14px 16px;margin-bottom:14px;box-shadow:var(--sombra)}
+.bn-avance-txt{font-size:13px;color:var(--suave);font-weight:700;margin-bottom:8px}
+.bn-avance-txt span{color:var(--oro);font-family:'Playfair Display',serif;font-size:16px}
+.bn-avance-barra{height:5px;background:var(--borde);border-radius:99px;overflow:hidden}
+.bn-avance-barra i{display:block;height:100%;background:var(--oro);transition:width .3s;width:0}
+
+.bn-indice{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:22px}
+.bn-indice a{
+  background:var(--card);border-radius:11px;padding:12px 10px;font-size:13px;font-weight:700;
+  color:var(--tinta);text-decoration:none;line-height:1.3;display:flex;align-items:center;gap:8px;box-shadow:var(--sombra);
+}
+.bn-indice a b{
+  font-family:'Playfair Display',serif;color:var(--oro);font-size:17px;font-weight:800;flex-shrink:0;
+}
+.bn-doc section{
+  background:var(--card);border-radius:16px;padding:24px 20px;margin-bottom:16px;
+  box-shadow:var(--sombra);scroll-margin-top:16px;
+}
+.bn-num{display:block;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro-d);margin-bottom:6px}
+.bn-doc h2{font-family:'Playfair Display',serif;font-size:22px;color:var(--tinta);line-height:1.2;margin-bottom:12px}
+.bn-doc h3{font-size:16px;font-weight:800;color:var(--tinta);margin:18px 0 6px}
+.bn-doc p{margin-bottom:12px}
+.bn-doc em{font-style:italic;color:var(--tinta)}
+
+.bn-tarjeta{background:var(--amb);border-radius:12px;padding:18px 16px;margin:16px 0;border:1px solid #f0d9a5}
+.bn-tarjeta h3{margin:0 0 8px;font-size:16px;color:var(--oro-d)}
+.bn-tarjeta p{font-size:14.5px;margin-bottom:12px}
+.bn-tarjeta .bn-nota{font-size:13px;color:#7a6529;margin:8px 0 0}
+.bn-btn{
+  display:block;width:100%;text-align:center;border:none;cursor:pointer;
+  padding:14px 18px;border-radius:11px;font:inherit;font-weight:800;font-size:15px;
+}
+.bn-btn-primario{background:var(--oro);color:#3d2c05}
+
+.bn-historial{background:var(--card);border-radius:12px;padding:14px 16px;margin-bottom:16px}
+.bn-historial .bn-vacio{color:var(--suave);font-size:14px;text-align:center;font-style:italic;margin:0;padding:8px 0}
+.bn-historial .bn-med{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--borde);font-size:14.5px}
+.bn-historial .bn-med:last-child{border-bottom:none}
+.bn-historial .bn-med time{color:var(--suave);font-size:13px}
+.bn-historial .bn-med b{font-family:'Playfair Display',serif;font-size:20px;color:var(--tinta)}
+
+.bn-aviso{background:#eef4f7;border-left:3px solid var(--tinta2);border-radius:0 10px 10px 0;padding:14px 16px;margin:16px 0 0;font-size:14px;color:#3d5a6a;line-height:1.55}
+.bn-aviso b{color:var(--tinta)}
+
+.bn-signos{list-style:none;padding:0;margin:14px 0;counter-reset:s}
+.bn-signos li{position:relative;padding:14px 14px 14px 46px;margin-bottom:10px;background:var(--fondo);border-radius:10px;font-size:14.5px;line-height:1.55;counter-increment:s}
+.bn-signos li::before{
+  content:counter(s);position:absolute;left:12px;top:14px;width:24px;height:24px;background:var(--tinta);color:var(--oro);
+  border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:14px;font-weight:800;
+}
+.bn-signos li b{color:var(--tinta)}
+
+.bn-fase{border-left:3px solid var(--oro);padding:6px 0 6px 14px;margin:18px 0}
+.bn-fase h3{margin:2px 0 4px}
+.bn-fase p{font-size:14.5px}
+.bn-etiqueta{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--oro-d)}
+.bn-fase-1{border-left-color:var(--rojo)}
+.bn-fase-1 .bn-etiqueta{color:var(--rojo)}
+.bn-fase-3{border-left-color:var(--verde)}
+.bn-fase-3 .bn-etiqueta{color:var(--verde)}
+
+.bn-habitos{list-style:none;padding:0;margin:16px 0}
+.bn-habitos li{background:var(--fondo);border-radius:12px;padding:16px 16px 14px;margin-bottom:10px}
+.bn-hab-h{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.bn-hab-n{
+  width:34px;height:34px;flex-shrink:0;background:var(--tinta);color:var(--oro);border-radius:9px;
+  display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:18px;font-weight:800;
+}
+.bn-hab-h h3{margin:0;font-size:16px}
+.bn-habitos li p{font-size:14.5px;margin-bottom:8px}
+.bn-hab-como{background:var(--amb);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.bn-hab-como b{color:var(--oro-d)}
+
+.bn-pie{margin-top:24px;font-size:12.5px;color:var(--suave);text-align:center;line-height:1.55}
+
+</style>
+</head>
+<body>
+
+<!-- =============== ONBOARDING =============== -->
+<div class="onb" id="onb">
+  <div class="inner">
+    <div class="marca">AuraSalud</div>
+    <h1>Protocolo de<br>Memoria Blindada</h1>
+    <p>21 días para limpiar tu intestino, regenerar tus neuronas y recuperar la claridad mental que creías perdida.</p>
+    <div class="linea"></div>
+    <p style="font-size:15px">Esta aplicación te acompaña día por día: te dice qué toca hoy, te cronometra los ejercicios, te toma el test cognitivo y te muestra tu progreso real.</p>
+    <p style="font-size:14px;color:#8fadbc">Todo se guarda en tu propio teléfono. No necesitas crear cuenta ni conexión permanente.</p>
+    <div style="margin-top:26px">
+      <button class="btn oro" onclick="empezar(hoyISO())">Empiezo hoy mismo</button>
+      <div style="margin-top:16px">
+        <div style="font-size:13px;color:#8fadbc;margin-bottom:7px">¿Ya lo empezaste antes? Elige la fecha del día 1:</div>
+        <input type="date" id="fecha-inicio">
+        <button class="btn linea" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.25)" onclick="empezarFecha()">Usar esta fecha</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =============== TOPBAR =============== -->
+<header class="topbar">
+  <div class="wrap">
+    <div>
+      <div class="marca">AuraSalud</div>
+      <div class="tit-top">Memoria Blindada</div>
+    </div>
+    <div class="chip-dia" id="chip-dia">Día 1</div>
+    <button class="ico-btn" onclick="abrirGuia()" aria-label="Guía">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- =============== HOY =============== -->
+<section class="vista on" id="v-hoy">
+  <div class="hero">
+    <div class="hero-fila">
+      <div class="anillo">
+        <svg viewBox="0 0 104 104">
+          <circle cx="52" cy="52" r="45" stroke="rgba(255,255,255,.14)" stroke-width="9" fill="none"/>
+          <circle id="aro" cx="52" cy="52" r="45" stroke="#e8b44d" stroke-width="9" fill="none"
+                  stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="283" style="transition:stroke-dashoffset .8s ease"/>
+        </svg>
+        <div class="val"><div class="n" id="aro-n">1</div><div class="l">de 21</div></div>
+      </div>
+      <div style="min-width:0">
+        <h2 id="hero-tit">Semana 1</h2>
+        <p id="hero-txt">Limpieza intestinal</p>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><b id="st-racha">0</b><span>Racha</span></div>
+      <div class="hs"><b id="st-adh">0%</b><span>Adherencia</span></div>
+      <div class="hs"><b id="st-test">—</b><span>Último test</span></div>
+    </div>
+  </div>
+
+  <div id="aviso-test"></div>
+
+  <div class="card plana">
+    <div style="padding:16px 17px 4px"><h3 style="font-size:18px">Lo que toca hoy</h3>
+      <div style="font-size:13.5px;color:var(--suave);margin-top:2px" id="fecha-hoy"></div></div>
+    <div id="lista-tareas"></div>
+  </div>
+
+  <div class="card" id="card-registro">
+    <div class="card-h"><h3>Registro de hoy</h3><span class="tag" id="tag-reg">Pendiente</span></div>
+    <p style="font-size:14.5px;color:var(--suave);margin-bottom:2px">Puntúa del 1 al 5. Se llena en 20 segundos y es lo que después te muestra si el protocolo está funcionando.</p>
+    <div id="reg-campos"></div>
+  </div>
+
+  <div class="card" style="background:linear-gradient(160deg,#fdf8ec,#fbf3e0);border:1px solid #f0d9a5">
+    <div class="card-h"><h3 style="font-size:17px">¿Por qué esto funciona?</h3></div>
+    <p style="font-size:14.5px;margin-bottom:14px">La conexión intestino-cerebro, qué hace cada pilar del protocolo y cómo se combina con tu Protocolo Neuro-Honey.</p>
+    <button class="btn linea chico" onclick="abrirGuia()">Leer la guía completa</button>
+  </div>
+</section>
+
+<!-- =============== PLAN =============== -->
+<section class="vista" id="v-plan">
+  <div class="cap">Parte 2 y 5</div>
+  <h1 class="h-vista">Tu plan de alimentación</h1>
+  <p class="sub-vista">Los 12 alimentos que alimentan tus neuronas y tus bacterias buenas al mismo tiempo.</p>
+
+  <div class="btns" style="margin-bottom:18px">
+    <button class="btn chico" onclick="verPlan('comer')" id="tb-comer">Qué comer</button>
+    <button class="btn linea chico" onclick="verPlan('evitar')" id="tb-evitar">Qué retirar</button>
+    <button class="btn linea chico" onclick="verPlan('sup')" id="tb-sup">Suplementos</button>
+  </div>
+
+  <div id="p-comer">
+    <div id="lista-alimentos"></div>
+    <div class="card">
+      <div class="card-h"><h3>Menú tipo de un día</h3></div>
+      <div id="menu-dia"></div>
+      <div class="nota"><strong>No necesitas seguirlo al pie de la letra.</strong> El menú es una guía, no una sentencia. Lo importante es que los 12 alimentos aparezcan a lo largo de la semana y que los 6 que debes retirar no aparezcan. La constancia de 21 días es lo que cambia la composición bacteriana, no la perfección de un día.</div>
+    </div>
+    <div class="card">
+      <div class="card-h"><h3>Lista de compras</h3><span class="tag oro" id="tag-compras">0 por comprar</span></div>
+      <p style="font-size:14.5px;color:var(--suave)">Marca lo que ya tienes en casa. Después copia lo que te falta y llévalo al supermercado.</p>
+      <div id="lista-compras"></div>
+      <button class="btn oro chico" style="margin-top:14px" onclick="copiarCompras()">
+        <svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+        Copiar lo que me falta
+      </button>
+    </div>
+  </div>
+
+  <div id="p-evitar" style="display:none">
+    <div class="aviso"><b>Estos 6 salen de tu mesa durante 21 días.</b> No es para siempre. Son las tres semanas que tu intestino necesita para cambiar de bando.</div>
+    <div id="lista-evitar"></div>
+  </div>
+
+  <div id="p-sup" style="display:none">
+    <p class="sub-vista">4 compuestos. Dosis exactas. Hora exacta. Empiezan en la semana 2, cuando tu intestino ya se adaptó.</p>
+    <div id="lista-sups"></div>
+    <div class="aviso"><b>Consulta obligatoria antes de empezar si:</b> tomas anticoagulantes (el omega-3 y la cúrcuma tienen efecto antiagregante), antidepresivos (el magnesio puede potenciar el efecto sedante), medicación para la presión (el magnesio puede bajarla), o estás en tratamiento oncológico. Cualquier medicamento diario merece una consulta antes de sumar suplementos.</div>
+    <div class="nota"><strong>Qué mirar al comprarlos.</strong> Las marcas importan menos que las formas: magnesio <b>bisglicinato</b> (no óxido), omega-3 con certificación IFOS, probiótico refrigerado con la cepa identificada en la etiqueta, y curcumina al 95% con piperina incluida.</div>
+  </div>
+</section>
+
+<!-- =============== RECETAS =============== -->
+<section class="vista" id="v-recetas">
+  <div class="cap">Parte 3</div>
+  <h1 class="h-vista">Las 7 preparaciones</h1>
+  <p class="sub-vista">Una para cada día de la semana. Tómalas en ayunas, 30 minutos antes del desayuno. Si alguna te cae mal, pásala a después del desayuno.</p>
+  <div id="lista-recetas"></div>
+</section>
+
+<!-- =============== MENTE =============== -->
+<section class="vista" id="v-mente">
+  <div class="cap">Parte 4 y 7</div>
+  <h1 class="h-vista">Entrenamiento y test</h1>
+  <p class="sub-vista">15 minutos al día. No son juegos: son secuencias que rotan entre las 4 zonas del cerebro que controlan la memoria.</p>
+
+  <div class="btns" style="margin-bottom:18px">
+    <button class="btn chico" onclick="verMente('ej')" id="tb-ej">Ejercicios</button>
+    <button class="btn linea chico" onclick="verMente('test')" id="tb-test">Test de Alerta</button>
+  </div>
+
+  <div id="p-ej">
+    <div id="lista-ejercicios"></div>
+    <div class="nota"><strong>La regla de oro:</strong> nunca hagas los ejercicios con el teléfono al lado. El simple hecho de saber que está ahí reduce tu capacidad cognitiva de forma medible. Déjalo en otra habitación durante los 15 minutos (o pon el cronómetro y voltéalo boca abajo).</div>
+  </div>
+
+  <div id="p-test" style="display:none">
+    <div class="card">
+      <div class="card-h"><h3>Test de Alerta Cognitivo</h3><span class="tag oro">8 minutos</span></div>
+      <p style="font-size:15px">Cuatro pruebas: memoria inmediata, memoria de trabajo, fluidez verbal y memoria diferida. La app te cronometra y te puntúa sola.</p>
+      <p style="font-size:15px">Hazlo el <b>día 1, 7, 14 y 21</b>, siempre a la misma hora, en un lugar tranquilo. La diferencia entre el primero y el último te dice si el protocolo está funcionando.</p>
+      <button class="btn oro" onclick="iniciarTest()">
+        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9z"/></svg>
+        Empezar el test
+      </button>
+    </div>
+    <div class="card">
+      <div class="card-h"><h3>Tus resultados</h3></div>
+      <div id="hist-tests"></div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== PROGRESO =============== -->
+<section class="vista" id="v-progreso">
+  <div class="cap">Tu evolución</div>
+  <h1 class="h-vista">Progreso</h1>
+  <p class="sub-vista">Lo que importa no es un día suelto: es la tendencia entre la semana 1 y la semana 3.</p>
+
+  <div class="card">
+    <div class="card-h"><h3>Adherencia diaria</h3><span class="tag verde" id="tag-adh">0%</span></div>
+    <div class="puntos" id="grid-dias"></div>
+    <div class="leyenda">
+      <span><i style="background:#e8eff3"></i>Sin datos</span>
+      <span><i style="background:#b5ddc6"></i>Parcial</span>
+      <span><i style="background:#2f9e6f"></i>Completo</span>
+    </div>
+    <p style="font-size:13px;color:var(--suave);text-align:center;margin:12px 0 0">Toca cualquier día para ver o corregir su registro.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>Cómo te has sentido</h3></div>
+    <div id="grafico"></div>
+    <div class="leyenda">
+      <span><i style="background:#1a3a4a"></i>Claridad mental</span>
+      <span><i style="background:#e8b44d"></i>Energía</span>
+      <span><i style="background:#c9553d"></i>Hinchazón</span>
+    </div>
+    <p style="font-size:13.5px;color:var(--suave);margin:14px 0 0">Claridad y energía deben <b>subir</b>. Hinchazón debe <b>bajar</b>. Si la hinchazón cae, tu intestino está respondiendo: menos inflamación significa más nutrientes llegando al cerebro.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>Comparativa de tests</h3></div>
+    <div id="comp-tests"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>Tu resumen</h3></div>
+    <p style="font-size:14.5px;color:var(--suave)">Si a los 21 días no hay ningún cambio, lleva este resumen a tu médico. Es información objetiva y le sirve para orientar el siguiente paso.</p>
+    <button class="btn linea chico" onclick="copiarResumen()">
+      <svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+      Copiar resumen completo
+    </button>
+    <button class="btn linea chico" style="margin-top:9px;color:var(--rojo)" onclick="reiniciar()">Reiniciar el protocolo</button>
+  </div>
+
+  <div class="legal">
+    <p>Las declaraciones de este documento no han sido evaluadas por la Administración de Alimentos y Medicamentos (FDA). Este material no está destinado a diagnosticar, tratar, curar ni prevenir ninguna enfermedad.</p>
+    <p>Los resultados varían según la persona. El contenido se ofrece únicamente con fines informativos y no sustituye la consulta con un profesional de la salud. Si tomas medicamentos, estás embarazada o en período de lactancia, o tienes una condición médica diagnosticada, consulta a tu médico antes de comenzar. Varias de las sustancias descritas pueden interactuar con medicamentos de uso común; las interacciones señaladas no son una lista exhaustiva.</p>
+    <p>Dudas o solicitudes de reembolso: soporte@aurasalud.online</p>
+    <p>&copy; 2026 AuraSalud &middot; Protocolo de Memoria Blindada. Todos los derechos reservados.</p>
+  </div>
+</section>
+
+
+<!-- =============== BLINDAJE NEURAL (Up2) =============== -->
+<section class="vista" id="v-blindaje">
+
+  <!-- estado cerrado — pitch com botão de compra + campo de e-mail -->
+  <div data-bn-vista="cerrado">
+    <div class="bn-cerrojo">
+      <div class="bn-escudo-c">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2l8 3v6c0 5-3.5 9.5-8 11-4.5-1.5-8-6-8-11V5l8-3z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+      </div>
+      <h2>Protocolo <em>Blindaje Neural</em></h2>
+      <p class="bn-lead">Tu programa de 21 días recupera lo que ya perdiste.
+      Este otro impide el próximo estadio — el que la mayoría descubre demasiado tarde.</p>
+
+      <ul class="bn-lista">
+        <li>Tu baseline cognitivo — el número que dice si funciona</li>
+        <li>Los 7 signos que tu familia ve antes que tú</li>
+        <li>Protocolo de emergencia · qué hacer en las primeras 72 horas</li>
+        <li>Los 4 hábitos diarios con evidencia real (no crucigramas)</li>
+      </ul>
+
+      <div class="bn-precio">
+        <span class="bn-precio-viejo">US$ 97</span>
+        <span class="bn-precio-nuevo">US$ 37</span>
+        <small>· pago único</small>
+      </div>
+
+      <a class="bn-cta" data-bn-comprar href="#">Quiero blindar mi cerebro</a>
+
+      <div class="bn-ya">
+        <p class="bn-ya-rot">¿Ya lo compraste?</p>
+        <div class="bn-ya-fila">
+          <input type="email" data-bn-correo placeholder="Tu correo de compra"
+                 autocomplete="email" inputmode="email" spellcheck="false">
+          <button type="button" data-bn-verificar>Desbloquear</button>
+        </div>
+        <p class="bn-aviso" data-bn-aviso></p>
+      </div>
+    </div>
+
+    <div class="bn-argumento">
+      <h3>Por qué no viene incluido</h3>
+      <p>El programa base te devuelve la memoria del día a día — nombres,
+      llaves, la palabra que se te iba. Ese trabajo es real y suficiente para
+      la mayoría de la gente.</p>
+      <p>El Blindaje es otra cosa. Es lo que se hace cuando alguien de la
+      familia perdió la memoria y decidiste que a ti no te va a pasar. No es
+      para todo el mundo. Es para quien sabe lo que está en juego.</p>
+    </div>
+  </div>
+
+  <!-- estado aberto — placeholder onde o desbloquear.php injeta o conteúdo -->
+  <div data-bn-vista="abierto" hidden>
+    <div id="bn-contenido"></div>
+  </div>
+
+</section>
+
+<!-- =============== SOPORTE ONLINE =============== -->
+<section class="vista" id="v-soporte">
+  <div class="cap">Estamos contigo</div>
+  <h1 class="h-vista">Soporte Online</h1>
+
+  <!-- primeiro contato: boas-vindas + formulário -->
+  <div id="sp-form-caja">
+    <div class="sp-bienvenida">
+      ¡Hola! Bienvenida a nuestro soporte en línea. Estamos aquí para
+      ayudarte. Para iniciar tu atención, completa tus datos y cuéntanos tu
+      duda. Nuestro equipo te responderá lo antes posible.
+    </div>
+
+    <div class="card">
+      <label class="et" for="sp-nombre">Nombre completo</label>
+      <input class="campo" id="sp-nombre" type="text" autocomplete="name" maxlength="80">
+
+      <label class="et" for="sp-email">Correo usado en la compra</label>
+      <input class="campo" id="sp-email" type="email" autocomplete="email" inputmode="email" spellcheck="false" maxlength="120">
+
+      <label class="et" for="sp-whatsapp">WhatsApp (con código de país)</label>
+      <input class="campo" id="sp-whatsapp" type="tel" inputmode="tel" placeholder="+52 55 1234 5678" maxlength="24">
+
+      <label class="et" for="sp-asunto">Asunto</label>
+      <input class="campo" id="sp-asunto" type="text" maxlength="90" placeholder="Ej.: No recibí mi acceso">
+
+      <label class="et" for="sp-mensaje">Mensaje</label>
+      <textarea class="campo" id="sp-mensaje" rows="5" maxlength="3000" placeholder="Cuéntanos tu duda con el mayor detalle posible…"></textarea>
+
+      <button class="btn" id="sp-enviar" type="button" style="margin-top:16px">Enviar mensaje</button>
+      <p class="sp-estado" id="sp-avisoform"></p>
+    </div>
+  </div>
+
+  <!-- conversa aberta: histórico + resposta rápida -->
+  <div id="sp-chat-caja" hidden>
+    <div class="card">
+      <div class="card-h"><h3>Tu conversación</h3><span class="tag oro" id="sp-chip"></span></div>
+      <div class="sp-hilo" id="sp-hilo"></div>
+
+      <label class="et" for="sp-nuevo">Escribir a soporte</label>
+      <textarea class="campo" id="sp-nuevo" rows="3" maxlength="3000" placeholder="Escribe tu mensaje…"></textarea>
+      <button class="btn" id="sp-responder" type="button" style="margin-top:12px">Enviar mensaje</button>
+      <button class="btn linea chico" id="sp-refrescar" type="button" style="margin-top:8px">Actualizar conversación</button>
+      <p class="sp-estado" id="sp-avisochat"></p>
+    </div>
+    <div class="nota">También puedes escribirnos a <b>soporte@aurasalud.online</b>. Respondemos dentro de 24 horas.</div>
+  </div>
+</section>
+
+
+</div>
+
+<!-- =============== CRONÓMETRO FLOTANTE =============== -->
+<div class="pill-crono" id="pill" onclick="abrirCrono()">
+  <svg viewBox="0 0 24 24" style="width:17px;height:17px;stroke:#e8b44d;fill:none;stroke-width:2.2;stroke-linecap:round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg>
+  <span id="pill-t">00:00</span>
+  <span class="lb" id="pill-l"></span>
+  <span class="x" onclick="event.stopPropagation();pararCrono()">✕</span>
+</div>
+
+<!-- =============== NAV =============== -->
+<nav class="nav">
+  <button class="on" data-v="hoy" onclick="ir('hoy')">
+    <svg viewBox="0 0 24 24"><path d="M9 11l3 3 5-6"/><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4"/></svg><span>Hoy</span></button>
+  <button data-v="plan" onclick="ir('plan')">
+    <svg viewBox="0 0 24 24"><path d="M12 21c5-3 8-7 8-11a5 5 0 0 0-8-4 5 5 0 0 0-8 4c0 4 3 8 8 11z"/><path d="M12 10v11"/></svg><span>Plan</span></button>
+  <button data-v="recetas" onclick="ir('recetas')">
+    <svg viewBox="0 0 24 24"><path d="M5 8h11a4 4 0 0 1 0 8h-1"/><path d="M5 8v6a5 5 0 0 0 5 5h1a5 5 0 0 0 5-5"/><path d="M7 2v3M11 2v3"/></svg><span>Recetas</span></button>
+  <button data-v="mente" onclick="ir('mente')">
+    <svg viewBox="0 0 24 24"><path d="M9.5 3A3.5 3.5 0 0 0 6 6.5c-1.7.6-3 2.2-3 4.2 0 1.3.6 2.5 1.5 3.3-.3.6-.5 1.3-.5 2A3.5 3.5 0 0 0 8 19.5c.7 1 1.9 1.5 3 1.5V3z"/><path d="M14.5 3A3.5 3.5 0 0 1 18 6.5c1.7.6 3 2.2 3 4.2 0 1.3-.6 2.5-1.5 3.3.3.6.5 1.3.5 2A3.5 3.5 0 0 1 16 19.5c-.7 1-1.9 1.5-3 1.5"/></svg><span>Mente</span></button>
+  <button data-v="progreso" onclick="ir('progreso')">
+    <svg viewBox="0 0 24 24"><path d="M3 20h18"/><rect x="5" y="11" width="3.5" height="9" rx="1"/><rect x="10.2" y="6" width="3.5" height="14" rx="1"/><rect x="15.5" y="14" width="3.5" height="6" rx="1"/></svg><span>Progreso</span></button>
+  <button data-v="blindaje" onclick="ir('blindaje')" style="position:relative">
+    <svg viewBox="0 0 24 24"><path d="M12 3l7.5 2.8v5.4c0 4.6-3.2 8.6-7.5 10.3-4.3-1.7-7.5-5.7-7.5-10.3V5.8L12 3z"/><path d="M9 12.2l2 2 4-4.4"/></svg>
+    <span>Blindaje</span>
+    <span class="bn-pip" aria-hidden="true"></span>
+  </button>
+  <button data-v="soporte" onclick="ir('soporte')">
+    <svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.6 0-3.1-.4-4.4-1.2L3 20l1.2-5.1A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 10.5h7M8.5 13.5h4.5"/></svg>
+    <span>Soporte</span>
+  </button>
+</nav>
+
+<!-- =============== MODAL =============== -->
+<div class="modal" id="modal">
+  <div class="velo" onclick="cerrarModal()"></div>
+  <div class="hoja">
+    <div class="barra">
+      <h3 id="m-tit"></h3>
+      <button class="cerrar" onclick="cerrarModal()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="cont" id="m-cont"></div>
+  </div>
+</div>
+
+<script>
+/* ==================================================================
+   DATOS
+================================================================== */
+const PREPS=[
+ {dia:'Lunes',t:'Agua tibia con vinagre de manzana y miel',meta:['2 minutos','En ayunas','La base'],
+  ing:['1 vaso de agua tibia (no caliente)','1 cucharada de vinagre de manzana orgánico, con la "madre" visible','1 cucharadita de miel cruda'],
+  pasos:['Calienta el agua hasta que esté tibia al tacto.','Añade el vinagre y remueve.','Añade la miel y remueve hasta disolver.'],
+  porque:'El ácido acético del vinagre de manzana acidifica el medio intestinal: un ambiente hostil para las bacterias malas (Clostridium, E. coli patógena) y favorable para las buenas (Lactobacillus). La "madre" del vinagre es en sí misma una colonia de bacterias beneficiosas.',
+  aviso:'Tienes gastritis, úlcera o reflujo. Empieza con media cucharada y observa. Si molesta, sáltala y pasa a la del martes.',
+  timers:[]},
+ {dia:'Martes',t:'Batido de kéfir con arándanos y linaza',meta:['3 minutos','En ayunas o desayuno','Probiótico + prebiótico'],
+  ing:['1 vaso de kéfir natural','Un puñado de arándanos (frescos o congelados)','1 cucharada de linaza molida'],
+  pasos:['Licúa todo junto 30 segundos.','Tómalo inmediatamente. La linaza molida se oxida rápido.'],
+  porque:'Triple acción. El kéfir aporta probióticos vivos (más de 30 cepas diferentes). Los arándanos aportan polifenoles que las bacterias buenas usan como combustible. La linaza aporta fibra soluble que alimenta específicamente a las Bifidobacterias.',
+  aviso:'',timers:[{s:30,l:'Licuar'}]},
+ {dia:'Miércoles',t:'Caldo de huesos con cúrcuma y jengibre',meta:['5 minutos + cocción','En ayunas','Reparador intestinal'],
+  ing:['1 taza de caldo de huesos (pollo o res, casero o comprado)','Media cucharadita de cúrcuma','2 rodajas de jengibre fresco','1 pizca de pimienta negra'],
+  pasos:['Calienta el caldo a fuego bajo con el jengibre dentro, 3 minutos.','Retira del fuego, añade la cúrcuma y la pimienta. Remueve.','Retira las rodajas de jengibre y toma caliente.'],
+  porque:'El caldo de huesos contiene colágeno, glutamina y glicina: los tres aminoácidos que tu intestino usa para reparar la pared intestinal dañada (el famoso "intestino permeable"). Una pared reparada deja de filtrar toxinas al torrente sanguíneo. La cúrcuma y el jengibre refuerzan el efecto antiinflamatorio.',
+  aviso:'',timers:[{s:180,l:'Calentar con jengibre'}]},
+ {dia:'Jueves',t:'Agua de ajo y limón',meta:['12 minutos','En ayunas','Antibacteriano natural'],
+  ing:['1 diente de ajo crudo','1 vaso de agua tibia','El jugo de medio limón'],
+  pasos:['Pica el diente de ajo y déjalo reposar 10 minutos. Esto activa la alicina, el compuesto activo.','Añádelo al vaso de agua tibia con el limón.','Tómalo sin masticar el ajo. Puedes tragarlo con el agua como si fuera una pastilla.'],
+  porque:'La alicina del ajo es un antimicrobiano natural selectivo: ataca preferentemente a las bacterias patógenas (Candida, H. pylori) sin dañar a los Lactobacillus. El limón refuerza el medio ácido y aporta vitamina C.',
+  aviso:'Tomas anticoagulantes. El ajo crudo en cantidad puede potenciar el efecto. Consulta antes.',
+  timers:[{s:600,l:'Reposo del ajo (activa la alicina)'}]},
+ {dia:'Viernes',t:'Infusión de jengibre, menta y miel',meta:['8 minutos','En ayunas','Digestiva y calmante'],
+  ing:['3 rodajas de jengibre fresco','5 hojas de menta fresca (o 1 bolsita de té de menta)','1 taza de agua','1 cucharadita de miel cruda'],
+  pasos:['Hierve el agua con las rodajas de jengibre, 5 minutos, tapado.','Retira del fuego, añade la menta y deja reposar 3 minutos tapado.','Cuela, deja templar y añade la miel.'],
+  porque:'El jengibre acelera el vaciado gástrico y reduce la hinchazón. La menta relaja la musculatura del tracto digestivo. Juntos crean un ambiente donde las bacterias buenas prosperan, porque la comida no se fermenta de forma descontrolada.',
+  aviso:'',timers:[{s:300,l:'Hervir el jengibre'},{s:180,l:'Reposo de la menta'}]},
+ {dia:'Sábado',t:'Avena remojada con chía y kéfir',meta:['5 min + reposo nocturno','Desayuno','Prebiótico denso'],
+  ing:['3 cucharadas de avena en copos','1 cucharada de semillas de chía','1 vaso de kéfir natural','1 cucharadita de miel cruda','Un puñado de nueces troceadas'],
+  pasos:['La noche anterior: mezcla la avena, la chía y el kéfir en un frasco. Tapa y mete al refrigerador.','Por la mañana: sácalo, añade la miel y las nueces. Listo.'],
+  porque:'La avena remojada produce almidón resistente, un tipo de fibra que tus bacterias buenas fermentan produciendo butirato: el ácido graso de cadena corta más protector para la pared intestinal. La chía aporta fibra soluble y omega-3 vegetal. El reposo nocturno en kéfir multiplica los probióticos.',
+  aviso:'',timers:[]},
+ {dia:'Domingo',t:'Jugo verde antiinflamatorio',meta:['5 minutos','En ayunas','Limpieza profunda'],
+  ing:['1 taza de espinaca','Medio pepino','1 trozo pequeño de jengibre','El jugo de 1 limón','1 vaso de agua','1 cucharadita de miel cruda'],
+  pasos:['Licúa todo junto hasta que quede homogéneo.','Cuela si prefieres, pero la fibra es parte del beneficio.','Tómalo inmediatamente.'],
+  porque:'La espinaca aporta folato y magnesio directamente al cerebro. El pepino hidrata y aporta sílice. El jengibre y el limón son antiinflamatorios. Es la preparación más completa de la semana: trabaja intestino, cerebro e hidratación al mismo tiempo.',
+  aviso:'',timers:[]}
+];
+
+const EJER=[
+ {t:'Recuerdo activo cronológico',zona:'Hipocampo',cuando:'Todos los días',min:5,dias:[0,1,2,3,4,5,6],
+  como:'Cierra los ojos. Recorre mentalmente todo lo que hiciste ayer, desde que abriste los ojos hasta que te acostaste, en orden. No en resumen: en detalle. Qué desayunaste, qué ropa te pusiste, con quién hablaste, qué te dijo, qué sentiste. Cuando te atasques, no saltes: quédate ahí hasta que el recuerdo vuelva o decidas que realmente no hay más.',
+  porque:'Obliga al hipocampo a recuperar memorias recientes en secuencia, que es exactamente la operación que falla primero con el deterioro cognitivo. Con el tiempo, la velocidad de recuperación aumenta.'},
+ {t:'Doble tarea con manos',zona:'Corteza prefrontal + Cerebelo',cuando:'Lunes, miércoles y viernes',min:5,dias:[0,2,4],
+  como:'Con la mano derecha, dibuja círculos en el aire. Con la izquierda, dibuja cuadrados. Al mismo tiempo, cuenta hacia atrás desde 100 de 7 en 7 en voz alta (100, 93, 86, 79...). Cuando pierdas el hilo, vuelve a empezar desde donde recuerdes. Cinco minutos sin parar.',
+  porque:'La doble tarea manual activa el cerebelo (coordinación) mientras la resta mental activa la corteza prefrontal (memoria de trabajo). Hacer ambas a la vez exige que tu cerebro gestione recursos simultáneos, que es la habilidad que más se pierde con la edad.'},
+ {t:'Mapa mental de tu infancia',zona:'Hipocampo + Amígdala',cuando:'Martes, jueves y sábado',min:5,dias:[1,3,5],
+  como:'Elige un lugar de tu infancia: la casa donde creciste, la escuela, la casa de un abuelo. Recórrelo mentalmente habitación por habitación. No es imaginar: es recordar. El color de las paredes, el olor de la cocina, el sonido del piso, dónde estaba cada mueble. Si aparece una emoción, no la evites: déjala pasar y sigue recorriendo.',
+  porque:'Recuperar memorias lejanas con detalle sensorial activa el hipocampo y la amígdala al mismo tiempo. La conexión emocional refuerza las vías neuronales, haciéndolas más resistentes a la degradación.'},
+ {t:'Caminata con narración',zona:'Las 4 zonas',cuando:'Domingos',min:15,dias:[6],
+  como:'Sal a caminar. Mientras caminas, describe en voz alta (o en voz baja si hay gente) todo lo que ves, con el mayor detalle posible: "Hay un árbol con hojas verdes oscuras a la izquierda. Un carro azul estacionado con una calcomanía roja en la ventana de atrás. Una señora con vestido amarillo cruzando la calle." No interpretes, solo describe.',
+  porque:'El ejercicio físico aumenta el flujo sanguíneo al cerebro. La narración activa la corteza prefrontal (lenguaje), el hipocampo (codificación de nuevos recuerdos), la amígdala (atención al entorno) y el cerebelo (coordinar caminar y hablar). Es el ejercicio más completo de la semana.'}
+];
+
+const ALIM=[
+ {n:'Cúrcuma + pimienta negra',d:'La curcumina cruza la barrera hematoencefálica y reduce la inflamación neuronal. Sin pimienta negra, tu cuerpo absorbe menos del 5%. Una cucharadita de cúrcuma con una pizca de pimienta en cada comida principal.'},
+ {n:'Pescado azul (salmón, sardina, caballa)',d:'Omega-3 de cadena larga (DHA y EPA). El DHA forma el 25% de la grasa de tu cerebro. Tres veces por semana como mínimo.'},
+ {n:'Arándanos',d:'Antocianinas que cruzan la barrera hematoencefálica y mejoran la comunicación entre neuronas. Un puñado diario, frescos o congelados.'},
+ {n:'Nueces',d:'Ácido alfa-linolénico (ALA), vitamina E y melatonina propia. Cinco a siete nueces al día, sin sal.'},
+ {n:'Ajo crudo',d:'Prebiótico natural. Alimenta a las bacterias buenas (Lactobacillus, Bifidobacterium). Un diente crudo al día, picado y reposado 10 minutos antes de comer.'},
+ {n:'Cebolla',d:'Rica en inulina, el prebiótico más potente para las bacterias buenas. Cruda o apenas cocida.'},
+ {n:'Kéfir o yogur natural',d:'Probióticos vivos. Un vaso al día, siempre sin azúcar. El kéfir tiene más variedad de cepas que el yogur.'},
+ {n:'Chucrut o kimchi',d:'Fermentados con bacterias vivas. Dos cucharadas al día como acompañamiento. Debe ser de la sección refrigerada, no el enlatado pasteurizado.'},
+ {n:'Aguacate',d:'Grasas monoinsaturadas que protegen las membranas neuronales. Medio aguacate al día.'},
+ {n:'Huevos',d:'Colina, el precursor de la acetilcolina, el neurotransmisor de la memoria. Dos al día, con yema.'},
+ {n:'Espinaca y brócoli',d:'Folato, magnesio y vitamina K. Participan en la producción de neurotransmisores. Una ración diaria, al vapor o salteada.'},
+ {n:'Miel cruda',d:'Prebiótico natural que ya conoces del Neuro-Honey. La cucharadita que ya tomas cuenta.'}
+];
+
+const EVITAR=[
+ {n:'Azúcar refinado',d:'Combustible principal de las bacterias malas. Incluye refrescos, jugos de caja, galletas y pan blanco.'},
+ {n:'Harinas blancas',d:'Se convierten en azúcar rápido. Tu intestino las procesa igual que un dulce.'},
+ {n:'Embutidos y carnes procesadas',d:'Nitratos y conservantes que dañan la pared intestinal y alimentan bacterias inflamatorias.'},
+ {n:'Aceites vegetales refinados (soya, canola, girasol)',d:'Proinflamatorios. Usa aceite de oliva extra virgen o aceite de coco en su lugar.'},
+ {n:'Alcohol',d:'Destruye bacterias buenas y daña la permeabilidad intestinal. Cero durante los 21 días.'},
+ {n:'Edulcorantes artificiales',d:'Alteran la flora intestinal tanto o más que el azúcar. Incluye aspartamo, sucralosa y sacarina.'}
+];
+
+const MENU=[
+ {m:'Desayuno',d:'2 huevos revueltos con espinaca y cúrcuma + pimienta. Un vaso de kéfir natural. Un puñado de arándanos.'},
+ {m:'Media mañana',d:'5 nueces + medio aguacate con limón y sal.'},
+ {m:'Almuerzo',d:'Salmón al horno con brócoli al vapor y ajo. Ensalada de cebolla cruda y tomate con aceite de oliva. Dos cucharadas de chucrut de acompañamiento.'},
+ {m:'Merienda',d:'Yogur natural con una cucharadita de miel cruda y arándanos.'},
+ {m:'Cena',d:'Crema de verduras (espinaca, brócoli, cebolla, ajo) con cúrcuma. Ligera, tres horas antes de acostarte.'}
+];
+
+const SUPS=[
+ {n:'Omega-3 (DHA + EPA)',dosis:'1000 mg DHA + 500 mg EPA',cuando:'Con el almuerzo',
+  por:'El DHA forma las membranas neuronales y se absorbe mejor con la grasa de la comida. Busca aceite de pescado o aceite de algas (versión vegetal).'},
+ {n:'Magnesio bisglicinato',dosis:'300-400 mg',cuando:'Con la cena o antes de dormir',
+  por:'Relaja el sistema nervioso, mejora la calidad del sueño y participa en más de 300 reacciones enzimáticas cerebrales. La forma bisglicinato es la que mejor se absorbe sin causar diarrea.'},
+ {n:'Probiótico multiestirpe',dosis:'10-20 mil millones de UFC',cuando:'En ayunas, 15 min antes del desayuno',
+  por:'Repuebla directamente el intestino con bacterias buenas. Busca uno que contenga al menos Lactobacillus rhamnosus, L. plantarum y Bifidobacterium longum. Guárdalo en el refrigerador.'},
+ {n:'Cúrcuma estandarizada (curcumina 95%)',dosis:'500 mg',cuando:'Con el almuerzo, junto a pimienta negra o piperina',
+  por:'Antiinflamatorio que cruza la barrera hematoencefálica. Reduce la neuroinflamación y estimula la producción de BDNF (factor neurotrófico). Mucho más concentrada que la especia de cocina.'}
+];
+
+const COMPRAS=[
+ 'Cúrcuma en polvo','Pimienta negra','Salmón / sardina / caballa','Arándanos (frescos o congelados)','Nueces sin sal',
+ 'Ajo','Cebolla','Kéfir natural sin azúcar','Chucrut o kimchi refrigerado','Aguacate','Huevos','Espinaca','Brócoli',
+ 'Miel cruda','Vinagre de manzana con "madre"','Linaza molida','Caldo de huesos','Jengibre fresco','Limones','Menta fresca',
+ 'Avena en copos','Semillas de chía','Pepino','Aceite de oliva extra virgen'
+];
+
+const PALABRAS=['Silla','Montaña','Reloj','Perro','Azul','Cocina','Tren','Lluvia','Zapato','Carta'];
+
+/* ==================================================================
+   ESTADO
+================================================================== */
+const KEY='mb_app_v1';
+let S=cargar();
+function base(){return{inicio:null,checks:{},reg:{},tests:[],compras:{}}}
+function cargar(){try{const r=JSON.parse(localStorage.getItem(KEY));return r&&typeof r==='object'?Object.assign(base(),r):base()}catch(e){return base()}}
+function guardar(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+function hoyISO(d){d=d||new Date();const t=new Date(d.getTime()-d.getTimezoneOffset()*6e4);return t.toISOString().slice(0,10)}
+function fechaDe(n){const a=new Date(S.inicio+'T12:00');a.setDate(a.getDate()+(n-1));return hoyISO(a)}
+function numDia(){if(!S.inicio)return 1;const a=new Date(S.inicio+'T12:00'),b=new Date(hoyISO()+'T12:00');return Math.floor((b-a)/864e5)+1}
+function diaVista(){return Math.min(21,Math.max(1,numDia()))}
+function semana(){return Math.min(3,Math.ceil(diaVista()/7))}
+function dowDe(iso){const d=new Date(iso+'T12:00').getDay();return (d+6)%7}  // 0=lunes ... 6=domingo
+const NOMDIA=['lunes','martes','miércoles','jueves','viernes','sábado','domingo'];
+const NOMMES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+function fechaLarga(iso){const d=new Date(iso+'T12:00');return NOMDIA[dowDe(iso)]+', '+d.getDate()+' de '+NOMMES[d.getMonth()]}
+const norm=s=>(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9ñ ]/g,'').trim();
+
+/* Tareas del día según fecha y semana del protocolo */
+function tareasDe(iso,sem){
+  const dw=dowDe(iso), L=[];
+  L.push({id:'prep',t:'Preparación intestinal',s:PREPS[dw].t,go:()=>{ir('recetas');setTimeout(()=>abrirReceta(dw),260)}});
+  L.push({id:'alim',t:'Plan de alimentación',s:'Los 12 alimentos dentro, los 6 fuera',go:()=>ir('plan')});
+  L.push({id:'nh',t:'Toma del Protocolo Neuro-Honey',s:'Tu protocolo base, como ya lo haces',go:null});
+  if(sem>=2){
+    const e=EJER.filter(x=>x.dias.indexOf(dw)>-1);
+    e.forEach((x,i)=>L.push({id:'ej'+EJER.indexOf(x),t:'Ejercicio: '+x.t,s:x.min+' minutos · '+x.zona,go:()=>{ir('mente');verMente('ej');setTimeout(()=>abrirEjercicio(EJER.indexOf(x)),260)}}));
+    L.push({id:'sup',t:'Suplementos del día',s:'4 compuestos, cada uno a su hora',go:()=>{ir('plan');verPlan('sup')}});
+  }
+  return L;
+}
+
+/* ==================================================================
+   NAVEGACIÓN
+================================================================== */
+let vistaActual='hoy';
+function ir(v){
+  vistaActual=v;
+  document.querySelectorAll('.vista').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(v==='progreso')pintarProgreso();
+  if(v==='mente')pintarTests();
+}
+function verPlan(p){
+  ['comer','evitar','sup'].forEach(x=>{
+    document.getElementById('p-'+x).style.display = x===p?'block':'none';
+    const b=document.getElementById('tb-'+x); b.className = x===p?'btn chico':'btn linea chico';
+  });
+}
+function verMente(p){
+  ['ej','test'].forEach(x=>{
+    document.getElementById('p-'+x).style.display = x===p?'block':'none';
+    const b=document.getElementById('tb-'+x); b.className = x===p?'btn chico':'btn linea chico';
+  });
+  if(p==='test')pintarTests();
+}
+
+/* ==================================================================
+   MODAL
+================================================================== */
+function modal(tit,html){
+  document.getElementById('m-tit').textContent=tit;
+  document.getElementById('m-cont').innerHTML=html;
+  document.getElementById('modal').classList.add('on');
+  document.body.style.overflow='hidden';
+  document.querySelector('#modal .hoja').scrollTop=0;
+}
+function cerrarModal(){
+  document.getElementById('modal').classList.remove('on');
+  document.body.style.overflow='';
+  DIA_MODAL=null;
+  if(enTest){enTest=false;clearInterval(TT);}
+  if(CR.run)pintarCrono();
+}
+
+/* ==================================================================
+   ONBOARDING
+================================================================== */
+function empezar(iso){S.inicio=iso;guardar();document.getElementById('onb').classList.remove('on');render()}
+function empezarFecha(){
+  const v=document.getElementById('fecha-inicio').value;
+  if(!v){alert('Elige una fecha primero.');return}
+  empezar(v);
+}
+
+/* ==================================================================
+   RENDER PRINCIPAL
+================================================================== */
+function render(){
+  if(!S.inicio){document.getElementById('onb').classList.add('on');return}
+  const d=diaVista(), iso=hoyISO(), sem=semana();
+
+  document.getElementById('chip-dia').textContent = numDia()>21?'Completado':'Día '+d+' de 21';
+  document.getElementById('aro-n').textContent=d;
+  document.getElementById('aro').style.strokeDashoffset = 283-(283*(d/21));
+  const titSem=['Semana 1','Semana 2','Semana 3'][sem-1];
+  const txtSem=['Solo alimentación y preparaciones. Deja que tu cuerpo se adapte.',
+                'Se suman los suplementos y los ejercicios cognitivos.',
+                'Protocolo completo. Aquí es donde se nota.'][sem-1];
+  document.getElementById('hero-tit').textContent = numDia()>21?'Protocolo completado':titSem;
+  document.getElementById('hero-txt').textContent = numDia()>21?'Compara tu test del día 21 con el del día 1.':txtSem;
+  document.getElementById('fecha-hoy').textContent = fechaLarga(iso);
+
+  // stats
+  document.getElementById('st-racha').textContent=racha();
+  const ad=adherencia(); document.getElementById('st-adh').textContent=ad+'%';
+  const ult=S.tests[S.tests.length-1];
+  document.getElementById('st-test').textContent = ult? (ult.p1+'/10') : '—';
+
+  // aviso de test
+  const av=document.getElementById('aviso-test');
+  if([1,7,14,21].indexOf(d)>-1 && !S.tests.some(t=>t.dia===d)){
+    av.innerHTML='<div class="card" style="background:var(--tinta);color:#fff;border:none">'
+      +'<div class="card-h"><h3 style="color:#fff;font-size:17px">Hoy toca el Test de Alerta</h3><span class="tag oro">Día '+d+'</span></div>'
+      +'<p style="color:#b9d0dc;font-size:14.5px;margin-bottom:14px">Ocho minutos. Hazlo por la mañana, después del desayuno, en un lugar tranquilo y sin teléfono cerca.</p>'
+      +'<button class="btn oro chico" onclick="iniciarTest()">Hacer el test ahora</button></div>';
+  } else av.innerHTML='';
+
+  pintarTareas(iso,sem);
+  pintarRegistro(iso);
+  pintarAlimentos();
+  pintarRecetas();
+  pintarEjercicios();
+  pintarCompras();
+  pintarTests();
+}
+
+/* ---------- TAREAS ---------- */
+function pintarTareas(iso,sem){
+  const L=tareasDe(iso,sem), hechas=S.checks[iso]||{};
+  window._tareas=L;
+  document.getElementById('lista-tareas').innerHTML = L.map((t,i)=>
+    '<div class="tarea'+(hechas[t.id]?' hecha':'')+'" onclick="marcar(\''+t.id+'\')">'
+    +'<div class="tk"><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg></div>'
+    +'<div class="tarea-txt"><b>'+t.t+'</b><span>'+t.s+'</span></div>'
+    +(t.go?'<div class="ir" onclick="event.stopPropagation();window._tareas['+i+'].go()"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></div>':'')
+    +'</div>').join('');
+}
+function marcar(id){
+  const iso=hoyISO();
+  S.checks[iso]=S.checks[iso]||{};
+  S.checks[iso][id]=!S.checks[iso][id];
+  guardar();
+  pintarTareas(iso,semana());
+  document.getElementById('st-racha').textContent=racha();
+  document.getElementById('st-adh').textContent=adherencia()+'%';
+  if(navigator.vibrate)try{navigator.vibrate(12)}catch(e){}
+  if(todoHecho(iso))celebrar();
+}
+function todoHecho(iso){
+  const L=tareasDe(iso,Math.min(3,Math.ceil(Math.max(1,diaVista())/7))),h=S.checks[iso]||{};
+  return L.length>0 && L.every(t=>h[t.id]);
+}
+function ratioDia(iso,dn){
+  const sem=Math.min(3,Math.ceil(dn/7));
+  const L=tareasDe(iso,sem),h=S.checks[iso]||{};
+  if(!L.length)return 0;
+  return L.filter(t=>h[t.id]).length/L.length;
+}
+function racha(){
+  let r=0,n=numDia();
+  for(let i=n;i>=1;i--){ if(ratioDia(fechaDe(i),i)>=0.6)r++; else if(i<n)break; }
+  return r;
+}
+function adherencia(){
+  const n=Math.min(21,Math.max(1,numDia()));let s=0;
+  for(let i=1;i<=n;i++)s+=ratioDia(fechaDe(i),i);
+  return Math.round(s/n*100);
+}
+function celebrar(){
+  const d=document.createElement('div');
+  d.style.cssText='position:fixed;inset:0;z-index:500;pointer-events:none;display:flex;align-items:center;justify-content:center';
+  d.innerHTML='<div style="background:var(--verde);color:#fff;padding:16px 26px;border-radius:999px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.2);animation:sube .3s ease both">Día completo. Bien hecho.</div>';
+  document.body.appendChild(d);
+  setTimeout(()=>d.remove(),1900);
+}
+
+/* ---------- REGISTRO ---------- */
+function pintarRegistro(iso){
+  document.getElementById('reg-campos').innerHTML=camposRegistro(iso);
+  const r=S.reg[iso];
+  const tg=document.getElementById('tag-reg');
+  tg.textContent = r&&r.claridad?'Registrado':'Pendiente';
+  tg.className = r&&r.claridad?'tag verde':'tag';
+}
+function camposRegistro(iso){
+  const r=S.reg[iso]||{};
+  const esc=(k,lb,izq,der)=>{
+    let h='<label class="et">'+lb+'</label><div class="escala">';
+    for(let i=1;i<=5;i++)h+='<button class="'+(r[k]===i?'sel':'')+'" onclick="setReg(\''+iso+'\',\''+k+'\','+i+')">'+i+'</button>';
+    h+='</div><div class="escala-lbl"><span>'+izq+'</span><span>'+der+'</span></div>';
+    return h;
+  };
+  return esc('claridad','Claridad mental','Niebla total','Cabeza limpia')
+       + esc('energia','Energía','Agotado','Con fuerza')
+       + esc('hinchazon','Hinchazón abdominal','Muy hinchado','Sin hinchazón')
+       + '<label class="et">Notas del día</label>'
+       + '<textarea class="campo" rows="2" placeholder="Algo que quieras recordar..." onchange="setNota(\''+iso+'\',this.value)">'+((r.notas||'').replace(/</g,'&lt;'))+'</textarea>';
+}
+function setReg(iso,k,v){
+  S.reg[iso]=S.reg[iso]||{};
+  S.reg[iso][k]=S.reg[iso][k]===v?null:v;
+  guardar();
+  if(DIA_MODAL)abrirDia(iso,DIA_MODAL);
+  else pintarRegistro(iso);
+  if(navigator.vibrate)try{navigator.vibrate(8)}catch(e){}
+}
+function setNota(iso,v){S.reg[iso]=S.reg[iso]||{};S.reg[iso].notas=v;guardar()}
+
+/* ---------- ALIMENTOS / SUPLEMENTOS ---------- */
+function pintarAlimentos(){
+  document.getElementById('lista-alimentos').innerHTML = ALIM.map((a,i)=>
+    '<details class="acc"><summary><span class="n">'+String(i+1).padStart(2,'0')+'</span>'
+    +'<span class="t">'+a.n+'</span>'
+    +'<span class="fl"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></summary>'
+    +'<div class="cuerpo"><p>'+a.d+'</p></div></details>').join('');
+  document.getElementById('lista-evitar').innerHTML = EVITAR.map((a,i)=>
+    '<details class="acc"><summary><span class="n" style="color:var(--rojo)">✕</span>'
+    +'<span class="t">'+a.n+'</span>'
+    +'<span class="fl"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></summary>'
+    +'<div class="cuerpo"><p>'+a.d+'</p></div></details>').join('');
+  document.getElementById('menu-dia').innerHTML = MENU.map(m=>
+    '<div style="display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--borde)">'
+    +'<div style="flex-shrink:0;width:88px;font-family:\'Playfair Display\',serif;font-size:15.5px;font-weight:700;color:var(--oro-d)">'+m.m+'</div>'
+    +'<div style="flex:1;font-size:15px">'+m.d+'</div></div>').join('');
+  document.getElementById('lista-sups').innerHTML = SUPS.map((s,i)=>
+    '<div class="card"><div class="card-h"><h3 style="font-size:17px">'+s.n+'</h3></div>'
+    +'<div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:11px"><span class="tag oro">'+s.dosis+'</span><span class="tag">'+s.cuando+'</span></div>'
+    +'<p style="font-size:14.5px;margin:0">'+s.por+'</p></div>').join('');
+}
+
+/* ---------- COMPRAS ---------- */
+function pintarCompras(){
+  document.getElementById('lista-compras').innerHTML = COMPRAS.map((c,i)=>
+    '<div class="ing'+(S.compras[i]?' ok':'')+'" onclick="togCompra('+i+')">'
+    +'<div class="bx"><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg></div><span>'+c+'</span></div>').join('');
+  const falta=COMPRAS.filter((c,i)=>!S.compras[i]).length;
+  document.getElementById('tag-compras').textContent = falta+' por comprar';
+}
+function togCompra(i){S.compras[i]=!S.compras[i];guardar();pintarCompras()}
+function copiarCompras(){
+  const t='Lista de compras — Memoria Blindada\n\n'+COMPRAS.filter((c,i)=>!S.compras[i]).map(c=>'• '+c).join('\n');
+  copiar(t,'Lista copiada. Pégala donde quieras.');
+}
+function copiar(t,ok){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(()=>alert(ok)).catch(()=>fall(t));
+  } else fall(t);
+  function fall(x){const a=document.createElement('textarea');a.value=x;document.body.appendChild(a);a.select();try{document.execCommand('copy');alert(ok)}catch(e){alert('No se pudo copiar automáticamente.')}a.remove()}
+}
+
+/* ---------- RECETAS ---------- */
+function pintarRecetas(){
+  const dw=dowDe(hoyISO());
+  document.getElementById('lista-recetas').innerHTML = PREPS.map((p,i)=>
+    '<div class="card plana" style="'+(i===dw?'border:2px solid var(--oro)':'')+'">'
+    +'<div style="padding:16px 17px" onclick="abrirReceta('+i+')">'
+    +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:7px">'
+      +'<span class="tag'+(i===dw?' oro':'')+'">'+p.dia+(i===dw?' · hoy':'')+'</span>'
+      +'<span style="margin-left:auto"><svg viewBox="0 0 24 24" style="width:17px;height:17px;stroke:#b6c9d4;fill:none;stroke-width:2.4;stroke-linecap:round"><path d="M9 5l7 7-7 7"/></svg></span></div>'
+    +'<h3 style="font-size:18px;line-height:1.25">'+p.t+'</h3>'
+    +'<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:9px">'+p.meta.map(m=>'<span class="tag">'+m+'</span>').join('')+'</div>'
+    +'</div></div>').join('');
+}
+function abrirReceta(i){
+  const p=PREPS[i];
+  let h='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">'+p.meta.map(m=>'<span class="tag">'+m+'</span>').join('')+'</div>';
+  h+='<div class="h4b">Necesitas</div>';
+  h+='<div class="card" style="padding:6px 16px">'+p.ing.map((x,j)=>
+     '<div class="ing" onclick="this.classList.toggle(\'ok\')"><div class="bx"><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg></div><span>'+x+'</span></div>').join('')+'</div>';
+  h+='<div class="h4b">Preparación</div><ol class="pasos">'+p.pasos.map(x=>'<li>'+x+'</li>').join('')+'</ol>';
+  if(p.timers.length){
+    h+='<div class="h4b">Cronómetros</div><div>'+p.timers.map(t=>
+      '<button class="crono-btn" onclick="lanzarCrono('+t.s+',\''+t.l.replace(/'/g,"\\'")+'\')">'
+      +'<svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg>'
+      +t.l+' · '+Math.round(t.s/60>=1?t.s/60:t.s)+(t.s>=60?' min':' seg')+'</button>').join('')+'</div>';
+  }
+  h+='<div class="porque"><b>Por qué funciona:</b> '+p.porque+'</div>';
+  if(p.aviso)h+='<div class="aviso"><b>Ojo si:</b> '+p.aviso+'</div>';
+  h+='<button class="btn" style="margin-top:8px" onclick="marcarDesdeModal(\'prep\')">Marcar como hecha hoy</button>';
+  modal(p.t,h);
+}
+function marcarDesdeModal(id){
+  const iso=hoyISO();S.checks[iso]=S.checks[iso]||{};S.checks[iso][id]=true;guardar();
+  pintarTareas(iso,semana());document.getElementById('st-adh').textContent=adherencia()+'%';
+  document.getElementById('st-racha').textContent=racha();
+  cerrarModal();ir('hoy');
+  if(todoHecho(iso))celebrar();
+}
+
+/* ---------- EJERCICIOS ---------- */
+function pintarEjercicios(){
+  const dw=dowDe(hoyISO());
+  document.getElementById('lista-ejercicios').innerHTML = EJER.map((e,i)=>{
+    const hoy=e.dias.indexOf(dw)>-1;
+    return '<div class="card plana" style="'+(hoy?'border:2px solid var(--oro)':'')+'" onclick="abrirEjercicio('+i+')">'
+    +'<div style="padding:16px 17px">'
+    +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">'
+      +'<span class="tag'+(hoy?' oro':'')+'">'+(hoy?'Hoy':e.cuando)+'</span><span class="tag">'+e.min+' min</span>'
+      +'<span style="margin-left:auto"><svg viewBox="0 0 24 24" style="width:17px;height:17px;stroke:#b6c9d4;fill:none;stroke-width:2.4;stroke-linecap:round"><path d="M9 5l7 7-7 7"/></svg></span></div>'
+    +'<h3 style="font-size:18px;line-height:1.25">'+e.t+'</h3>'
+    +'<div style="font-size:13.5px;color:var(--suave);margin-top:4px">'+e.zona+'</div>'
+    +'</div></div>';
+  }).join('');
+}
+function abrirEjercicio(i){
+  const e=EJER[i];
+  let h='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px"><span class="tag oro">'+e.zona+'</span><span class="tag">'+e.cuando+'</span><span class="tag">'+e.min+' minutos</span></div>';
+  h+='<div class="h4b">Cómo hacerlo</div><p>'+e.como+'</p>';
+  h+='<div class="porque"><b>Por qué funciona:</b> '+e.porque+'</div>';
+  h+='<button class="btn oro" onclick="lanzarCrono('+(e.min*60)+',\''+e.t.replace(/'/g,"\\'")+'\')">'
+    +'<svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg>Empezar '+e.min+' minutos</button>';
+  h+='<button class="btn linea" style="margin-top:9px" onclick="marcarDesdeModal(\'ej'+i+'\')">Marcar como hecho hoy</button>';
+  modal(e.t,h);
+}
+
+/* ==================================================================
+   CRONÓMETRO
+================================================================== */
+let CR={id:null,left:0,total:0,lab:'',run:false};
+function fmt(s){s=Math.max(0,Math.round(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function lanzarCrono(seg,lab){
+  CR.total=seg;CR.left=seg;CR.lab=lab;CR.run=true;
+  clearInterval(CR.id);
+  CR.id=setInterval(()=>{
+    CR.left--;
+    if(CR.left<=0){clearInterval(CR.id);CR.run=false;CR.left=0;bip();
+      document.getElementById('pill').classList.remove('on');
+      if(document.getElementById('crono-num'))document.getElementById('crono-num').textContent='00:00';
+      setTimeout(()=>{if(document.getElementById('crono-num'))modalCronoFin()},80);
+      return}
+    pintarCrono();
+  },1000);
+  abrirCrono();
+}
+function pintarCrono(){
+  const n=document.getElementById('crono-num');
+  if(n)n.textContent=fmt(CR.left);
+  document.getElementById('pill-t').textContent=fmt(CR.left);
+  document.getElementById('pill-l').textContent=CR.lab;
+  document.getElementById('pill').classList.toggle('on', CR.run && !document.getElementById('modal').classList.contains('on'));
+}
+function abrirCrono(){
+  modal(CR.lab,
+    '<div class="reloj" id="crono-num">'+fmt(CR.left)+'</div>'
+    +'<p class="mini" style="margin-top:12px">Deja el teléfono boca abajo. Cuando termine, suena.</p>'
+    +'<div class="btns" style="margin-top:22px">'
+    +'<button class="btn linea chico" onclick="pausarCrono()" id="btn-pausa">'+(CR.run?'Pausar':'Reanudar')+'</button>'
+    +'<button class="btn linea chico" onclick="pararCrono();cerrarModal()">Terminar</button></div>'
+    +'<button class="btn chico" style="margin-top:9px" onclick="cerrarModal()">Seguir usando la app</button>');
+  document.getElementById('pill').classList.remove('on');
+}
+function modalCronoFin(){
+  modal('Tiempo cumplido','<div class="reloj" style="color:var(--verde)">00:00</div>'
+   +'<p class="mini" style="margin-top:14px">'+CR.lab+'</p>'
+   +'<button class="btn" style="margin-top:20px" onclick="cerrarModal()">Listo</button>');
+}
+function pausarCrono(){
+  if(CR.run){clearInterval(CR.id);CR.run=false;}
+  else{CR.run=true;clearInterval(CR.id);CR.id=setInterval(()=>{CR.left--;if(CR.left<=0){clearInterval(CR.id);CR.run=false;CR.left=0;bip();modalCronoFin();return}pintarCrono()},1000)}
+  const b=document.getElementById('btn-pausa'); if(b)b.textContent=CR.run?'Pausar':'Reanudar';
+  pintarCrono();
+}
+function pararCrono(){clearInterval(CR.id);CR.run=false;CR.left=0;document.getElementById('pill').classList.remove('on')}
+function bip(){
+  try{
+    const c=new (window.AudioContext||window.webkitAudioContext)();
+    [0,.35,.7].forEach(d=>{
+      const o=c.createOscillator(),g=c.createGain();
+      o.connect(g);g.connect(c.destination);o.type='sine';o.frequency.value=880;
+      g.gain.setValueAtTime(.0001,c.currentTime+d);
+      g.gain.exponentialRampToValueAtTime(.28,c.currentTime+d+.02);
+      g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+d+.3);
+      o.start(c.currentTime+d);o.stop(c.currentTime+d+.32);
+    });
+  }catch(e){}
+  if(navigator.vibrate)try{navigator.vibrate([200,90,200])}catch(e){}
+}
+
+/* ==================================================================
+   TEST DE ALERTA COGNITIVO
+================================================================== */
+let TS={},TT=null,enTest=false;
+function iniciarTest(){
+  TS={p1:0,p2:0,p3:0,p4:0,dichas1:[],dichas4:[],animales:[]};
+  enTest=true;
+  paso0();
+}
+function barra(n){return '<div class="progreso-test"><i style="width:'+(n*20)+'%"></i></div>'}
+function paso0(){
+  modal('Test de Alerta Cognitivo',
+    barra(0)
+    +'<p>Cuatro pruebas seguidas, unos 8 minutos en total. La app te cronometra y te puntúa sola.</p>'
+    +'<div class="nota"><b>Antes de empezar:</b><br>· Busca un lugar tranquilo, sin ruido ni gente hablando.<br>· No pauses entre pruebas. El orden importa.<br>· Responde con lo que realmente recuerdes, sin buscar ayuda. El test solo sirve si eres honesto contigo.</div>'
+    +'<button class="btn oro" onclick="paso1()">Empezar prueba 1</button>');
+}
+/* Prueba 1: memorizar */
+function paso1(){
+  let t=40;
+  modal('Prueba 1 · Memoria inmediata',
+    barra(1)
+    +'<p>Lee esta lista <b>una sola vez</b>, con calma. Tienes 40 segundos. Después tendrás que escribir las que recuerdes.</p>'
+    +'<div class="big-num" id="t1">40</div>'
+    +'<div class="palabras">'+PALABRAS.map(p=>'<div>'+p+'</div>').join('')+'</div>'
+    +'<button class="btn" onclick="paso1b()">Ya las memoricé</button>');
+  clearInterval(TT);
+  TT=setInterval(()=>{
+    t--;const e=document.getElementById('t1');
+    if(!e){clearInterval(TT);return}
+    e.textContent=t;
+    if(t<=0){clearInterval(TT);paso1b()}
+  },1000);
+}
+function paso1b(){
+  clearInterval(TT);
+  modal('Prueba 1 · Escribe lo que recuerdes',
+    barra(1)
+    +'<p>Escribe todas las palabras que recuerdes, separadas por coma. No mires atrás.</p>'
+    +'<textarea class="campo" id="in1" rows="3" placeholder="silla, tren, ..." autofocus></textarea>'
+    +'<button class="btn oro" style="margin-top:14px" onclick="corrige1()">Corregir y seguir</button>');
+  setTimeout(()=>{const e=document.getElementById('in1');if(e)e.focus()},250);
+}
+function corrige1(){
+  const v=(document.getElementById('in1').value||'').split(/[,\n;]+/).map(norm).filter(Boolean);
+  const ac=PALABRAS.filter(p=>v.indexOf(norm(p))>-1);
+  TS.p1=ac.length;TS.dichas1=ac;
+  modal('Prueba 1 · Resultado',
+    barra(1)
+    +'<div class="big-num">'+ac.length+'<span style="font-size:22px;color:var(--suave)">/10</span></div>'
+    +'<div class="chips">'+PALABRAS.map(p=>'<span class="'+(ac.indexOf(p)>-1?'ok':'no')+'">'+p+'</span>').join('')+'</div>'
+    +'<div class="nota" style="margin-top:18px">7-10 excelente · 5-6 normal · menos de 5, hay margen de mejora. Lo que importa de verdad es cómo cambia este número entre el día 1 y el día 21.</div>'
+    +'<button class="btn" onclick="paso2()">Ir a la prueba 2</button>');
+}
+/* Prueba 2: resta de 7 */
+let R2={val:100,ok:0,t:60};
+function paso2(){
+  R2={val:100,ok:0,t:60};
+  modal('Prueba 2 · Memoria de trabajo',
+    barra(2)
+    +'<p>Resta de <b>7 en 7</b> empezando en 100, lo más rápido que puedas. Escribe cada resultado y pulsa enter. Tienes 60 segundos.</p>'
+    +'<div class="big-num" id="t2">60</div>'
+    +'<div style="text-align:center;font-size:15px;color:var(--suave);margin:14px 0 4px">Vas en</div>'
+    +'<div style="text-align:center;font-family:\'Playfair Display\',serif;font-size:34px;font-weight:800;color:var(--oro-d)" id="v2">100</div>'
+    +'<input class="campo" id="in2" type="number" inputmode="numeric" style="margin-top:14px;text-align:center;font-size:22px;font-weight:700" placeholder="93">'
+    +'<div class="serie" id="s2"></div>'
+    +'<button class="btn linea chico" style="margin-top:10px" onclick="fin2()">Terminar antes</button>');
+  const inp=document.getElementById('in2');
+  setTimeout(()=>inp.focus(),250);
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();chk2()}});
+  inp.addEventListener('input',()=>{ if(String(inp.value).length>=String(R2.val-7).length) chk2() });
+  clearInterval(TT);
+  TT=setInterval(()=>{
+    R2.t--;const e=document.getElementById('t2');
+    if(!e){clearInterval(TT);return}
+    e.textContent=R2.t;
+    if(R2.t<=0){clearInterval(TT);fin2()}
+  },1000);
+}
+function chk2(){
+  const inp=document.getElementById('in2');if(!inp)return;
+  const v=parseInt(inp.value,10);
+  if(isNaN(v))return;
+  if(v===R2.val-7){
+    R2.val=v;R2.ok++;
+    document.getElementById('v2').textContent=v;
+    const s=document.getElementById('s2');s.innerHTML+='<span>'+v+'</span>';
+    inp.value='';inp.style.borderColor='';
+    if(v<=2){clearInterval(TT);fin2()}
+  } else {
+    inp.style.borderColor='var(--rojo)';
+    setTimeout(()=>{if(inp)inp.style.borderColor=''},450);
+    inp.value='';
+  }
+}
+function fin2(){
+  clearInterval(TT);
+  TS.p2=R2.ok;
+  modal('Prueba 2 · Resultado',
+    barra(2)
+    +'<div class="big-num">'+R2.ok+'<span style="font-size:20px;color:var(--suave)"> restas</span></div>'
+    +'<p class="mini">Llegaste hasta el '+R2.val+' en 60 segundos.</p>'
+    +'<div class="nota" style="margin-top:18px">Llegar al 30 sin error es excelente. Llegar al 58 es normal. Atascarse antes del 72 indica margen de mejora.</div>'
+    +'<button class="btn" onclick="paso3()">Ir a la prueba 3</button>');
+}
+/* Prueba 3: fluidez verbal */
+function paso3(){
+  let t=60;
+  modal('Prueba 3 · Fluidez verbal',
+    barra(3)
+    +'<p>Escribe todos los <b>animales</b> que se te ocurran en 60 segundos. Uno por línea o separados por coma.</p>'
+    +'<div class="big-num" id="t3">60</div>'
+    +'<textarea class="campo" id="in3" rows="5" style="margin-top:14px" placeholder="perro, gato, ..."></textarea>'
+    +'<p class="mini" id="c3">0 animales</p>'
+    +'<button class="btn linea chico" style="margin-top:10px" onclick="fin3()">Terminar antes</button>');
+  const inp=document.getElementById('in3');
+  setTimeout(()=>inp.focus(),250);
+  inp.addEventListener('input',()=>{
+    document.getElementById('c3').textContent=cuenta3()+' animales';
+  });
+  clearInterval(TT);
+  TT=setInterval(()=>{
+    t--;const e=document.getElementById('t3');
+    if(!e){clearInterval(TT);return}
+    e.textContent=t;
+    if(t<=0){clearInterval(TT);fin3()}
+  },1000);
+}
+function cuenta3(){
+  const e=document.getElementById('in3');if(!e)return 0;
+  const l=(e.value||'').split(/[,\n;]+/).map(norm).filter(Boolean);
+  return l.filter((x,i)=>l.indexOf(x)===i).length;
+}
+function fin3(){
+  const n=cuenta3();clearInterval(TT);TS.p3=n;
+  modal('Prueba 3 · Resultado',
+    barra(3)
+    +'<div class="big-num">'+n+'<span style="font-size:20px;color:var(--suave)"> animales</span></div>'
+    +'<div class="nota" style="margin-top:18px">Más de 18 es excelente. Entre 12 y 17 es normal. Menos de 12 indica margen de mejora.</div>'
+    +'<button class="btn" onclick="paso4()">Ir a la prueba 4</button>');
+}
+/* Prueba 4: diferida */
+function paso4(){
+  modal('Prueba 4 · Memoria diferida',
+    barra(4)
+    +'<p>Sin mirar atrás: ¿cuántas de las 10 palabras del principio recuerdas <b>ahora</b>, después de las otras dos pruebas?</p>'
+    +'<textarea class="campo" id="in4" rows="3" placeholder="silla, tren, ..."></textarea>'
+    +'<button class="btn oro" style="margin-top:14px" onclick="fin4()">Ver mi resultado final</button>');
+  setTimeout(()=>{const e=document.getElementById('in4');if(e)e.focus()},250);
+}
+function fin4(){
+  const v=(document.getElementById('in4').value||'').split(/[,\n;]+/).map(norm).filter(Boolean);
+  const ac=PALABRAS.filter(p=>v.indexOf(norm(p))>-1);
+  TS.p4=ac.length;TS.dichas4=ac;
+  const reg={dia:diaVista(),fecha:hoyISO(),p1:TS.p1,p2:TS.p2,p3:TS.p3,p4:TS.p4};
+  S.tests=S.tests.filter(t=>t.dia!==reg.dia);
+  S.tests.push(reg);S.tests.sort((a,b)=>a.dia-b.dia);
+  guardar();enTest=false;
+  resultadoFinal(reg);
+}
+function resultadoFinal(r){
+  const prim=S.tests[0];
+  let comp='';
+  if(S.tests.length>1&&prim.dia!==r.dia){
+    const d=(a,b)=>{const x=b-a;return (x>0?'+':'')+x};
+    comp='<div class="nota"><b>Comparado con tu test del día '+prim.dia+':</b><br>'
+      +'Memoria inmediata '+d(prim.p1,r.p1)+' · Memoria de trabajo '+d(prim.p2,r.p2)
+      +' · Fluidez verbal '+d(prim.p3,r.p3)+' · Memoria diferida '+d(prim.p4,r.p4)+'</div>';
+  }
+  modal('Test completado · Día '+r.dia,
+    barra(5)
+    +'<div class="card" style="padding:6px 18px">'
+    +res('Memoria inmediata',r.p1+'/10','Cuántas palabras recordaste al momento')
+    +res('Memoria de trabajo',r.p2,'Restas de 7 correctas en 60 segundos')
+    +res('Fluidez verbal',r.p3,'Animales distintos en 60 segundos')
+    +res('Memoria diferida',r.p4+'/10','Cuántas seguían ahí después de las otras pruebas')
+    +'</div>'
+    +comp
+    +'<div class="nota"><b>Cómo leerlo:</b> el número absoluto importa menos de lo que crees. Lo que cuenta es la diferencia entre tu test del día 1 y el del día 21. Tu línea base es tu línea base. Y en la prueba 4, lo relevante es que no baje mucho respecto a la prueba 1: si recordaste 7 al principio y 5 al final, tu retención es buena.</div>'
+    +'<button class="btn" onclick="cerrarModal();ir(\'mente\');verMente(\'test\')">Ver mi historial</button>');
+  function res(t,n,s){return '<div class="res"><div class="rn">'+n+'</div><div class="rt"><b>'+t+'</b><span>'+s+'</span></div></div>'}
+}
+function pintarTests(){
+  const c=document.getElementById('hist-tests');if(!c)return;
+  if(!S.tests.length){
+    c.innerHTML='<p style="font-size:14.5px;color:var(--suave);margin:0">Todavía no has hecho ningún test. El primero es tu línea base: hazlo hoy mismo si estás en el día 1.</p>';
+    return;
+  }
+  c.innerHTML='<div class="scroll-x"><table class="tabla"><tr><th>Día</th><th>Inmediata</th><th>Trabajo</th><th>Fluidez</th><th>Diferida</th></tr>'
+    +S.tests.map(t=>'<tr><td><b>'+t.dia+'</b></td><td>'+t.p1+'/10</td><td>'+t.p2+'</td><td>'+t.p3+'</td><td>'+t.p4+'/10</td></tr>').join('')
+    +'</table></div>';
+}
+
+/* ==================================================================
+   PROGRESO
+================================================================== */
+function pintarProgreso(){
+  const n=numDia();
+  let g='';
+  for(let i=1;i<=21;i++){
+    const iso=fechaDe(i),r=i<=n?ratioDia(iso,i):0;
+    let cl='pt';
+    if(i<=n){
+      if(r>=1)cl+=' p100'; else if(r>=.75)cl+=' p75'; else if(r>=.5)cl+=' p50'; else if(r>0)cl+=' p25';
+    }
+    if(i===n)cl+=' hoy';
+    g+='<div class="'+cl+'" onclick="abrirDia(\''+iso+'\','+i+')">'+i+'</div>';
+  }
+  document.getElementById('grid-dias').innerHTML=g;
+  document.getElementById('tag-adh').textContent=adherencia()+'%';
+  document.getElementById('grafico').innerHTML=grafico();
+  compTests();
+}
+function grafico(){
+  const W=320,H=170,pl=24,pr=8,pt=10,pb=24;
+  const x=d=>pl+((d-1)/20)*(W-pl-pr);
+  const y=v=>pt+((5-v)/4)*(H-pt-pb);
+  const series=[
+    {k:'claridad',c:'#1a3a4a'},
+    {k:'energia',c:'#e8b44d'},
+    {k:'hinchazon',c:'#c9553d'}
+  ];
+  let s='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto;display:block">';
+  for(let v=1;v<=5;v++){
+    s+='<line x1="'+pl+'" y1="'+y(v)+'" x2="'+(W-pr)+'" y2="'+y(v)+'" stroke="#e6eef2" stroke-width="1"/>';
+    s+='<text x="'+(pl-7)+'" y="'+(y(v)+3.5)+'" font-size="9" fill="#a3b8c4" text-anchor="end">'+v+'</text>';
+  }
+  [1,7,14,21].forEach(d=>{s+='<text x="'+x(d)+'" y="'+(H-7)+'" font-size="9" fill="#a3b8c4" text-anchor="middle">'+d+'</text>'});
+  let hay=false;
+  series.forEach(se=>{
+    let pts=[];
+    for(let i=1;i<=21;i++){
+      const r=S.reg[fechaDe(i)];
+      if(r&&r[se.k])pts.push([x(i),y(r[se.k])]);
+    }
+    if(pts.length)hay=true;
+    if(pts.length>1)s+='<polyline points="'+pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')+'" fill="none" stroke="'+se.c+'" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>';
+    pts.forEach(p=>{s+='<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="3.2" fill="'+se.c+'"/>'});
+  });
+  s+='</svg>';
+  if(!hay)s+='<p style="font-size:14.5px;color:var(--suave);text-align:center;margin:14px 0 0">Todavía no hay datos. Llena el registro de hoy en la pestaña <b>Hoy</b> y la línea empieza a dibujarse.</p>';
+  return s;
+}
+function compTests(){
+  const c=document.getElementById('comp-tests');
+  if(S.tests.length<2){
+    c.innerHTML='<p style="font-size:14.5px;color:var(--suave);margin:0">Necesitas al menos dos tests para comparar. Hazlos el día 1, 7, 14 y 21.</p>';
+    return;
+  }
+  const a=S.tests[0],b=S.tests[S.tests.length-1];
+  const fila=(t,va,vb,max)=>{
+    const dif=vb-va;
+    const col=dif>0?'var(--verde)':dif<0?'var(--rojo)':'var(--suave)';
+    return '<div style="padding:12px 0;border-bottom:1px solid var(--borde)">'
+      +'<div style="display:flex;align-items:baseline;gap:8px;margin-bottom:7px"><b style="color:var(--tinta);font-size:15px;flex:1">'+t+'</b>'
+      +'<span style="font-weight:700;color:'+col+'">'+(dif>0?'+':'')+dif+'</span></div>'
+      +barrita(va,max,'#b6c9d4','Día '+a.dia)
+      +barrita(vb,max,'#1a3a4a','Día '+b.dia)+'</div>';
+  };
+  const barrita=(v,max,col,lb)=>'<div style="display:flex;align-items:center;gap:9px;margin-bottom:5px">'
+      +'<span style="font-size:11.5px;color:var(--suave);width:46px;flex-shrink:0">'+lb+'</span>'
+      +'<div style="flex:1;height:9px;background:#eef4f7;border-radius:99px;overflow:hidden"><i style="display:block;height:100%;width:'+Math.min(100,v/max*100)+'%;background:'+col+';border-radius:99px"></i></div>'
+      +'<span style="font-size:12.5px;font-weight:700;color:var(--tinta);width:24px;text-align:right">'+v+'</span></div>';
+  c.innerHTML=fila('Memoria inmediata',a.p1,b.p1,10)
+    +fila('Memoria de trabajo',a.p2,b.p2,14)
+    +fila('Fluidez verbal',a.p3,b.p3,25)
+    +fila('Memoria diferida',a.p4,b.p4,10);
+}
+let DIA_MODAL=null;
+function abrirDia(iso,n){
+  n=n||DIA_MODAL||1; DIA_MODAL=n;
+  const r=S.reg[iso]||{},h=S.checks[iso]||{};
+  const L=tareasDe(iso,Math.min(3,Math.ceil(n/7)));
+  let html='<div style="font-size:14px;color:var(--suave);margin-bottom:14px">'+fechaLarga(iso)+'</div>';
+  html+='<div class="h4b">Tareas de ese día</div><div class="card" style="padding:4px 16px">'
+    +L.map(t=>'<div class="ing'+(h[t.id]?' ok':'')+'"><div class="bx"><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg></div><span>'+t.t+'</span></div>').join('')
+    +'</div>';
+  html+='<div class="h4b">Cómo te sentiste</div>'+camposRegistro(iso);
+  html+='<button class="btn" style="margin-top:18px" onclick="cerrarModal();pintarProgreso()">Guardar y cerrar</button>';
+  modal('Día '+n,html);
+}
+function copiarResumen(){
+  const n=Math.min(21,numDia());
+  let t='PROTOCOLO DE MEMORIA BLINDADA — RESUMEN\n';
+  t+='Inicio: '+S.inicio+' · Día actual: '+n+' de 21\n';
+  t+='Adherencia general: '+adherencia()+'%\n\n';
+  t+='TESTS DE ALERTA COGNITIVO\n';
+  if(!S.tests.length)t+='Sin tests registrados.\n';
+  else S.tests.forEach(x=>{t+='Día '+x.dia+' ('+x.fecha+'): inmediata '+x.p1+'/10 · trabajo '+x.p2+' · fluidez '+x.p3+' · diferida '+x.p4+'/10\n'});
+  t+='\nREGISTRO DIARIO (claridad / energía / hinchazón, escala 1-5)\n';
+  for(let i=1;i<=n;i++){
+    const iso=fechaDe(i),r=S.reg[iso];
+    if(r&&(r.claridad||r.energia||r.hinchazon)){
+      t+='Día '+i+': '+(r.claridad||'-')+' / '+(r.energia||'-')+' / '+(r.hinchazon||'-')+(r.notas?' — '+r.notas:'')+'\n';
+    }
+  }
+  const prom=(k,a,b)=>{let s=0,c=0;for(let i=a;i<=Math.min(b,n);i++){const r=S.reg[fechaDe(i)];if(r&&r[k]){s+=r[k];c++}}return c?(s/c).toFixed(1):'-'};
+  t+='\nPROMEDIOS\nSemana 1 — claridad '+prom('claridad',1,7)+' · energía '+prom('energia',1,7)+' · hinchazón '+prom('hinchazon',1,7)+'\n';
+  t+='Semana 3 — claridad '+prom('claridad',15,21)+' · energía '+prom('energia',15,21)+' · hinchazón '+prom('hinchazon',15,21)+'\n';
+  copiar(t,'Resumen copiado. Ya puedes pegarlo donde lo necesites.');
+}
+function reiniciar(){
+  if(!confirm('Esto borra tu progreso, tus registros y tus tests. ¿Seguro que quieres empezar de cero?'))return;
+  S=base();guardar();location.reload();
+}
+
+/* ==================================================================
+   GUÍA
+================================================================== */
+function abrirGuia(){
+  modal('La guía completa',
+   '<div class="cap">Parte 1</div><h2 style="font-size:22px;margin-bottom:12px">Por qué tu intestino decide lo que tu cerebro recuerda</h2>'
+  +'<p>Tu intestino y tu cerebro están conectados por un cable directo llamado <b>nervio vago</b>. Es una autopista de doble sentido: lo que pasa en tu intestino llega a tu cerebro, y lo que pasa en tu cerebro afecta a tu intestino. Por eso sientes el estómago cerrado cuando estás nervioso, y por eso un intestino inflamado produce niebla mental.</p>'
+  +'<p>Dentro de tu intestino viven billones de bacterias, y hay dos tipos que importan:</p>'
+  +'<p><b>Las bacterias buenas</b> producen ácidos grasos de cadena corta que reducen la inflamación, fabrican vitaminas del grupo B que tu cerebro necesita y producen el 90% de la serotonina de tu cuerpo. La serotonina no solo regula el ánimo: es el precursor de la melatonina y participa en la formación de memorias.</p>'
+  +'<p><b>Las bacterias malas</b>, cuando dominan, hacen lo contrario. Producen lipopolisacáridos (LPS), toxinas que cruzan la pared intestinal dañada, entran en la sangre y llegan al cerebro. Allí activan la microglía, las células inmunes del cerebro, que en estado de alerta constante destruyen conexiones neuronales en vez de protegerlas.</p>'
+  +'<div class="porque"><b>El círculo vicioso:</b> más bacterias malas producen más inflamación. Más inflamación daña la pared intestinal. Una pared dañada deja pasar más toxinas. Más toxinas en el cerebro producen más niebla mental, más olvidos, más dificultad para concentrarte.</div>'
+  +'<div class="h4b">Las señales de que tu intestino sabotea tu memoria</div>'
+  +'<ul class="pasos">'
+  +'<li><b>Niebla mental después de comer.</b> Si una hora después del almuerzo sientes la cabeza pesada, tu intestino está enviando señales inflamatorias.</li>'
+  +'<li><b>Hinchazón abdominal frecuente.</b> Las bacterias malas fermentan los alimentos de forma desordenada y producen gas.</li>'
+  +'<li><b>Estreñimiento o diarrea sin causa clara.</b> El tránsito irregular es la firma de un microbioma desequilibrado.</li>'
+  +'<li><b>Antojos de azúcar y harinas.</b> Las bacterias malas se alimentan de azúcar. Cuando dominan, literalmente te piden más combustible.</li>'
+  +'<li><b>Cansancio que no se va con dormir.</b> Si duermes suficiente y te levantas agotado, la inflamación sistémica puede ser la causa.</li>'
+  +'</ul>'
+  +'<div class="h4b">Los tres frentes del protocolo</div>'
+  +'<p>La <b>alimentación neuro-intestinal</b> retira lo que alimenta a las bacterias malas y añade lo que alimenta a las buenas. Las <b>preparaciones restauradoras</b> ayudan a reparar la pared intestinal y a repoblar con bacterias buenas. La <b>activación cognitiva</b> reactiva las conexiones que la inflamación debilitó, mientras limpias el terreno. Los tres trabajan en sinergia: la alimentación prepara el terreno, las preparaciones aceleran la restauración y los ejercicios reconstruyen.</p>'
+
+  +'<div class="cap" style="margin-top:30px">Parte 6</div><h2 style="font-size:22px;margin-bottom:12px">Cómo combinarlo con el Protocolo Neuro-Honey</h2>'
+  +'<p>El Protocolo Neuro-Honey actúa directamente sobre la función cerebral: aporta nutrientes, activa vías neuronales y protege las conexiones existentes. El Protocolo de Memoria Blindada trabaja desde el intestino: elimina la inflamación que bloquea esos mismos nutrientes y restaura la capacidad de tu cuerpo de absorberlos. Hacer solo uno deja la mitad del trabajo sin hacer.</p>'
+  +'<div class="scroll-x"><table class="tabla"><tr><th>Momento</th><th>Qué haces</th></tr>'
+  +'<tr><td><b>Al despertar</b></td><td>Probiótico en ayunas, 15 minutos antes de comer.</td></tr>'
+  +'<tr><td><b>Desayuno</b></td><td>Preparación del Neuro-Honey + preparación intestinal del día. Si ambas llevan miel, cuenta la suma: máximo 3 cucharaditas al día.</td></tr>'
+  +'<tr><td><b>Media mañana</b></td><td>Ejercicio de activación cognitiva (15 minutos).</td></tr>'
+  +'<tr><td><b>Almuerzo</b></td><td>Comida con los 12 alimentos clave. Omega-3 y cúrcuma con esta comida.</td></tr>'
+  +'<tr><td><b>Tarde</b></td><td>Segunda toma de Neuro-Honey si tu protocolo la incluye. Nunca después de las 18:00.</td></tr>'
+  +'<tr><td><b>Cena</b></td><td>Ligera, 3 horas antes de acostarte. Magnesio con esta comida.</td></tr>'
+  +'<tr><td><b>Noche</b></td><td>Si tienes el Protocolo del Sueño Profundo, sigue la rutina nocturna.</td></tr>'
+  +'</table></div>'
+  +'<div class="nota"><b>Qué esperar y cuándo.</b> La mayoría de las personas reporta los primeros cambios entre el día 10 y el 14: menos hinchazón, más energía por la mañana y la sensación de que la cabeza está más limpia. La mejora medible en memoria suele aparecer al día 21. No te frustres si no lo notas antes: la restauración intestinal es gradual y tu cerebro necesita tiempo para aprovechar el nuevo ambiente.</div>'
+  +'<div class="aviso"><b>Importante.</b> Este material es informativo y no sustituye la consulta médica. Si tomas anticoagulantes, sedantes, antidepresivos, medicación para la tensión, la diabetes o el colesterol, habla con tu médico antes de añadir cualquier suplemento o cambio alimentario.</div>'
+  +'<p style="font-size:13px;color:var(--suave)">Dudas o reembolsos: soporte@aurasalud.online</p>');
+}
+
+/* ==================================================================
+   ARRANQUE
+================================================================== */
+document.getElementById('fecha-inicio').max=hoyISO();
+document.getElementById('fecha-inicio').value=hoyISO();
+render();
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&S.inicio&&!enTest)render()});
+
+
+/* ==================================================================
+   BLINDAJE NEURAL (Up2) — cadeado do módulo
+   ================================================================== */
+(function(){
+  'use strict';
+
+  var API_DESBLOQUEAR = '/front/api/desbloquear.php';
+  var LINK_OFERTA     = 'https://aurasalud.online/front/up2/';
+  var PRODUTO         = 'up2';
+  var LS_CORREO       = 'bn-correo';
+  var LS_CAPS         = 'bn-capitulos-vistos';
+  var LS_MEDS         = 'bn-baseline-mediciones';
+
+  var vista = document.getElementById('v-blindaje');
+  if (!vista) return;
+
+  var vCerrado = vista.querySelector('[data-bn-vista="cerrado"]');
+  var vAbierto = vista.querySelector('[data-bn-vista="abierto"]');
+  var caja     = document.getElementById('bn-contenido');
+  var btnNav   = document.querySelector('.nav button[data-v="blindaje"]');
+
+  var comprar = vista.querySelector('[data-bn-comprar]');
+  if (comprar) comprar.href = LINK_OFERTA;
+
+  var campo   = vista.querySelector('[data-bn-correo]');
+  var botao   = vista.querySelector('[data-bn-verificar]');
+  var aviso   = vista.querySelector('[data-bn-aviso]');
+
+  function decir(t, c){ aviso.className='bn-aviso'+(c?' '+c:''); aviso.textContent=t; }
+
+  function pedir(correo){
+    return fetch(API_DESBLOQUEAR
+      +'?producto='+encodeURIComponent(PRODUTO)
+      +'&email='+encodeURIComponent(correo), {credentials:'omit'})
+      .then(function(r){return r.json();})
+      .catch(function(){return {ok:false, motivo:'red'};});
+  }
+
+  function abrir(html){
+    caja.innerHTML = html;
+    vCerrado.hidden = true;
+    vAbierto.hidden = false;
+    if (btnNav) btnNav.classList.add('bn-abierto');
+    montarInterativos();
+    pintarAvance();
+  }
+
+  botao.addEventListener('click', function(){
+    var correo = (campo.value||'').trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) { decir('Escribe un correo válido.','mal'); return; }
+    decir('Comprobando…');
+    botao.disabled = true;
+    pedir(correo).then(function(r){
+      botao.disabled = false;
+      if (r && r.ok){
+        try{ localStorage.setItem(LS_CORREO, correo); }catch(e){}
+        decir('¡Listo!','bien');
+        abrir(r.html);
+        return;
+      }
+      if (r && r.motivo==='sin_acceso'){
+        decir('Ese correo no tiene el Blindaje Neural. Si compraste con otro correo, prueba con ese; si crees que hay un error, escribe a soporte@aurasalud.online.','mal');
+      } else if (r && r.motivo==='demasiadas_consultas'){
+        decir('Demasiados intentos. Espera unos minutos.','mal');
+      } else {
+        decir('No pudimos comprobarlo ahora. Inténtalo en un minuto.','mal');
+      }
+    });
+  });
+  campo.addEventListener('keydown', function(e){ if(e.key==='Enter'){e.preventDefault();botao.click();} });
+
+  /* ---------- interativos DENTRO do módulo pago ---------- */
+  function leer(k){ try{ return JSON.parse(localStorage.getItem(k))||[]; }catch(e){ return []; } }
+  function guardar(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+
+  function pintarAvance(){
+    var vistos = leer(LS_CAPS);
+    var n = vistos.length;
+    var el = document.getElementById('bn-avance-n');
+    var barra = document.getElementById('bn-avance-i');
+    if (el)    el.textContent = n;
+    if (barra) barra.style.width = Math.round(n/4*100)+'%';
+  }
+
+  function marcarCap(n){
+    var vistos = leer(LS_CAPS);
+    if (vistos.indexOf(n)===-1){ vistos.push(n); guardar(LS_CAPS,vistos); pintarAvance(); }
+  }
+
+  function pintarHistorial(){
+    var box = document.getElementById('bn-historial');
+    if (!box) return;
+    var meds = leer(LS_MEDS);
+    if (!meds.length){ box.innerHTML = '<p class="bn-vacio">Todavía no hay mediciones. Empieza por el baseline.</p>'; return; }
+    box.innerHTML = meds.slice().reverse().map(function(m){
+      var d = new Date(m.t);
+      var f = d.toLocaleDateString('es',{day:'2-digit',month:'short',year:'numeric'});
+      return '<div class="bn-med"><time>'+f+'</time><b>'+m.p+' <small>/100</small></b></div>';
+    }).join('');
+  }
+
+  function iniciarBaseline(){
+    var meds = leer(LS_MEDS);
+    var ok = confirm('El test dura 3 minutos y no se puede pausar. ¿Empiezas ahora?');
+    if (!ok) return;
+    var puntaje = Math.floor(60 + Math.random()*35);   /* placeholder — troca por lógica real do teste depois */
+    meds.push({ t:Date.now(), p:puntaje });
+    guardar(LS_MEDS, meds);
+    pintarHistorial();
+    alert('Baseline registrado: '+puntaje+' / 100. Repite el día 30 y compara.');
+  }
+
+  function montarInterativos(){
+    /* botão do baseline */
+    var b = document.getElementById('bn-empezar-test');
+    if (b) b.addEventListener('click', iniciarBaseline);
+
+    /* observar leitura dos capítulos */
+    var caps = caja.querySelectorAll('section[data-cap]');
+    function marcarQuePassou(){
+      var gatilho = window.innerHeight * 0.35;
+      caps.forEach(function(c){
+        var r = c.getBoundingClientRect();
+        if (r.top < gatilho) {
+          var n = parseInt(c.dataset.cap, 10);
+          if (n) marcarCap(n);
+        }
+      });
+    }
+    marcarQuePassou();
+    window.addEventListener('scroll', marcarQuePassou, {passive:true});
+
+    pintarHistorial();
+  }
+
+  /* ---------- verificação automática ---------- */
+  function correoConocido(){
+    var q = new URLSearchParams(location.search);
+    var e = q.get('email') || q.get('correo');
+    if (e) return e;
+    try{ return localStorage.getItem(LS_CORREO)||''; }catch(err){ return ''; }
+  }
+  var yaC = correoConocido();
+  if (yaC){
+    if (campo) campo.value = yaC;
+    pedir(yaC).then(function(r){ if (r && r.ok) abrir(r.html); });
+  }
+})();
+
+/* ==================================================================
+   SOPORTE ONLINE — conversa com a equipe (persistida no servidor)
+   ================================================================== */
+(function(){
+  'use strict';
+
+  var API = '/front/api/soporte.php';
+  var LS_CLAVE='sp-clave', LS_CORREO='sp-correo', LS_NOMBRE='sp-nombre',
+      LS_WA='sp-whatsapp', LS_ASUNTO='sp-asunto';
+
+  var $id = function(x){ return document.getElementById(x); };
+  var cajaForm = $id('sp-form-caja'), cajaChat = $id('sp-chat-caja');
+  if (!cajaForm) return;
+
+  function ls(k){ try{ return localStorage.getItem(k)||''; }catch(e){ return ''; } }
+  function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function escSp(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+  var ESTADOS = { nuevo:'Recibido', en_atencion:'En atención',
+                  esperando_cliente:'Respondido', resuelto:'Resuelto' };
+  var OK_TXT = '¡Mensaje recibido con éxito! Tu solicitud quedó registrada y nuestro equipo te responderá lo antes posible.';
+
+  function aviso(el, txt, tipo){ el.className='sp-estado'+(tipo?' '+tipo:''); el.textContent=txt||''; }
+
+  function pintar(historial, estado){
+    cajaForm.hidden = true; cajaChat.hidden = false;
+    $id('sp-chip').textContent = ESTADOS[estado]||estado||'';
+    $id('sp-hilo').innerHTML = historial.map(function(m){
+      var lado = m.de==='cliente' ? 'cliente' : 'equipo';
+      return '<div class="sp-msg '+lado+'">'
+        + (m.asunto ? '<div class="sp-asunto">'+escSp(m.asunto)+'</div>' : '')
+        + escSp(m.texto)
+        + '<div class="sp-meta">'+(lado==='cliente'?'Tú':'Equipo AuraSalud')+' · '+escSp(m.fecha)+'</div></div>';
+    }).join('');
+    var h = $id('sp-hilo'); h.scrollTop = h.scrollHeight;
+  }
+
+  function cargar(silencio){
+    var correo = ls(LS_CORREO), clave = ls(LS_CLAVE);
+    if (!correo || !clave){ cajaForm.hidden=false; cajaChat.hidden=true; return; }
+    if (!silencio) aviso($id('sp-avisochat'),'Actualizando…','info');
+    fetch(API+'?accion=historial&email='+encodeURIComponent(correo)
+             +'&clave='+encodeURIComponent(clave), {credentials:'omit'})
+      .then(function(r){ return r.json(); })
+      .then(function(r){
+        if (r && r.ok){ pintar(r.historial, r.estado); aviso($id('sp-avisochat'),''); }
+        else if (r && r.motivo==='sin_acceso'){ cajaForm.hidden=false; cajaChat.hidden=true; }
+        else if (!silencio){ aviso($id('sp-avisochat'),'No pudimos actualizar. Inténtalo en un minuto.','mal'); }
+      })
+      .catch(function(){ if (!silencio) aviso($id('sp-avisochat'),'Sin conexión. Inténtalo de nuevo.','mal'); });
+  }
+
+  function mandar(datos, btn, avisoEl, alOk){
+    btn.disabled = true;
+    var rotulo = btn.textContent;
+    btn.textContent = 'Enviando…';
+    var f = new FormData();
+    f.append('accion','enviar');
+    for (var k in datos) f.append(k, datos[k]);
+    fetch(API, {method:'POST', body:f, credentials:'omit'})
+      .then(function(r){ return r.json(); })
+      .then(function(r){
+        btn.disabled = false; btn.textContent = rotulo;
+        if (r && r.ok){
+          if (r.clave) lsSet(LS_CLAVE, r.clave);
+          lsSet(LS_CORREO, datos.email); lsSet(LS_NOMBRE, datos.nombre);
+          lsSet(LS_WA, datos.whatsapp); lsSet(LS_ASUNTO, datos.asunto);
+          alOk(r);
+          return;
+        }
+        if (r && r.motivo==='validacion'){
+          aviso(avisoEl,'Revisa los campos: nombre completo, correo válido, WhatsApp con código de país (ej. +52…), asunto y mensaje.','mal');
+        } else if (r && r.motivo==='demasiadas_consultas'){
+          aviso(avisoEl,'Demasiados envíos seguidos. Espera unos minutos.','mal');
+        } else {
+          aviso(avisoEl,'No pudimos enviar tu mensaje. Inténtalo de nuevo o escribe a soporte@aurasalud.online.','mal');
+        }
+      })
+      .catch(function(){
+        btn.disabled = false; btn.textContent = rotulo;
+        aviso(avisoEl,'Sin conexión. Inténtalo de nuevo o escribe a soporte@aurasalud.online.','mal');
+      });
+  }
+
+  /* formulário do primeiro contato */
+  $id('sp-enviar').addEventListener('click', function(){
+    var datos = {
+      nombre:   $id('sp-nombre').value.trim(),
+      email:    $id('sp-email').value.trim(),
+      whatsapp: $id('sp-whatsapp').value.trim(),
+      asunto:   $id('sp-asunto').value.trim(),
+      mensaje:  $id('sp-mensaje').value.trim(),
+      clave:    ls(LS_CLAVE)
+    };
+    var av = $id('sp-avisoform');
+    if (datos.nombre.length < 3){ aviso(av,'Escribe tu nombre completo.','mal'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(datos.email)){ aviso(av,'Escribe un correo válido.','mal'); return; }
+    if (!/^\+[0-9][0-9 ()\-.]{7,20}$/.test(datos.whatsapp)){ aviso(av,'Escribe tu WhatsApp con el código de país, ej. +52 55 1234 5678.','mal'); return; }
+    if (datos.asunto.length < 3){ aviso(av,'Escribe el asunto de tu duda.','mal'); return; }
+    if (datos.mensaje.length < 5){ aviso(av,'Describe tu duda en el mensaje.','mal'); return; }
+    mandar(datos, $id('sp-enviar'), av, function(r){
+      $id('sp-mensaje').value = '';
+      if (r.historial){ pintar(r.historial, r.estado); aviso($id('sp-avisochat'), OK_TXT, 'bien'); }
+      else { aviso(av, OK_TXT, 'bien'); }
+    });
+  });
+
+  /* resposta rápida na conversa aberta */
+  $id('sp-responder').addEventListener('click', function(){
+    var texto = $id('sp-nuevo').value.trim();
+    var av = $id('sp-avisochat');
+    if (texto.length < 5){ aviso(av,'Escribe tu mensaje.','mal'); return; }
+    if (!ls(LS_NOMBRE) || !ls(LS_WA) || !ls(LS_CORREO)){
+      /* dados perdidos neste aparelho — volta pro formulário, pré-preenchido */
+      cajaChat.hidden = true; cajaForm.hidden = false;
+      $id('sp-mensaje').value = texto;
+      return;
+    }
+    var datos = {
+      nombre: ls(LS_NOMBRE), email: ls(LS_CORREO), whatsapp: ls(LS_WA),
+      asunto: ls(LS_ASUNTO)||'Continuación', mensaje: texto, clave: ls(LS_CLAVE)
+    };
+    mandar(datos, $id('sp-responder'), av, function(r){
+      $id('sp-nuevo').value = '';
+      if (r.historial) pintar(r.historial, r.estado);
+      aviso(av, OK_TXT, 'bien');
+    });
+  });
+
+  $id('sp-refrescar').addEventListener('click', function(){ cargar(false); });
+
+  /* pré-preenche com o que o app já sabe */
+  var correoBn = ls('bn-correo');
+  if (correoBn && !$id('sp-email').value) $id('sp-email').value = correoBn;
+  if (ls(LS_NOMBRE)) $id('sp-nombre').value = ls(LS_NOMBRE);
+  if (ls(LS_WA))     $id('sp-whatsapp').value = ls(LS_WA);
+
+  /* recarrega a conversa ao entrar na aba */
+  var btnNavSp = document.querySelector('.nav button[data-v="soporte"]');
+  if (btnNavSp) btnNavSp.addEventListener('click', function(){ cargar(true); });
+  cargar(true);
+})();
+
+</script>
+</body>
+</html>
