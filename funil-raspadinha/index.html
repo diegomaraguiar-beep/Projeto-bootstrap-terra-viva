@@ -237,22 +237,6 @@ const CONFIG = {
   // "peso" = chance relativa. Ex.: pesos 70/25/5 → 70%, 25% e 5% de chance.
   premios: [
     {
-      id: "bonos",
-      rotulo: ["+3 BONOS", "GRATIS"],          // texto na fatia da roleta (2 linhas)
-      titulo: "3 Bonos extra por el mismo precio",
-      descricao: "Te llevas el protocolo completo + 3 materiales exclusivos que no están en la oferta normal.",
-      bonus: [
-        "Bono 1: Guía de Recetas Neuro-Nutritivas",
-        "Bono 2: Audio de Relajación Profunda",
-        "Bono 3: Plan Diario de 21 Días",
-      ],
-      precoDe: "",                              // vazio = mesmo preço (sem riscado)
-      precoPor: "US$ 37",
-      checkout: "https://pay.kashpay.com.br/SEU-CHECKOUT-BONUS",
-      peso: 70,
-      cor: "#1f2a44",
-    },
-    {
       id: "bonos-desc",
       rotulo: ["+3 BONOS", "+20% OFF"],
       titulo: "3 Bonos extra + 20% de descuento",
@@ -262,29 +246,11 @@ const CONFIG = {
         "Bono 2: Audio de Relajación Profunda",
         "Bono 3: Plan Diario de 21 Días",
       ],
-      precoDe: "US$ 37",
+      precoDe: "US$ 37",                        // preço normal (aparece riscado). Vazio = sem riscado
       precoPor: "US$ 29,60",
-      checkout: "https://pay.kashpay.com.br/SEU-CHECKOUT-BONUS-20OFF",
-      peso: 25,
+      checkout: "https://checkout.kashpay.com/checkout/checkout-1792286800835",
+      peso: 100,
       cor: "#5b1f3a",
-    },
-    {
-      id: "vip",
-      rotulo: ["+5 BONOS", "+30% OFF"],
-      titulo: "5 Bonos extra + 30% de descuento",
-      descricao: "El premio mayor: el protocolo completo, 5 materiales exclusivos y el mejor precio.",
-      bonus: [
-        "Bono 1: Guía de Recetas Neuro-Nutritivas",
-        "Bono 2: Audio de Relajación Profunda",
-        "Bono 3: Plan Diario de 21 Días",
-        "Bono 4: Checklist de Hábitos Matutinos",
-        "Bono 5: Acceso a Actualizaciones de por Vida",
-      ],
-      precoDe: "US$ 37",
-      precoPor: "US$ 25,90",
-      checkout: "https://pay.kashpay.com.br/SEU-CHECKOUT-VIP",
-      peso: 5,
-      cor: "#7a5300",
     },
   ],
 
@@ -556,7 +522,9 @@ const CONFIG = {
   /* ================= RESULTADO ================= */
   function mostrarResultado(premio, expira, comemorar) {
     const box = $("resultado");
-    const expirou = Date.now() >= expira;
+    // Sem checkout normal configurado, o prêmio não expira (evita mandar para um link quebrado)
+    const temPadrao = /^https?:\/\//.test(CONFIG.checkoutPadrao || "") && !CONFIG.checkoutPadrao.includes("SEU-");
+    const expirou = temPadrao && Date.now() >= expira;
     ["btn-girar", "raspa-dica", "btn-revelar", "uma-vez"].forEach((id) => $(id).classList.add("esconder"));
 
     if (expirou) {
@@ -587,7 +555,7 @@ const CONFIG = {
             : `<div class="de">${premio.precoDe}</div><div class="rotulo">${fill(T.rotuloPor)}</div>`}
           <div class="por">${premio.precoPor}</div>
         </div>
-        <div class="timer">${fill(T.timer)}<strong id="relogio">--:--</strong></div>
+        ${temPadrao ? `<div class="timer">${fill(T.timer)}<strong id="relogio">--:--</strong></div>` : ""}
         <a class="btn pulsar" id="cta" href="${comParams(premio.checkout)}">${fill(T.cta)}</a>
         <div class="selos">${selos}</div>
       </div>`;
@@ -596,12 +564,13 @@ const CONFIG = {
 
     const relogio = $("relogio");
     const tick = () => {
+      if (!relogio) return;
       const resta = expira - Date.now();
       if (resta <= 0) { clearInterval(iv); mostrarResultado(premio, expira, false); return; }
       const m = Math.floor(resta / 60000), s = Math.floor((resta % 60000) / 1000);
       relogio.textContent = `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
     };
-    const iv = setInterval(tick, 1000);
+    const iv = temPadrao ? setInterval(tick, 1000) : null;
     tick();
 
     if (comemorar) {
