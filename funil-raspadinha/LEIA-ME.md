@@ -45,6 +45,29 @@ para pegar quem volta do checkout.
 - Abra `https://seudominio.com/raspadinha/?reset=1` para jogar de novo (o `reset=1` apaga o prêmio salvo).
 - `?modo=raspadinha` ou `?modo=roleta` troca o modo pela URL, então dá pra fazer teste A/B sem duplicar a página.
 
+## VSL na VTurb (back redirect só depois do pitch)
+
+Use o `backredirect-vturb.js` no lugar do `backredirect.js`. Ele só liga o redirect quando a pessoa chega no
+pitch da VSL que está assistindo, e funciona com teste A/B (descobre qual VSL está tocando pela duração do vídeo).
+Suba o arquivo na mesma pasta da raspadinha e cole na página de vendas, antes do `</body>`:
+
+```html
+<script>
+window.BR_CONFIG = {
+  destino: "https://seudominio.com/raspadinha/",
+  vsls: [
+    { pitch: "45:00", duracao: "" },   // VSL A
+    { pitch: "54:55", duracao: "" },   // VSL B
+  ],
+};
+</script>
+<script src="https://seudominio.com/raspadinha/backredirect-vturb.js"></script>
+```
+
+- `duracao` só é necessária se as duas VSLs tiverem mais de 54:55 no total.
+- Teste rápido: abra a página de vendas com `?debugbr=1&pitchteste=10` e aparece uma caixinha mostrando o que o
+  script está vendo; o pitch passa a ser aos 10 segundos.
+
 ## O que a página já faz sozinha
 
 - **Repassa as UTMs** da página de vendas → roleta → checkout, para a Utmify atribuir a venda ao anúncio certo.
